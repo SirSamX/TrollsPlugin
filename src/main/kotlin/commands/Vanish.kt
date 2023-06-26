@@ -13,8 +13,8 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 
 class Vanish : CommandExecutor, Listener {
-    val vanished = ArrayList<Player>()
-    val plugin = Trolls.getPlugin()
+    private val vanished = ArrayList<Player>()
+    private val plugin = Trolls.getPlugin()
 
     override fun onCommand(p: CommandSender, command: Command, label: String, args: Array<out String>?): Boolean {
         if (p !is Player) return false
