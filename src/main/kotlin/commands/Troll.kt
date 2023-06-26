@@ -10,9 +10,9 @@ import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
 class Troll : CommandExecutor {
-    val items = ItemManager()
-    val utils = Utilities()
-    val plugin = Trolls.instance
+    private val items = ItemManager()//.items
+    private val utils = Utilities()
+    private val plugin = Trolls.instance
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>?): Boolean {
         if (sender !is Player) { utils.isNotPlayerMessage(sender); return true }
@@ -28,6 +28,11 @@ class Troll : CommandExecutor {
                 if (args[1] == "grappling_hook") { grapplingHook(sender, amount) }
                 else if (args[1] == "throwable_tnt") { throwableTNT(sender, amount) }
                 else { utils.formattingErrorMessage(sender); break }
+                /*for (item in items) {
+                    if ( == args[1]) {
+
+                    }
+                }*/
             }
         }
         else if (args[0].lowercase() == "reload") {

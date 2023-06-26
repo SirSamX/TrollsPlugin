@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 
 class TrollItem(
+    private val id: String? = null,
     private val material: Material = Material.BARRIER,
     private val name: String = "Unfinished Item",
     private val description: String? = null,
@@ -18,9 +19,12 @@ class TrollItem(
     private val abilities: Array<String>? = null,
     private val oneTimeUse: Boolean = false,
 ) {
-    val utils = Utilities()
+    private val utils = Utilities()
 
     fun createItem(): ItemStack {
+        if (id == null) {
+            throw Exception("ID of TrollItem cannot be null!")
+        }
         val item = ItemStack(material)
         val meta = item.itemMeta
 
@@ -44,12 +48,12 @@ class TrollItem(
         }
 
         if (!(description.isNullOrBlank())) {
-            lore.add(Component.text("§7" + description))
+            lore.add(Component.text("§7$description"))
             lore.add(Component.text(""))
         }
 
         if (!(note.isNullOrBlank())) {
-            lore.add(Component.text("§8" + note))
+            lore.add(Component.text("§8$note"))
             lore.add(Component.text(""))
 
         }
