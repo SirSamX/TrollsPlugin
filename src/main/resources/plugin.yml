@@ -1,0 +1,53 @@
+name: Trolls
+version: ${version}
+main: me.sirsam.trolls.Trolls
+description: Plugin for trolls
+author: SirSam
+website: programming4life.github.io
+api-version: "1.20"
+commands:
+  jump:
+    description: Launches you high in the air!
+    permission: op
+    permission-message: You do not have permission to use this Command!
+    usage: /<command> player
+  fly:
+    description: Allows you to toggle flight.
+    permission: op
+    permission-message: You do not have permission to use this Command!
+    usage: /<command>
+  godmode:
+    description: Makes you invulnerable.
+    permission: op
+    permission-message: You do not have permission to use this command!
+    aliases: god
+    usage: /<command>
+  sudo:
+    description: Allows you to send something or execute a command from another players chat.
+    permission: op
+    permission-message: You do not have permission to use this Command!
+    usage: /<command> player message
+  troll:
+    description: Allows you to get troll items.
+    permission: op
+    permission-message: You do not have permission to use this Command!
+    usage: /<command> [get] item amount
+  gui:
+    description: Allows you to open GUIs.
+    permission: op
+    permission-message: You do not have permission to use this Command!
+    usage: /<command>
+  vanish:
+    description: Allows you to become invisible.
+    permission: op
+    permission-message: You do not have permission to use this Command!
+    usage: /<command>
+  warp:
+    description: Allows you to warp to specific locations that are set by using /setwarp.
+    permission-message: You do not have permission to use this Command!
+    usage: /<command> name
+  setwarp:
+    description: Allows you to set a warp.
+    permission: op
+    permission-message: You do not have permission to use this Command!
+    usage: /<command> name
