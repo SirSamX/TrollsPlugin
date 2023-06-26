@@ -14,7 +14,7 @@ class TrollItem(
     private val description: String? = null,
     private val note: String? = null,
     private val rarity: TrollRarity = TrollRarity.UNFINISHED,
-    private val raritySuffix: String? = "",
+    private val raritySuffix: String = "",
     private val stackable: Boolean = true,
     private val abilities: Array<String>? = null,
     private val oneTimeUse: Boolean = false,
@@ -22,9 +22,6 @@ class TrollItem(
     private val utils = Utilities()
 
     fun createItem(): ItemStack {
-        if (id == null) {
-            throw Exception("ID of TrollItem cannot be null!")
-        }
         val item = ItemStack(material)
         val meta = item.itemMeta
 
@@ -36,6 +33,10 @@ class TrollItem(
         item.itemMeta = meta
 
         return item
+    }
+
+    fun getId(): String? {
+        return id
     }
 
     private fun addLore(): MutableList<Component> {
