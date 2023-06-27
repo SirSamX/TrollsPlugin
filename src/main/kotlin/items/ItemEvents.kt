@@ -6,9 +6,12 @@ import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.entity.EntityType
+import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
+import org.bukkit.event.entity.EntityShootBowEvent
+import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.event.inventory.InventoryType
 import org.bukkit.event.player.PlayerFishEvent
 import org.bukkit.event.player.PlayerInteractEvent
@@ -17,7 +20,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 
 class ItemEvents : Listener {
-    val utils = Utilities()
+    private val utils = Utilities()
 
     @EventHandler
     fun fishEvent(event: PlayerFishEvent) {
@@ -80,5 +83,25 @@ class ItemEvents : Listener {
         }
 
         return gui
+    }
+
+
+    @EventHandler
+    fun onProjectileLaunch(event: EntityShootBowEvent){
+        if (event.entity is Player){
+            val player = event.entity as Player
+            if(player.inventory.itemInMainHand.itemMeta != null && player.inventory.itemInMainHand.itemMeta.lore != null && player.inventory.itemInMainHand.itemMeta.lore!!.contains("§7Creates an explosive...")){
+                event.projectile.customName = "Explosive Bow"
+            }
+        }
+    }
+
+    @EventHandler
+    fun onProjectileHit(event: ProjectileHitEvent){
+        if (event.entity.customName != null) {
+            if (event.entity.customName.equals("Explosive Bow")) {
+                event.entity.world.createExplosion(event.entity.location, 5f, false, false)
+            }
+        }
     }
 }
