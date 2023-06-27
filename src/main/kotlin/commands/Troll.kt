@@ -33,7 +33,7 @@ class Troll : CommandExecutor {
                         i += 1
                         sender.inventory.addItem(givenItem)
                     }
-                    utils.receiveItemMessage(sender, amount, givenItem.itemMeta.displayName())
+                    utils.receiveItemMessage(sender, amount, item.getName())
                 }
             }
             utils.formattingErrorMessage(sender); return true
