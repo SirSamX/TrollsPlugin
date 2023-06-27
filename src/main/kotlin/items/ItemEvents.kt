@@ -29,7 +29,7 @@ class ItemEvents : Listener {
         val data = item.itemMeta.persistentDataContainer
         val strength = .3
 
-        if (data.get(utils.nameKey, PersistentDataType.STRING) == "Grappling Hook" && event.state == PlayerFishEvent.State.REEL_IN) {
+        if (data.get(utils.nameKey, PersistentDataType.STRING) == "grappling_hook" && event.state == PlayerFishEvent.State.REEL_IN) {
             val hookLocation = event.hook.location
             val change = hookLocation.subtract(p.location)
             p.velocity = change.toVector().multiply(strength)
@@ -44,9 +44,9 @@ class ItemEvents : Listener {
             val data = item.itemMeta.persistentDataContainer
             val strength = 1.4
 
-            if (data.get(utils.nameKey, PersistentDataType.STRING) == "Throwable TNT" && event.action == Action.RIGHT_CLICK_BLOCK) { event.isCancelled = true }
+            if (data.get(utils.nameKey, PersistentDataType.STRING) == "throwable_tnt" && event.action == Action.RIGHT_CLICK_BLOCK) { event.isCancelled = true }
 
-            if (data.get(utils.nameKey, PersistentDataType.STRING) == "Throwable TNT" && event.action == Action.RIGHT_CLICK_AIR) {
+            if (data.get(utils.nameKey, PersistentDataType.STRING) == "throwable_tnt" && event.action == Action.RIGHT_CLICK_AIR) {
                 if (player.gameMode != GameMode.CREATIVE) { utils.destroy(item, 1) }
 
                 val direction = player.location.direction

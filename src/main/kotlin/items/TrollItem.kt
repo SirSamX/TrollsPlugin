@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 
 class TrollItem(
-    private val id: String? = null,
+    private val id: String = "unknown_item",
     private val material: Material = Material.BARRIER,
     private val name: String = "Unfinished Item",
     private val description: String? = null,
@@ -26,7 +26,7 @@ class TrollItem(
         val meta = item.itemMeta
         val formattedName = rarity.color + name
 
-        meta.persistentDataContainer.set(utils.nameKey, PersistentDataType.STRING, name)
+        meta.persistentDataContainer.set(utils.nameKey, PersistentDataType.STRING, id)
         meta.displayName(Component.text(formattedName))
         meta.lore(addLore())
         meta.isUnbreakable = true
@@ -36,7 +36,7 @@ class TrollItem(
         return item
     }
 
-    fun getId(): String? { return id }
+    fun getId(): String { return id }
 
     fun getName(): String { return rarity.color +name}
 
