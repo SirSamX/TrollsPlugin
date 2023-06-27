@@ -17,36 +17,39 @@ class Troll : CommandExecutor {
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>?): Boolean {
         if (sender !is Player) { utils.isNotPlayerMessage(sender); return true }
-        if (args == null) { utils.formattingErrorMessage(sender); return true }
+        if (args == null  || args.isEmpty()) { utils.formattingErrorMessage(sender); return true }
 
-        if (args[0].lowercase() == "get") {
-            if (!(utils.isNumeric(args[2]))) { utils.formattingErrorMessage(sender); return true; }
-            val amount = args[2].toInt()
-            if (amount > 3000) { utils.formattingErrorMessage(sender); return true }
+        when (args[0].lowercase()) {
+            "get" -> {
+                if (args.size < 3) { utils.formattingErrorMessage(sender); return true }
+                if (!(utils.isNumeric(args[2]))) { utils.formattingErrorMessage(sender); return true; }
+                val amount = args[2].toInt()
+                if (amount > 3000) { utils.formattingErrorMessage(sender); return true }
 
-            lateinit var givenItem: ItemStack
-            for (item in itemManager.items) {
-                if (item.getId() == args[1]) {
-                    givenItem = item.createItem()
-                    var i = 0
-                    while (i < amount) {
-                        i += 1
-                        sender.inventory.addItem(givenItem)
+                lateinit var givenItem: ItemStack
+                for (item in itemManager.items) {
+                    if (item.getId() == args[1]) {
+                        givenItem = item.createItem()
+                        var i = 0
+                        while (i < amount) {
+                            i += 1
+                            sender.inventory.addItem(givenItem)
+                        }
+                        utils.receiveItemMessage(sender, amount, item.getName())
+                        return true
                     }
-                    utils.receiveItemMessage(sender, amount, item.getName())
                 }
             }
-            utils.formattingErrorMessage(sender); return true
+
+            "reload", "rl", "r" -> {
+                plugin.server.reload()
+                sender.sendMessage(Component.text("Reloaded Server"))
+                return true
+            }
+
+            else -> { utils.formattingErrorMessage(sender); return true }
         }
 
-        else if (args[0].lowercase() == "reload" || args[0].lowercase() == "r" || args[0].lowercase() == "rl") {
-            plugin.reloadConfig()
-            sender.sendMessage(Component.text("Reloaded Config"))
-            plugin.server.reload()
-            sender.sendMessage(Component.text("Reloaded Server"))
-        }
-
-        else utils.formattingErrorMessage(sender)
         return true
     }
 }
