@@ -24,9 +24,10 @@ class TrollItem(
     fun createItem(): ItemStack {
         val item = ItemStack(material)
         val meta = item.itemMeta
+        val formattedName = rarity.color + name
 
         meta.persistentDataContainer.set(utils.nameKey, PersistentDataType.STRING, name)
-        meta.displayName(Component.text(rarity.color + name))
+        meta.displayName(Component.text(formattedName))
         meta.lore(addLore())
         meta.isUnbreakable = true
         meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE)
@@ -35,9 +36,9 @@ class TrollItem(
         return item
     }
 
-    fun getId(): String? {
-        return id
-    }
+    fun getId(): String? { return id }
+
+    fun getName(): String { return rarity.color +name}
 
     private fun addLore(): MutableList<Component> {
         val lore = mutableListOf<Component>()
