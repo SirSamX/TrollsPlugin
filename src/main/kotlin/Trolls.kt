@@ -77,7 +77,7 @@ class Trolls : JavaPlugin(), Listener {
         p.sendMessage(Component.text("Welcome back ${p.name}!\nThere are currently ${playerCount - 1} other players online.", NamedTextColor.BLUE))
 
         val header = Component.text("GAMING LEGENDEN SERVER", NamedTextColor.RED)
-        val footer = Component.text("Neues Mitglied! POG", NamedTextColor.GREEN)
+        val footer = Component.text("1.20 Trails and Tails", NamedTextColor.GREEN)
         p.sendPlayerListHeaderAndFooter(header, footer)
 
         config.addDefault("warp.allow_warp", true)
