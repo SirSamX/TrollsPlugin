@@ -123,7 +123,7 @@ class ItemEvents : Listener {
         if(item.itemMeta != null) {
             val data = item.itemMeta.persistentDataContainer
 
-            if (data.get(utils.nameKey, PersistentDataType.STRING) == "throwable_tnt" && event.action == Action.RIGHT_CLICK_AIR) {
+            if (data.get(utils.nameKey, PersistentDataType.STRING) == "throwable_fireball" && event.action == Action.RIGHT_CLICK_AIR) {
                 val strength = 2
                 if (player.gameMode != GameMode.CREATIVE) { utils.destroy(item, 1) }
                 player.launchProjectile(LargeFireball::class.java, player.eyeLocation.direction.normalize().multiply(strength))
