@@ -3,6 +3,7 @@ package me.sirsam.trolls.items
 import me.sirsam.trolls.helpers.Utilities
 import net.kyori.adventure.text.Component
 import org.bukkit.Material
+import org.bukkit.enchantments.Enchantment
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
@@ -16,8 +17,10 @@ class TrollItem(
     private val rarity: TrollRarity = TrollRarity.UNFINISHED,
     private val raritySuffix: String = "",
     private val stackable: Boolean = true,
+    private val enchantments: MutableMap<Enchantment, Int>? = null,
     private val abilities: Array<String>? = null,
     private val oneTimeUse: Boolean = false,
+    private val unbreakable: Boolean = true
 ) {
     private val utils = Utilities()
 
@@ -28,8 +31,9 @@ class TrollItem(
 
         meta.persistentDataContainer.set(utils.nameKey, PersistentDataType.STRING, id)
         meta.displayName(Component.text(formattedName))
+        if (enchantments != null) { item.addEnchantments(enchantments) }
         meta.lore(addLore())
-        meta.isUnbreakable = true
+        meta.isUnbreakable = unbreakable
         meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE)
         item.itemMeta = meta
 
@@ -38,7 +42,7 @@ class TrollItem(
 
     fun getId(): String { return id }
 
-    fun getName(): String { return rarity.color +name}
+    fun getName(): String { return rarity.color + name}
 
     private fun addLore(): MutableList<Component> {
         val lore = mutableListOf<Component>()
@@ -65,7 +69,7 @@ class TrollItem(
             lore.add(Component.text(""))
         }
 
-        lore.add(Component.text(rarity.color + rarity + " " + raritySuffix))
+        lore.add(Component.text(rarity.color + rarity + " " + raritySuffix.uppercase()))
 
         return lore
     }
