@@ -6,6 +6,7 @@ import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.entity.EntityType
+import org.bukkit.entity.LargeFireball
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -43,11 +44,11 @@ class ItemEvents : Listener {
 
         if(item.itemMeta != null) {
             val data = item.itemMeta.persistentDataContainer
-            val strength = 1.4
 
             if (data.get(utils.nameKey, PersistentDataType.STRING) == "throwable_tnt" && event.action == Action.RIGHT_CLICK_BLOCK) { event.isCancelled = true }
 
             if (data.get(utils.nameKey, PersistentDataType.STRING) == "throwable_tnt" && event.action == Action.RIGHT_CLICK_AIR) {
+                val strength = 1.4
                 if (player.gameMode != GameMode.CREATIVE) { utils.destroy(item, 1) }
                 val direction = player.location.direction
                 val tntEntity = player.world.spawnEntity(player.location, EntityType.PRIMED_TNT)
@@ -114,4 +115,19 @@ class ItemEvents : Listener {
         }
     }
 
+    @EventHandler
+    fun throwFireball(event: PlayerInteractEvent) {
+        val player = event.player
+        val item = player.inventory.itemInMainHand
+
+        if(item.itemMeta != null) {
+            val data = item.itemMeta.persistentDataContainer
+
+            if (data.get(utils.nameKey, PersistentDataType.STRING) == "throwable_tnt" && event.action == Action.RIGHT_CLICK_AIR) {
+                val strength = 2
+                if (player.gameMode != GameMode.CREATIVE) { utils.destroy(item, 1) }
+                player.launchProjectile(LargeFireball::class.java, player.eyeLocation.direction.normalize().multiply(strength))
+            }
+        }
+    }
 }
