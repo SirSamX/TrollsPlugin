@@ -61,7 +61,7 @@ class ItemEvents : Listener {
         val player = event.player
         val item = player.inventory.itemInMainHand
 
-        if (event.action == Action.RIGHT_CLICK_AIR || event.action.isRightClick && item.type == Material.DISPENSER && player.isSneaking) {
+        if (event.action.isRightClick && item.type == Material.DISPENSER && player.isSneaking) {
             event.isCancelled = true
 
             player.openInventory(createDispenserGUI())
