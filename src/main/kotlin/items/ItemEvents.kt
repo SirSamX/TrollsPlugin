@@ -1,10 +1,13 @@
 package me.sirsam.trolls.items
 
+import me.sirsam.trolls.Trolls
 import me.sirsam.trolls.helpers.Utilities
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.Material
+import org.bukkit.entity.AbstractArrow
+import org.bukkit.entity.Arrow
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.LargeFireball
 import org.bukkit.entity.Player
@@ -18,9 +21,11 @@ import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
+import org.bukkit.scheduler.BukkitRunnable
 
 class ItemEvents : Listener {
     private val utils = Utilities()
+    private val plugin = Trolls.getPlugin()
 
     @EventHandler
     fun grapplingHookLaunch(event: PlayerFishEvent) {
@@ -130,5 +135,36 @@ class ItemEvents : Listener {
                 player.launchProjectile(LargeFireball::class.java, player.eyeLocation.direction.normalize().multiply(strength))
             }
         }
+    }
+
+    @EventHandler
+    fun onPlayerInteract(event: PlayerInteractEvent) {
+        val player = event.player
+        val item = player.inventory.itemInMainHand
+
+        if(item.itemMeta != null) {
+            val data = item.itemMeta.persistentDataContainer
+            if (event.action.isLeftClick && data.get(utils.nameKey, PersistentDataType.STRING) == "terminator") {
+                val arrow = player.launchProjectile(Arrow::class.java)
+                shootSpreadArrows(player, arrow, 3, 5f, 8.0)
+            }
+        }
+    }
+
+    private fun shootSpreadArrows(player: Player, arrow: Arrow, amount: Int, angle: Float, damage: Double) {
+        for (i in 0 until amount) {
+            val rotation = Math.toRadians(angle * (i - (amount - 1) / 2.0))
+            val direction = arrow.velocity.clone().rotateAroundY(rotation)
+            val newArrow = player.launchProjectile(Arrow::class.java)
+            newArrow.damage = damage
+            newArrow.pickupStatus = AbstractArrow.PickupStatus.CREATIVE_ONLY
+            newArrow.velocity = direction
+            object : BukkitRunnable() {
+                override fun run() {
+                    newArrow.remove()
+                }
+            }.runTaskLater(plugin, 60L)
+        }
+        arrow.remove()
     }
 }
