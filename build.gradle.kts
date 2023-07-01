@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "me.sirsam.trolls"
-version = "0.21.0"
+version = "0.22.1"
 
 repositories {
     mavenCentral()
