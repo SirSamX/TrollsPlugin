@@ -1,10 +1,12 @@
 package me.sirsam.trolls
 
+import io.papermc.paper.event.player.AsyncChatEvent
 import me.sirsam.trolls.commands.*
 import me.sirsam.trolls.helpers.Ranks
 import me.sirsam.trolls.items.ItemEvents
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.Sound
@@ -164,6 +166,15 @@ class Trolls : JavaPlugin(), Listener {
                 p.playSound(p.location, Sound.BLOCK_ANVIL_DESTROY, 1f, 1f)
             }
             else p.openAnvil(null, true)
+        }
+    }
+
+    @EventHandler
+    fun onChatEvent(event: AsyncChatEvent) {
+        var message = PlainTextComponentSerializer.plainText().serialize(event.message())
+        if (message.contains(":yin_yang:", true)) {
+            message = message.replace(":yin_yang:", "☯", true)
+            event.message(PlainTextComponentSerializer.plainText().deserialize(message))
         }
     }
 }
