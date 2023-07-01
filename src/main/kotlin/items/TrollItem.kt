@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 
 class TrollItem(
-    private val id: String = "unknown_item",
+    private val id: String = "unfinished_item",
     private val material: Material = Material.BARRIER,
     private val name: String = "Unfinished Item",
     private val description: String? = null,
@@ -42,7 +42,13 @@ class TrollItem(
 
     fun getId(): String { return id }
 
-    fun getName(): String { return rarity.color + name}
+    fun getName(color: Boolean = true): String {
+        return if (color) {
+            rarity.color + name
+        }
+        else name
+    }
+
 
     private fun addLore(): MutableList<Component> {
         val lore = mutableListOf<Component>()
