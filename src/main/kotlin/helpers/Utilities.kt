@@ -21,7 +21,9 @@ class Utilities {
 
     fun formattingErrorMessage(p: Player) { p.sendMessage(Component.text("Formatting error, check your command syntax!", NamedTextColor.RED)) }
 
-    fun isNotPlayerMessage(p: CommandSender) { p.sendMessage(Component.text("Target is not a player.")) }
+    fun isNotPlayerMessage(p: CommandSender) { p.sendMessage(Component.text("Sender is not a player.")) }
+
+    fun playerNotExistingMessage(p: CommandSender) { p.sendMessage(Component.text("This player does not exist!", NamedTextColor.RED)) }
 
     fun isNumeric(input: String): Boolean { return input.toDoubleOrNull() != null }
 
