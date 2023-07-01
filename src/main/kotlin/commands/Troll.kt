@@ -1,5 +1,6 @@
 package me.sirsam.trolls.commands
 
+import me.sirsam.trolls.GuiManager
 import me.sirsam.trolls.Trolls
 import me.sirsam.trolls.helpers.Utilities
 import me.sirsam.trolls.items.ItemManager
@@ -45,6 +46,10 @@ class Troll : CommandExecutor {
                 plugin.server.reload()
                 sender.sendMessage(Component.text("Reloaded Server"))
                 return true
+            }
+
+            "items" -> {
+                sender.openInventory(GuiManager().questGUI())
             }
 
             else -> { utils.formattingErrorMessage(sender); return true }
