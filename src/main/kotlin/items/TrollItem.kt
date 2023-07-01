@@ -31,8 +31,8 @@ class TrollItem(
 
         meta.persistentDataContainer.set(utils.nameKey, PersistentDataType.STRING, id)
         meta.displayName(Component.text(formattedName))
-        if (enchantments != null) { item.addEnchantments(enchantments) }
         meta.lore(addLore())
+        if (enchantments != null) { item.addUnsafeEnchantments(enchantments) }
         meta.isUnbreakable = unbreakable
         meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE)
         item.itemMeta = meta
