@@ -29,7 +29,7 @@ class TrollItem(
         val meta = item.itemMeta
         val formattedName = rarity.color + name
 
-        meta.persistentDataContainer.set(utils.nameKey, PersistentDataType.STRING, id)
+        meta.persistentDataContainer.set(utils.idKey, PersistentDataType.STRING, id)
         meta.displayName(Component.text(formattedName))
         meta.lore(addLore())
         if (enchantments != null) { item.addUnsafeEnchantments(enchantments) }

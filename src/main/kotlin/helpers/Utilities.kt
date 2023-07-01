@@ -6,6 +6,7 @@ import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.NamespacedKey
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 
@@ -13,9 +14,10 @@ class Utilities {
     private val plugin = Trolls.getPlugin()
     private val config = plugin.config
 
-    val nameKey = NamespacedKey(plugin, "itemname")
+    private val compactInventoryKey = NamespacedKey(plugin, "compactInventory")
+    val idKey = NamespacedKey(plugin, "itemID")
 
-    fun isTrollItem(i: ItemStack): Boolean { return i.itemMeta.persistentDataContainer.get(nameKey, PersistentDataType.STRING) !== null }
+    fun isTrollItem(i: ItemStack): Boolean { return i.itemMeta.persistentDataContainer.get(idKey, PersistentDataType.STRING) !== null }
 
     fun receiveItemMessage(p: Player, a: Int, i: String) { p.sendMessage(Component.text("You received $a $i!")) }
 
@@ -36,4 +38,15 @@ class Utilities {
     }
 
     fun getStringFromConfig(path: String): String? { return config.getString(path) }
+
+    fun storeInventoryInItem(item: ItemStack, inv: Inventory) {
+        val meta = item.itemMeta
+        meta.persistentDataContainer.set(compactInventoryKey, PersistentDataType.STRING, BukkitSerialization().toBase64(inv))
+        item.setItemMeta(meta)
+    }
+
+    fun getInventoryInItem(item: ItemStack): Inventory? {
+        val inventoryData = item.itemMeta.persistentDataContainer.get(compactInventoryKey, PersistentDataType.STRING)
+        return BukkitSerialization().fromBase64(inventoryData)
+    }
 }
