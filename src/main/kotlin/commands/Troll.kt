@@ -49,7 +49,7 @@ class Troll : CommandExecutor {
             }
 
             "items" -> {
-                sender.openInventory(GuiManager().questGUI())
+                sender.openInventory(GuiManager().itemGUI())
             }
 
             else -> { utils.formattingErrorMessage(sender); return true }
