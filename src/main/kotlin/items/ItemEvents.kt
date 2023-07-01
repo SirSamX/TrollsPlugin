@@ -10,7 +10,6 @@ import org.bukkit.entity.LargeFireball
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
-import org.bukkit.event.block.Action
 import org.bukkit.event.entity.EntityShootBowEvent
 import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.event.inventory.InventoryType
@@ -45,10 +44,9 @@ class ItemEvents : Listener {
         if(item.itemMeta != null) {
             val data = item.itemMeta.persistentDataContainer
 
-            if (data.get(utils.nameKey, PersistentDataType.STRING) == "throwable_tnt" && event.action == Action.RIGHT_CLICK_BLOCK) { event.isCancelled = true }
-
-            if (data.get(utils.nameKey, PersistentDataType.STRING) == "throwable_tnt" && event.action == Action.RIGHT_CLICK_AIR) {
+            if (data.get(utils.nameKey, PersistentDataType.STRING) == "throwable_tnt" && event.action.isRightClick) {
                 val strength = 1.4
+                event.isCancelled = true
                 if (player.gameMode != GameMode.CREATIVE) { utils.destroy(item, 1) }
                 val direction = player.location.direction
                 val tntEntity = player.world.spawnEntity(player.location, EntityType.PRIMED_TNT)
@@ -61,15 +59,17 @@ class ItemEvents : Listener {
     fun openShootyBoxGui(event: PlayerInteractEvent) {
         val player = event.player
         val item = player.inventory.itemInMainHand
+        val data = item.itemMeta.persistentDataContainer
 
-        if (event.action.isRightClick && item.type == Material.DISPENSER && player.isSneaking) {
+        if (data.get(utils.nameKey, PersistentDataType.STRING) == "shooty_box" && event.action.isRightClick) {
             event.isCancelled = true
-
-            player.openInventory(createDispenserGUI())
+            if (player.isSneaking) {
+                player.openInventory(shootyBoxGUI())
+            }
         }
     }
 
-    private fun createDispenserGUI(): Inventory {
+    private fun shootyBoxGUI(): Inventory {
         val gui = Bukkit.createInventory(null, InventoryType.DISPENSER, Component.text("Shooty Box"))
         val item = ItemStack(Material.DIAMOND)
         val meta = item.itemMeta
@@ -123,8 +123,9 @@ class ItemEvents : Listener {
         if(item.itemMeta != null) {
             val data = item.itemMeta.persistentDataContainer
 
-            if (data.get(utils.nameKey, PersistentDataType.STRING) == "throwable_fireball" && event.action == Action.RIGHT_CLICK_AIR) {
+            if (data.get(utils.nameKey, PersistentDataType.STRING) == "throwable_fireball" && event.action.isRightClick) {
                 val strength = 2
+                event.isCancelled = true
                 if (player.gameMode != GameMode.CREATIVE) { utils.destroy(item, 1) }
                 player.launchProjectile(LargeFireball::class.java, player.eyeLocation.direction.normalize().multiply(strength))
             }
