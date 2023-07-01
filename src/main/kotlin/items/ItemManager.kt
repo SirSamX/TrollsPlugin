@@ -12,6 +12,8 @@ class ItemManager{
         //TrollItem("leap", Material.FEATHER, "Leap", "Right-click to launch you in the direction you're' looking.", rarity = TrollRarity.EPIC),         ### NOT WORKING BECAUSE OF LAGGING BACK WHEN USING ABILITY! ###
         TrollItem("pogeroni_sword", Material.NETHERITE_SWORD, "Pogeroni Sword", "Fickt Emanuel.", "Hallo", TrollRarity.RARE, "SWORD", enchantments = mutableMapOf(Enchantment.DAMAGE_ALL to 5, Enchantment.DURABILITY to 3), unbreakable = false),
         TrollItem("shooty_box", Material.DISPENSER, "Shooty Box", "Shift + Right-click to open GUI. Right click to shoot.", rarity = TrollRarity.UNFINISHED),
-        TrollItem("terminator", Material.BOW, "Terminator", "Left-click to shoot 5 arrows.", null, TrollRarity.MYTHIC, "BOW")
+        TrollItem("terminator", Material.BOW, "Terminator", "Left-click to shoot 5 arrows.", null, TrollRarity.MYTHIC, "BOW"),
+        TrollItem("treecapitator", Material.GOLDEN_AXE, "Treecapitator", "Break wood to cut down a whole tree.", "Blocks: 50, Delay: 1 Ticks", TrollRarity.EPIC, "AXE"),
+        TrollItem("jungle_axe", Material.WOODEN_AXE, "Jungle Axe", "Break wood to cut down a whole tree.", "Blocks: 25, Delay: 3 Tick", TrollRarity.UNCOMMON, "AXE")
     )
 }
