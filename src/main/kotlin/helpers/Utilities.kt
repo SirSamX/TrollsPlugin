@@ -15,7 +15,7 @@ class Utilities {
     private val config = plugin.config
 
     private val compactInventoryKey = NamespacedKey(plugin, "compactInventory")
-    val idKey = NamespacedKey(plugin, "itemID")
+    val idKey = NamespacedKey(plugin, "ID")
 
     fun isTrollItem(i: ItemStack): Boolean { return i.itemMeta.persistentDataContainer.get(idKey, PersistentDataType.STRING) !== null }
 
