@@ -66,15 +66,16 @@ class ItemEvents : Listener {
     fun openShootyBoxGui(event: PlayerInteractEvent) {
         val player = event.player
         val item = player.inventory.itemInMainHand
-
-        if (item.itemMeta.persistentDataContainer.get(utils.idKey, PersistentDataType.STRING) == "shooty_box" && event.action.isRightClick) {
-            event.isCancelled = true
-            if (player.isSneaking) {
-                val inv = utils.getInventoryInItem(item)
-                if (inv == null) {
-                    player.openInventory(Bukkit.createInventory(null, InventoryType.DISPENSER, Component.text("Shooty Box")))
-                } else {
-                    player.openInventory(inv)
+        if (item.itemMeta != null) {
+            if (item.itemMeta.persistentDataContainer.get(utils.idKey, PersistentDataType.STRING) == "shooty_box" && event.action.isRightClick) {
+                event.isCancelled = true
+                if (player.isSneaking) {
+                    val inv = utils.getInventoryInItem(item)
+                    if (inv == null) {
+                        player.openInventory(Bukkit.createInventory(null, InventoryType.DISPENSER, Component.text("Shooty Box")))
+                    } else {
+                        player.openInventory(inv)
+                    }
                 }
             }
         }
@@ -105,16 +106,6 @@ class ItemEvents : Listener {
                 event.entity.world.createExplosion(event.entity.location, 2.5f, false, true)
                 event.entity.remove()
             }
-        }
-    }
-
-    @EventHandler
-    fun leap(event: PlayerInteractEvent) {
-        val player = event.player
-        val strength = .3
-
-        if (player.inventory.itemInMainHand.itemMeta.persistentDataContainer.get(utils.idKey, PersistentDataType.STRING) == "leap" && event.action.isRightClick) {
-            player.velocity = player.eyeLocation.toVector().multiply(strength)
         }
     }
 
@@ -237,7 +228,7 @@ class ItemEvents : Listener {
                     val y: Double = r * sin(t)
                     val z: Double = r * sin(t)
                     loc.add(x, y, z)
-                    player.world.spawnParticle(Particle.DRIP_LAVA, x, y, z, 1)
+                    player.world.spawnParticle(Particle.DRIP_LAVA, loc, 1)
                     loc.subtract(x, y, z)
                     if (t > Math.PI * 8) {
                         cancel()
