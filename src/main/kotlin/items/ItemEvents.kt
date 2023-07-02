@@ -11,6 +11,7 @@ import org.bukkit.block.Block
 import org.bukkit.entity.*
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.block.Action
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.entity.EntityShootBowEvent
 import org.bukkit.event.entity.ProjectileHitEvent
@@ -20,6 +21,9 @@ import org.bukkit.event.player.PlayerFishEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.scheduler.BukkitRunnable
+import kotlin.math.cos
+import kotlin.math.sin
+
 
 class ItemEvents : Listener {
     private val utils = Utilities()
@@ -216,6 +220,30 @@ class ItemEvents : Listener {
                 block.breakNaturally()
                 block.world.spawnParticle(Particle.VILLAGER_HAPPY, block.location, 1, 0.0, 0.0, 0.0, 0.0)
             }, delay * index)
+        }
+    }
+
+    @EventHandler
+    fun particle(event: PlayerInteractEvent) {
+        val player = event.player
+        if (event.action == Action.LEFT_CLICK_AIR) {
+            object : BukkitRunnable() {
+                var loc = player.location
+                var t = 0.0
+                var r = 2.0
+                override fun run() {
+                    t += Math.PI / 16
+                    val x: Double = r * cos(t)
+                    val y: Double = r * sin(t)
+                    val z: Double = r * sin(t)
+                    loc.add(x, y, z)
+                    player.world.spawnParticle(Particle.DRIP_LAVA, x, y, z, 1)
+                    loc.subtract(x, y, z)
+                    if (t > Math.PI * 8) {
+                        cancel()
+                    }
+                }
+            }.runTaskTimer(plugin, 0, 1)
         }
     }
 }
