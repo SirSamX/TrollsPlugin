@@ -297,11 +297,12 @@ class ItemEvents : Listener {
     fun shootParticle(loc: Location) {
         object : BukkitRunnable() {
             var t = 0.0
+            var speed = 3.0
             val direction: Vector = loc.direction.normalize()
             override fun run() {
                 t += 0.5
                 val x: Double = direction.x * t
-                val y: Double = direction.y * t + 1.5
+                val y: Double = direction.y * t + speed
                 val z: Double = direction.z * t
                 loc.add(x, y, z)
                 loc.world.spawnParticle(Particle.SPELL_WITCH, loc, 1, 0.0, 0.0, 0.0)
