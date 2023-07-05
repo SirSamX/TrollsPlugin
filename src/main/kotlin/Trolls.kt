@@ -51,7 +51,7 @@ class Trolls : JavaPlugin(), Listener {
         getCommand("sudo")?.setExecutor(Sudo())
         getCommand("troll")?.setExecutor(Troll())
         getCommand("godmode")?.setExecutor(Godmode())
-        getCommand("gui")?.setExecutor(Gui())
+        getCommand("quest")?.setExecutor(Quest())
         getCommand("vanish")?.setExecutor(Vanish())
 
         if (config.getBoolean("warp.allow_warp")) {

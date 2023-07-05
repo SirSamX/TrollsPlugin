@@ -15,13 +15,13 @@ commands:
     description: Allows you to toggle flight.
     permission: op
     permission-message: You do not have permission to use this Command!
-    usage: /<command>
+    usage: /<command> player
   godmode:
     description: Makes you invulnerable.
     permission: op
     permission-message: You do not have permission to use this command!
     aliases: god
-    usage: /<command>
+    usage: /<command> player
   sudo:
     description: Allows you to send something or execute a command from another players chat.
     permission: op
@@ -31,23 +31,23 @@ commands:
     description: Allows you to get troll items.
     permission: op
     permission-message: You do not have permission to use this Command!
-    usage: /<command> [get] item amount
-  gui:
+    usage: /<command>
+  quest:
     description: Allows you to open GUIs.
-    permission: op
     permission-message: You do not have permission to use this Command!
     usage: /<command>
+    aliases: quests
   vanish:
     description: Allows you to become invisible.
     permission: op
     permission-message: You do not have permission to use this Command!
-    usage: /<command>
+    usage: /<command> player
   warp:
     description: Allows you to warp to specific locations that are set by using /setwarp.
     permission-message: You do not have permission to use this Command!
-    usage: /<command> name
+    usage: /<command> warp_name
   setwarp:
     description: Allows you to set a warp.
     permission: op
     permission-message: You do not have permission to use this Command!
-    usage: /<command> name
+    usage: /<command> warp_name
