@@ -37,8 +37,6 @@ class Utilities {
         }
     }
 
-    fun getStringFromConfig(path: String): String? { return config.getString(path) }
-
     fun storeInventoryInItem(item: ItemStack, inv: Inventory) {
         val meta = item.itemMeta
         meta.persistentDataContainer.set(compactInventoryKey, PersistentDataType.STRING, BukkitSerialization().toBase64(inv))

@@ -31,14 +31,11 @@ class Trolls : JavaPlugin(), Listener {
     }
 
     override fun onEnable() {
-        val config = this.config
         instance = this
 
         logger.info("Plugin enabled!")
         registerCommands()
         registerEvents()
-
-        config.addDefault("warp.allow_warp", true)
     }
 
     override fun onDisable() {
@@ -53,11 +50,6 @@ class Trolls : JavaPlugin(), Listener {
         getCommand("godmode")?.setExecutor(Godmode())
         getCommand("quest")?.setExecutor(Quest())
         getCommand("vanish")?.setExecutor(Vanish())
-
-        if (config.getBoolean("warp.allow_warp")) {
-            getCommand("setwarp")?.setExecutor(SetWarp())
-            getCommand("warp")?.setExecutor(Warp())
-        }
     }
 
     private fun registerEvents() {
@@ -174,7 +166,7 @@ class Trolls : JavaPlugin(), Listener {
         var message = PlainTextComponentSerializer.plainText().serialize(event.message())
         if (message.contains(":yin_yang:", true)) {
             message = message.replace(":yin_yang:", "☯", true)
-            event.message(PlainTextComponentSerializer.plainText().deserialize(message))
         }
+        event.message(PlainTextComponentSerializer.plainText().deserialize(message))
     }
 }

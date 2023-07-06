@@ -1,15 +1,17 @@
 package me.sirsam.trolls
 
 import me.sirsam.trolls.guis.quests.Completed
-import me.sirsam.trolls.guis.quests.Open
 import me.sirsam.trolls.guis.quests.Menu
+import me.sirsam.trolls.guis.quests.Open
 import me.sirsam.trolls.items.ItemManager
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.inventory.InventoryAction
 import org.bukkit.event.inventory.InventoryClickEvent
+import org.bukkit.event.inventory.InventoryType
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 
@@ -45,12 +47,17 @@ class GuiManager : Listener {
 
     @EventHandler
     fun onclick(e: InventoryClickEvent) {
-        if (e.inventory.holder is Menu) {
-            val p = e.whoClicked
-            when (e.slot) {
-                1 -> p.openInventory(Open().inventory)
-                3 -> p.openInventory(Completed().inventory)
+        val p = e.whoClicked
+        when (e.clickedInventory?.holder) {
+            is Menu -> {
+                when (e.slot) {
+                    1 -> p.openInventory(Open().inventory)
+                    3 -> p.openInventory(Completed().inventory)
+                }
+                e.isCancelled = true
             }
+        }
+        if (e.clickedInventory?.type == InventoryType.PLAYER && e.currentItem?.type == Material.STONE && e.action == InventoryAction.MOVE_TO_OTHER_INVENTORY || e.isShiftClick) {
             e.isCancelled = true
         }
     }

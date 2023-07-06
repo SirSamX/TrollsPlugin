@@ -3,6 +3,7 @@ package me.sirsam.trolls.items
 import me.sirsam.trolls.Trolls
 import me.sirsam.trolls.helpers.Utilities
 import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.*
 import org.bukkit.block.Block
 import org.bukkit.entity.*
@@ -294,7 +295,7 @@ class ItemEvents : Listener {
         }.runTaskTimer(plugin, 0, 1)
     }
 
-    fun shootParticle(loc: Location) {
+    private fun shootParticle(loc: Location) {
         object : BukkitRunnable() {
             var t = 0.0
             var speed = 3.0
@@ -331,32 +332,23 @@ class ItemEvents : Listener {
                     val loc = player.location
 
                     when (data.get(wandKey, PersistentDataType.STRING)) {
-                        "particle" -> {
-                            particle(loc)
-                            player.sendMessage("Casting particle ability")
-                        }
-                        "big_particle" -> {
-                            bigParticle(loc)
-                            player.sendMessage("Casting big particle ability")
-                        }
-                        "shoot" -> {
-                            shootParticle(loc)
-                            player.sendMessage("Casting shoot particle ability")
-                        }
+                        "Circle" -> particle(loc)
+                        "Wave" -> bigParticle(loc)
+                        "Shoot" -> shootParticle(loc)
                         else -> {
-                            player.sendMessage("Invalid ability")
+                            player.sendMessage(Component.text("Invalid spell!", NamedTextColor.RED))
                         }
                     }
                 } else if (event.action.isLeftClick) {
                     val newAbility = when (data.get(wandKey, PersistentDataType.STRING)) {
-                        "particle" -> "big_particle"
-                        "big_particle" -> "shoot"
-                        "shoot" -> "particle"
-                        else -> "particle"
+                        "Circle" -> "Wave"
+                        "Wave" -> "Shoot"
+                        "Shoot" -> "Circle"
+                        else -> "Circle"
                     }
                     data.set(wandKey, PersistentDataType.STRING, newAbility)
                     item.itemMeta = itemMeta
-                    player.sendMessage("Changed ability to $newAbility")
+                    player.sendMessage(Component.text("§eChanged ability to §a§l$newAbility"))
                 }
             }
         }

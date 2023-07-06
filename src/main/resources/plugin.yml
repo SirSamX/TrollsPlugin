@@ -42,12 +42,3 @@ commands:
     permission: op
     permission-message: You do not have permission to use this Command!
     usage: /<command> player
-  warp:
-    description: Allows you to warp to specific locations that are set by using /setwarp.
-    permission-message: You do not have permission to use this Command!
-    usage: /<command> warp_name
-  setwarp:
-    description: Allows you to set a warp.
-    permission: op
-    permission-message: You do not have permission to use this Command!
-    usage: /<command> warp_name
