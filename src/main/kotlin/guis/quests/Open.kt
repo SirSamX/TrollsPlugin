@@ -1,6 +1,6 @@
 package me.sirsam.trolls.guis.quests
 
-import me.sirsam.trolls.GuiManager
+import me.sirsam.trolls.guis.GuiManager
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.Material

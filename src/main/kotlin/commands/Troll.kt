@@ -1,6 +1,6 @@
 package me.sirsam.trolls.commands
 
-import me.sirsam.trolls.GuiManager
+import me.sirsam.trolls.guis.GuiManager
 import me.sirsam.trolls.Trolls
 import me.sirsam.trolls.helpers.Utilities
 import me.sirsam.trolls.items.ItemManager

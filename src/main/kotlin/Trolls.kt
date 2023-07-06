@@ -2,6 +2,7 @@ package me.sirsam.trolls
 
 import io.papermc.paper.event.player.AsyncChatEvent
 import me.sirsam.trolls.commands.*
+import me.sirsam.trolls.guis.GuiManager
 import me.sirsam.trolls.helpers.Ranks
 import me.sirsam.trolls.items.ItemEvents
 import net.kyori.adventure.text.Component
@@ -73,8 +74,6 @@ class Trolls : JavaPlugin(), Listener {
         val header = Component.text("GAMING LEGENDEN SERVER", NamedTextColor.RED)
         val footer = Component.text("1.20 Trails and Tails", NamedTextColor.GREEN)
         p.sendPlayerListHeaderAndFooter(header, footer)
-
-        config.addDefault("warp.allow_warp", true)
 
         fun setRank(rank: Ranks, p: Player) {
             val name = Component.text(rank.prefix, rank.color).append(p.name().append(Component.text(rank.suffix)))
