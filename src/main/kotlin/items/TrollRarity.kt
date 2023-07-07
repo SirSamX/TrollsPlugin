@@ -11,6 +11,7 @@ enum class TrollRarity(val color: NamedTextColor) {
     MYTHIC(NamedTextColor.LIGHT_PURPLE),
     DIVINE(NamedTextColor.AQUA),
     SPECIAL(NamedTextColor.RED),
+    VERY_SPECIAL(NamedTextColor.DARK_RED),
     ADMIN(NamedTextColor.DARK_RED),
     UNFINISHED(NamedTextColor.DARK_RED)
 }
