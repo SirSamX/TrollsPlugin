@@ -23,7 +23,7 @@ class GuiManager : Listener {
         val gui = Bukkit.createInventory(null, 54, Component.text("Items"))
         var slot = 0
 
-        for (item in ItemManager().items.sortedBy { it.getName(false) }) {
+        for (item in ItemManager().items.sortedBy { it.getName() }) {
             gui.setItem(slot, item.createItem())
             slot += 1
         }
