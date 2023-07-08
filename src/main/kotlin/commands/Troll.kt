@@ -1,7 +1,7 @@
 package me.sirsam.trolls.commands
 
-import me.sirsam.trolls.GuiManager
 import me.sirsam.trolls.Trolls
+import me.sirsam.trolls.guis.Items
 import me.sirsam.trolls.helpers.Utilities
 import me.sirsam.trolls.items.ItemManager
 import net.kyori.adventure.text.Component
@@ -49,7 +49,7 @@ class Troll : CommandExecutor {
             }
 
             "items" -> {
-                sender.openInventory(GuiManager().itemGUI())
+                sender.openInventory(Items().inventory)
             }
 
             else -> { utils.formattingErrorMessage(sender); return true }
