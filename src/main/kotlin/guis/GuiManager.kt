@@ -2,6 +2,7 @@ package me.sirsam.trolls.guis
 
 import me.sirsam.trolls.Trolls
 import net.kyori.adventure.text.Component
+import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -13,8 +14,6 @@ import org.bukkit.inventory.ItemStack
 
 class GuiManager : Listener {
     val instance = Trolls.getPlugin()
-
-
 
     fun item(material: Material, amount: Int = 1, name: Component, lore: MutableList<Component>? = null): ItemStack {
         val item = ItemStack(material, amount)
@@ -32,26 +31,36 @@ class GuiManager : Listener {
         val p = e.whoClicked
         when (e.clickedInventory?.holder) {
             is Items -> {
+                val itemsGUI = e.inventory.holder as Items
                 when (e.slot) {
                     45 -> {
-                        e.isCancelled = true
+                        if (itemsGUI.page <= 1) return
+                        itemsGUI.page--
+                        p.openInventory(itemsGUI.inventory)
+                        p.sendMessage(Component.text("Page " + itemsGUI.page))
                     }
                     49 -> {
                         e.isCancelled = true
                         p.closeInventory()
                     }
                     53 -> {
-                        e.isCancelled = true
-                        val itemsGUI = Items()
                         itemsGUI.page++
                         p.openInventory(itemsGUI.inventory)
+                        p.sendMessage(Component.text("Page " + itemsGUI.page))
+                    }
+                }
+                if (p.gameMode == GameMode.CREATIVE && e.slot < 45) {
+                    if (e.currentItem != null) {
+                        if (e.isShiftClick) {
+                            p.inventory.addItem(e.currentItem!!)
+                        } else p.setItemOnCursor(e.currentItem)
                     }
                 }
                 e.isCancelled = true
             }
         }
-        if (e.clickedInventory?.type == InventoryType.PLAYER && e.currentItem?.type == Material.STONE && e.action == InventoryAction.MOVE_TO_OTHER_INVENTORY || e.isShiftClick) {
-            e.isCancelled = true
+        if (e.clickedInventory?.type == InventoryType.PLAYER && e.action == InventoryAction.MOVE_TO_OTHER_INVENTORY || e.isShiftClick) {
+            if (e.whoClicked.openInventory.topInventory.holder == Items()) e.isCancelled = true
         }
     }
 }

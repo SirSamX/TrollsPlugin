@@ -11,14 +11,14 @@ import kotlin.IllegalArgumentException
 class Items : InventoryHolder {
     private val gui = GuiManager()
     private val items = ItemManager()
-    var page = 0
+    var page = 1
 
     override fun getInventory(): Inventory {
-        if (page < 0) {
+        if (page <= 0) {
             throw IllegalArgumentException("page cant be negative")
         }
 
-        val inv = Bukkit.createInventory(null, 54, Component.text("Items"))
+        val inv = Bukkit.createInventory(this, 54, Component.text("Items"))
 
         items.items.sortedBy { it.getName() }.forEachIndexed { index, item ->
             if (index <= 44) {
@@ -26,7 +26,7 @@ class Items : InventoryHolder {
             }
         }
 
-        if (page != 0) {
+        if (page != 1) {
             inv.setItem(45, gui.item(Material.ARROW, name = Component.text("Previous Page")))
         }
         inv.setItem(49, gui.item(Material.BARRIER, name = Component.text("Close")))
