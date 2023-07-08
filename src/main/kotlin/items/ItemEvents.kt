@@ -1,6 +1,7 @@
 package me.sirsam.trolls.items
 
 import me.sirsam.trolls.Trolls
+import me.sirsam.trolls.helpers.Cooldown
 import me.sirsam.trolls.helpers.Utilities
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
@@ -110,13 +111,15 @@ class ItemEvents : Listener {
 
     @EventHandler
     fun explosiveBowShoot(event: EntityShootBowEvent) {
-        val player = event.entity as Player
-        if (player.inventory.itemInMainHand.itemMeta.persistentDataContainer.get(
-                utils.idKey,
-                PersistentDataType.STRING
-            ) == "explosive_bow"
-        ) {
-            event.projectile.customName(Component.text("Explosive Arrow"))
+        if (event.entity is Player) {
+            val player = event.entity as Player
+            if (player.inventory.itemInMainHand.itemMeta.persistentDataContainer.get(
+                    utils.idKey,
+                    PersistentDataType.STRING
+                ) == "explosive_bow"
+            ) {
+                event.projectile.customName(Component.text("Explosive Arrow"))
+            }
         }
     }
 
@@ -315,7 +318,7 @@ class ItemEvents : Listener {
         }.runTaskTimer(plugin, 0, 1)
     }
 
-
+    private val wandCooldown = Cooldown()
     @EventHandler
     fun magicalWand(event: PlayerInteractEvent) {
         val player = event.player
@@ -328,7 +331,8 @@ class ItemEvents : Listener {
             if (data.get(utils.idKey, PersistentDataType.STRING) == "magical_wand") {
                 val wandKey = NamespacedKey(plugin, "ability")
 
-                if (event.action.isRightClick) {
+                if (event.action.isRightClick && wandCooldown.can(player)) {
+                    wandCooldown.add(player, 1000)
                     val loc = player.location
 
                     when (data.get(wandKey, PersistentDataType.STRING)) {
@@ -349,7 +353,7 @@ class ItemEvents : Listener {
                     data.set(wandKey, PersistentDataType.STRING, newAbility)
                     item.itemMeta = itemMeta
                     player.sendMessage(Component.text("§eChanged ability to §a§l$newAbility"))
-                }
+                } else utils.cooldownMessage(player, wandCooldown.eta(player))
             }
         }
     }

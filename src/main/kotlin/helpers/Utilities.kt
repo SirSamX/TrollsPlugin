@@ -28,6 +28,8 @@ class Utilities {
 
     fun playerNotExistingMessage(p: CommandSender) { p.sendMessage(Component.text("This player does not exist!", NamedTextColor.RED)) }
 
+    fun cooldownMessage(p: Player, eta: Long) { p.sendMessage(Component.text("Please wait ${"%.1f".format(eta)}s before using this!", NamedTextColor.YELLOW)) }
+
     fun isNumeric(input: String): Boolean { return input.toDoubleOrNull() != null }
 
     fun destroy(item: ItemStack, quantity: Int) {
