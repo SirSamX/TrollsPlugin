@@ -1,12 +1,12 @@
 package me.sirsam.trolls.guis.quests
 
+import me.sirsam.trolls.GuiManager
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.event.inventory.InventoryType
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.InventoryHolder
-import me.sirsam.trolls.guis.GuiManager
 
 class Menu : InventoryHolder {
     private val gui = GuiManager()

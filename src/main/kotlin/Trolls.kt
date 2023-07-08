@@ -2,7 +2,6 @@ package me.sirsam.trolls
 
 import io.papermc.paper.event.player.AsyncChatEvent
 import me.sirsam.trolls.commands.*
-import me.sirsam.trolls.guis.GuiManager
 import me.sirsam.trolls.helpers.Ranks
 import me.sirsam.trolls.items.ItemEvents
 import net.kyori.adventure.text.Component
