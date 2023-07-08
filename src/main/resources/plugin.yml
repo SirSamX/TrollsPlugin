@@ -32,11 +32,6 @@ commands:
     permission: op
     permission-message: You do not have permission to use this Command!
     usage: /<command>
-  quest:
-    description: Allows you to open GUIs.
-    permission-message: You do not have permission to use this Command!
-    usage: /<command>
-    aliases: quests
   vanish:
     description: Allows you to become invisible.
     permission: op
