@@ -1,6 +1,5 @@
-package me.sirsam.trolls.guis
+package me.sirsam.trolls
 
-import me.sirsam.trolls.Trolls
 import me.sirsam.trolls.guis.quests.Completed
 import me.sirsam.trolls.guis.quests.Menu
 import me.sirsam.trolls.guis.quests.Open
@@ -24,7 +23,7 @@ class GuiManager : Listener {
         val gui = Bukkit.createInventory(null, 54, Component.text("Items"))
         var slot = 0
 
-        for (item in ItemManager().items.sortedBy { it.getName(false) }) {
+        for (item in ItemManager().items.sortedBy { it.getName() }) {
             gui.setItem(slot, item.createItem())
             slot += 1
         }
