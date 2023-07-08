@@ -3,6 +3,7 @@ package me.sirsam.trolls.items
 import me.sirsam.trolls.helpers.Utilities
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.text.format.TextDecoration
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.inventory.ItemFlag
@@ -10,14 +11,14 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 
 class TrollItem(
-    private val id: String = "unfinished_item",
-    private val material: Material = Material.BARRIER,
-    private val name: String = "Unfinished Item",
+    private val id: String,
+    private val material: Material,
+    private val name: String,
     private val description: String? = null,
     private val note: String? = null,
     private val rarity: TrollRarity = TrollRarity.UNFINISHED,
     private val raritySuffix: String = "",
-    private val stackable: Boolean = true,
+    private val stackable: Boolean = false,
     private val enchantments: MutableMap<Enchantment, Int>? = null,
     private val abilities: Map<TrollAbility, String>? = null,
     private val oneTimeUse: Boolean = false,
@@ -31,6 +32,7 @@ class TrollItem(
         val meta = item.itemMeta
 
         meta.persistentDataContainer.set(utils.idKey, PersistentDataType.STRING, id)
+        meta.persistentDataContainer.set(utils.stackableKey, PersistentDataType.BOOLEAN, stackable)
         meta.displayName(getNameComponent())
         meta.lore(addLore())
         meta.isUnbreakable = unbreakable
@@ -48,7 +50,7 @@ class TrollItem(
 
     fun getNameComponent(colored: Boolean = true): Component {
         return if (colored) {
-            Component.text(name, rarity.color)
+            Component.text(name, rarity.color).decoration(TextDecoration.ITALIC, false)
         }
         else Component.text(name)
     }
@@ -63,7 +65,7 @@ class TrollItem(
         }
 
         if (!description.isNullOrBlank()) {
-            lore.add(Component.text("$description", NamedTextColor.GRAY))
+            lore.add(Component.text("$description", NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false))
             lore.add(Component.text(""))
         }
 
@@ -72,12 +74,12 @@ class TrollItem(
                 val type = ability.key.toString().replace("_", " ")
                 val name = ability.value
                 when (ability.key) {
-                    TrollAbility.RIGHT_CLICK -> { lore.add(Component.text("Item Ability: $name ", NamedTextColor.GOLD).append(Component.text(type, NamedTextColor.YELLOW))) }
-                    TrollAbility.LEFT_CLICK -> { lore.add(Component.text("Item Ability: $name ", NamedTextColor.GOLD).append(Component.text(type, NamedTextColor.YELLOW))) }
-                    TrollAbility.SHIFT_RIGHT_CLICK -> { lore.add(Component.text("Item Ability: $name ", NamedTextColor.GOLD).append(Component.text(type, NamedTextColor.YELLOW))) }
-                    TrollAbility.SHIFT_LEFT_CLICK -> { lore.add(Component.text("Item Ability: $name ", NamedTextColor.GOLD).append(Component.text(type, NamedTextColor.YELLOW))) }
-                    TrollAbility.FULL_SET_BONUS -> { lore.add(Component.text("Set Bonus: $name ", NamedTextColor.GOLD).append(Component.text(type, NamedTextColor.YELLOW))) }
-                    TrollAbility.PIECE_BONUS -> { lore.add(Component.text("Piece Bonus: $name ", NamedTextColor.GOLD).append(Component.text(type, NamedTextColor.YELLOW))) }
+                    TrollAbility.RIGHT_CLICK -> { lore.add(Component.text("Item Ability: $name ", NamedTextColor.GOLD).append(Component.text(type, NamedTextColor.YELLOW).decorate(TextDecoration.BOLD)).decoration(TextDecoration.ITALIC, false)) }
+                    TrollAbility.LEFT_CLICK -> { lore.add(Component.text("Item Ability: $name ", NamedTextColor.GOLD).append(Component.text(type, NamedTextColor.YELLOW).decorate(TextDecoration.BOLD)).decoration(TextDecoration.ITALIC, false)) }
+                    TrollAbility.SHIFT_RIGHT_CLICK -> { lore.add(Component.text("Item Ability: $name ", NamedTextColor.GOLD).append(Component.text(type, NamedTextColor.YELLOW).decorate(TextDecoration.BOLD)).decoration(TextDecoration.ITALIC, false)) }
+                    TrollAbility.SHIFT_LEFT_CLICK -> { lore.add(Component.text("Item Ability: $name ", NamedTextColor.GOLD).append(Component.text(type, NamedTextColor.YELLOW).decorate(TextDecoration.BOLD)).decoration(TextDecoration.ITALIC, false)) }
+                    TrollAbility.FULL_SET_BONUS -> { lore.add(Component.text("Set Bonus: $name ", NamedTextColor.GOLD).append(Component.text(type, NamedTextColor.YELLOW).decorate(TextDecoration.BOLD)).decoration(TextDecoration.ITALIC, false)) }
+                    TrollAbility.PIECE_BONUS -> { lore.add(Component.text("Piece Bonus: $name ", NamedTextColor.GOLD).append(Component.text(type, NamedTextColor.YELLOW).decorate(TextDecoration.BOLD)).decoration(TextDecoration.ITALIC, false)) }
                 }
             }
             lore.add(Component.text(""))
@@ -90,11 +92,11 @@ class TrollItem(
         }
 
         if (oneTimeUse) {
-            lore.add(Component.text("(consumed on use)", NamedTextColor.DARK_GRAY))
+            lore.add(Component.text("(consumed on use)", NamedTextColor.DARK_GRAY).decoration(TextDecoration.ITALIC, false))
             lore.add(Component.text(""))
         }
 
-        lore.add(Component.text(rarity.toString().replace("_", " ") + " " + raritySuffix.uppercase(), rarity.color))
+        lore.add(Component.text(rarity.toString().replace("_", " ") + " " + raritySuffix.uppercase(), rarity.color).decorate(TextDecoration.BOLD).decoration(TextDecoration.ITALIC, false))
 
         return lore
     }

@@ -5,6 +5,7 @@ import me.sirsam.trolls.commands.*
 import me.sirsam.trolls.guis.GuiManager
 import me.sirsam.trolls.helpers.Ranks
 import me.sirsam.trolls.items.ItemEvents
+import me.sirsam.trolls.items.ItemRecipes
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
@@ -33,10 +34,11 @@ class Trolls : JavaPlugin(), Listener {
 
     override fun onEnable() {
         instance = this
-
         logger.info("Plugin enabled!")
         registerCommands()
         registerEvents()
+        ItemRecipes().registerRecipes()
+        Bukkit.getOnlinePlayers().forEach { p -> ItemRecipes().unlockRecipes(p)}
     }
 
     override fun onDisable() {
@@ -73,6 +75,8 @@ class Trolls : JavaPlugin(), Listener {
         val header = Component.text("GAMING LEGENDEN SERVER", NamedTextColor.RED)
         val footer = Component.text("1.20 Trails and Tails", NamedTextColor.GREEN)
         p.sendPlayerListHeaderAndFooter(header, footer)
+
+        ItemRecipes().unlockRecipes(p)
 
         fun setRank(rank: Ranks, p: Player) {
             val name = Component.text(rank.prefix, rank.color).append(p.name().append(Component.text(rank.suffix)))

@@ -16,10 +16,11 @@ class Utilities {
 
     private val compactInventoryKey = NamespacedKey(plugin, "compactInventory")
     val idKey = NamespacedKey(plugin, "ID")
+    val stackableKey = NamespacedKey(plugin, "stackable")
 
     fun isTrollItem(i: ItemStack): Boolean { return i.itemMeta.persistentDataContainer.get(idKey, PersistentDataType.STRING) !== null }
 
-    fun receiveItemMessage(p: Player, a: Int, i: String) { p.sendMessage(Component.text("You received $a $i!")) }
+    fun receiveItemMessage(p: Player, a: Int, i: Component) { p.sendMessage(Component.text("You received $a $i!")) }
 
     fun formattingErrorMessage(p: Player) { p.sendMessage(Component.text("Formatting error, check your command syntax!", NamedTextColor.RED)) }
 

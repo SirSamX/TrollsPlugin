@@ -19,8 +19,8 @@ class Items : InventoryHolder {
         }
 
         val inv = Bukkit.createInventory(this, 54, Component.text("Items"))
-
-        items.items.sortedBy { it.getName() }.forEachIndexed { index, item ->
+        val registeredItems = items.items + items.ingredients
+        registeredItems.sortedBy { it.getName() }.forEachIndexed { index, item ->
             if (index <= 44) {
                 inv.setItem(index, item.createItem())
             }

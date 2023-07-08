@@ -1,6 +1,7 @@
 package me.sirsam.trolls.guis
 
 import me.sirsam.trolls.Trolls
+import me.sirsam.trolls.helpers.Utilities
 import net.kyori.adventure.text.Component
 import org.bukkit.GameMode
 import org.bukkit.Material
@@ -10,10 +11,12 @@ import org.bukkit.event.inventory.InventoryAction
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryType
 import org.bukkit.inventory.ItemStack
+import org.bukkit.persistence.PersistentDataType
 
 
 class GuiManager : Listener {
-    val instance = Trolls.getPlugin()
+    private val instance = Trolls.getPlugin()
+    private val utils = Utilities()
 
     fun item(material: Material, amount: Int = 1, name: Component, lore: MutableList<Component>? = null): ItemStack {
         val item = ItemStack(material, amount)
@@ -50,10 +53,21 @@ class GuiManager : Listener {
                     }
                 }
                 if (p.gameMode == GameMode.CREATIVE && e.slot < 45) {
-                    if (e.currentItem != null) {
+                    val item = e.currentItem?.clone()
+                    if (item != null) {
                         if (e.isShiftClick) {
-                            p.inventory.addItem(e.currentItem!!)
-                        } else p.setItemOnCursor(e.currentItem)
+                            if (e.isLeftClick && item.itemMeta.persistentDataContainer.get(utils.stackableKey, PersistentDataType.BOOLEAN) == true) {
+                                item.amount = item.maxStackSize
+                            }
+                            p.inventory.addItem(item)
+                        } else if (e.isRightClick) {
+                            p.setItemOnCursor(item)
+                        } else {
+                            if (item.itemMeta.persistentDataContainer.get(utils.stackableKey, PersistentDataType.BOOLEAN) == true) {
+                                item.amount = item.maxStackSize
+                            }
+                            p.setItemOnCursor(item)
+                        }
                     }
                 }
                 e.isCancelled = true
