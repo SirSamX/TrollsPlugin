@@ -246,6 +246,7 @@ class ItemEvents : Listener {
         for ((index, block) in treeBlocks.withIndex()) {
             plugin.server.scheduler.runTaskLater(plugin, Runnable {
                 block.breakNaturally()
+                block.world.spawnParticle(Particle.COMPOSTER, block.location.toCenterLocation(), 1)
             }, delay * index)
         }
     }
