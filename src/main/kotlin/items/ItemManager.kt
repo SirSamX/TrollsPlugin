@@ -58,14 +58,15 @@ class ItemManager{
             id = "shooty_box",
             material = Material.DISPENSER,
             name = "Shooty Box",
-            description = "Shift + Right-click to open GUI. Right click to shoot.", rarity = TrollRarity.UNFINISHED
+            abilities = mapOf(TrollAbility.RIGHT_CLICK to "Shoot!", TrollAbility.SHIFT_RIGHT_CLICK to "Open inventory"),
+            rarity = TrollRarity.UNFINISHED
         ),
         TrollItem(//6
             id = "terminator",
             material = Material.BOW,
             name = "Terminator",
-            description = "Left-click to shoot 3 arrows.",
-            note = null,
+            abilities = mapOf(TrollAbility.LEFT_CLICK to "Shoot 3 arrows!"),
+            note = "Infinite arrows!",
             rarity = TrollRarity.MYTHIC,
             raritySuffix = "BOW"
         ),
@@ -91,7 +92,7 @@ class ItemManager{
             id = "magical_wand",
             material = Material.BLAZE_ROD,
             name = "Magical Wand",
-            description = "Left-click to switch modes. Right-click to cast spell.",
+            abilities = mapOf(TrollAbility.RIGHT_CLICK to "Cast spell", TrollAbility.LEFT_CLICK to "Switch ability"),
             note = "TestItem",
             rarity = TrollRarity.ADMIN,
             raritySuffix = "WAND"
