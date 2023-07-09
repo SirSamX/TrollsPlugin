@@ -6,6 +6,7 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Bukkit
 import org.bukkit.Particle
+import org.bukkit.attribute.Attribute
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -27,7 +28,7 @@ class OnJoin : Listener {
 
         val loc = p.location
         loc.y++
-        p.world.spawnParticle(Particle.REVERSE_PORTAL, loc, 75)
+        p.world.spawnParticle(Particle.REVERSE_PORTAL, loc, 50)
 
         fun setRank(rank: Ranks, p: Player) {
             val name = Component.text(rank.prefix, rank.color).append(p.name().append(Component.text(rank.suffix)))
@@ -39,6 +40,7 @@ class OnJoin : Listener {
         when (p.name) {
             "niceleumas" -> {
                 setRank(Ranks.OWNER, p)
+                //p.getAttribute(Attribute.GENERIC_ATTACK_SPEED)?.baseValue = 100.0
             }
             "Blueberry1873" -> {
                 setRank(Ranks.ADMIN, p)

@@ -15,6 +15,6 @@ class OnLeave : Listener {
 
         val loc = p.location
         loc.y++
-        p.world.spawnParticle(Particle.PORTAL, loc, 75)
+        p.world.spawnParticle(Particle.PORTAL, loc, 50)
     }
 }
