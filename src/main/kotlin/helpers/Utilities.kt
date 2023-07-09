@@ -9,6 +9,7 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
+import kotlin.random.Random
 
 class Utilities {
     private val plugin = Trolls.getPlugin()
@@ -38,6 +39,11 @@ class Utilities {
         } else {
             item.amount = item.amount - quantity
         }
+    }
+
+    fun randomPercentage(percentage: Int, scale: Int = 1): Boolean {
+        val r = Random.nextInt(100 * scale)
+        return r < percentage * scale
     }
 
     fun storeInventoryInItem(item: ItemStack, inv: Inventory) {
