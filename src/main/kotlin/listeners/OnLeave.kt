@@ -1,6 +1,5 @@
 package me.sirsam.trolls.listeners
 
-import me.sirsam.trolls.helpers.Ranks
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Particle
