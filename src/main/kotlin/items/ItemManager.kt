@@ -96,7 +96,7 @@ class ItemManager{
             note = "TestItem",
             rarity = TrollRarity.ADMIN,
             raritySuffix = "WAND"
-        )
+        ),
     )
     val ingredients = listOf(
         TrollItem(//0
@@ -106,6 +106,14 @@ class ItemManager{
             rarity = TrollRarity.COMMON,
             raritySuffix = "INGREDIENT",
             stackable = true
-        )
+        ),
+        TrollItem(//1
+            id = "compressed_nether_star",
+            material = Material.NETHER_STAR,
+            name = "Compressed Nether Star",
+            rarity = TrollRarity.RARE,
+            raritySuffix = "INGREDIENT",
+            stackable = true
+        ),
     )
 }
