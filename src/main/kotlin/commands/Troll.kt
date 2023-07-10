@@ -6,6 +6,7 @@ import me.sirsam.trolls.guis.Items
 import me.sirsam.trolls.helpers.Utilities
 import me.sirsam.trolls.items.ItemManager
 import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.command.Command
@@ -66,6 +67,15 @@ class Troll : CommandExecutor {
                 meta.playerProfile = profile
                 head.itemMeta = meta
                 sender.inventory.addItem(head)
+            }
+
+            "version", "ver", "v" -> {
+                @Suppress("DEPRECATION")
+                sender.sendMessage(Component.text("Version: ${plugin.description.version}", NamedTextColor.YELLOW))
+            }
+
+            "help", "info" -> {
+                sender.sendMessage(Component.text("i cant help", NamedTextColor.YELLOW))
             }
 
             else -> { utils.formattingErrorMessage(sender); return true }
