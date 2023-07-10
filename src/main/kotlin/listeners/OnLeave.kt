@@ -32,7 +32,7 @@ class OnLeave : Listener {
                 event.quitMessage(Component.text("- ", NamedTextColor.RED).append(Component.text("Se Kaiser of la Redstöne is weg!", NamedTextColor.RED)))
             }
             "hbjju" -> {
-                event.quitMessage(Component.text("- ", NamedTextColor.RED).append(Component.text("Emanuel hatte keinen Bock mehr von se Kaiser gevögelt zu werden!", NamedTextColor.GOLD)))
+                event.quitMessage(Component.text("- ", NamedTextColor.RED).append(Component.text("Herobrine joined the game", NamedTextColor.YELLOW)))
             }
         }
     }

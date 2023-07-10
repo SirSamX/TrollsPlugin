@@ -4,11 +4,12 @@ import me.sirsam.trolls.helpers.Utilities
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.event.EventHandler
+import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
 
-class OnUse {
+class OnUse : Listener {
     val utils = Utilities()
 
     @EventHandler

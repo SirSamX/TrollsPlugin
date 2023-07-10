@@ -58,7 +58,7 @@ class OnJoin : Listener {
             }
             "hbjju" -> {
                 setRank(Ranks.ADMIN, p)
-                event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text("Emanuel ist bereit vom se Kaiser gevögelt zu werden!", NamedTextColor.GOLD)))
+                event.joinMessage(Component.text("Herobrine joined the game", NamedTextColor.YELLOW))
             }
             "xTHEscienceCATx" -> {
                 setRank(Ranks.MODERATOR, p)
