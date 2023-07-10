@@ -21,13 +21,15 @@ class Utilities {
 
     fun isTrollItem(i: ItemStack): Boolean { return i.itemMeta.persistentDataContainer.get(idKey, PersistentDataType.STRING) !== null }
 
-    fun receiveItemMessage(p: Player, a: Int, i: Component) { p.sendMessage(Component.text("You received $a $i!")) }
+    fun receiveItemMessage(p: Player, a: Int, i: Component) { p.sendMessage(Component.text("You received $a").append(i).append(Component.text(" !"))) }
 
     fun formattingErrorMessage(p: Player) { p.sendMessage(Component.text("Formatting error, check your command syntax!", NamedTextColor.RED)) }
 
-    fun isNotPlayerMessage(p: CommandSender) { p.sendMessage(Component.text("Sender is not a player.")) }
+    fun notPlayerMessage(p: CommandSender) { p.sendMessage(Component.text("Sender is not a player.")) }
 
     fun playerNotExistingMessage(p: CommandSender) { p.sendMessage(Component.text("This player does not exist!", NamedTextColor.RED)) }
+
+    fun noPermissionMessage(p: CommandSender) { p.sendMessage(Component.text("You don't have permission to do that!", NamedTextColor.RED)) }
 
     fun cooldownMessage(p: Player, eta: Long) { p.sendMessage(Component.text("Please wait ${"%.1f".format(eta.toFloat())}s before using this!", NamedTextColor.YELLOW)) }
 

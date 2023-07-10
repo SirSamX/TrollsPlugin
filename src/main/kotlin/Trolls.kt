@@ -22,11 +22,17 @@ class Trolls : JavaPlugin(), Listener {
 
     override fun onEnable() {
         instance = this
-        logger.info("Plugin enabled!")
+
+        config.addDefault("aaaaa.aaaa.aaa.aa.a", "ello")
+        saveDefaultConfig()
+
         registerCommands()
         registerEvents()
+
         ItemRecipes().registerRecipes()
         Bukkit.getOnlinePlayers().forEach { p -> ItemRecipes().unlockRecipes(p)}
+
+        logger.info("Plugin enabled!")
     }
 
     override fun onDisable() {
