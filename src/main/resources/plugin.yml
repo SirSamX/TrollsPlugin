@@ -41,25 +41,55 @@ commands:
 
 permissions:
   trolls.*:
-    default: op
-    description: Allows you to do everything in the Trolls plugin!
+    description: Access to all Trolls features
     children:
-      trolls.troll.*:
-        default: op
-        description: All permissions for the /troll command.
-        children:
-          trolls.troll.get: true
-          trolls.troll.reload: true
-          trolls.troll.items: false
-          trolls.troll.head: true
-          trolls.troll.version: false
-          trolls.troll.help: false
-      trolls.utils.*:
-        default: op
-        description: All permissions for utility commands.
-        children:
-          trolls.utils.fly: true
-          trolls.utils.god: true
-          trolls.utils.jump: true
-          trolls.utils.vanish: true
-          trolls.utils.sudo: true
+      trolls.troll: true
+      trolls.utils: true
+  trolls.troll:
+    description: All permissions for the /troll command
+    children:
+      trolls.troll.get: true
+      trolls.troll.reload: true
+      trolls.troll.items: true
+      trolls.troll.head: true
+      trolls.troll.version: true
+      trolls.troll.help: true
+  trolls.troll.reload:
+    default: op
+    description: /troll reload
+  trolls.troll.items:
+    default: true
+    description: /troll items
+  trolls.troll.head:
+    default: op
+    description: /troll head
+  trolls.troll.version:
+    default: true
+    description: /troll version
+  trolls.troll.help:
+    default: true
+    description: /troll help
+  trolls.utils:
+    default: op
+    description: All permissions for utility commands
+    children:
+      trolls.utils.fly: true
+      trolls.utils.god: true
+      trolls.utils.jump: true
+      trolls.utils.vanish: true
+      trolls.utils.sudo: true
+  trolls.utils.fly:
+    default: op
+    description: /fly
+  trolls.utils.god:
+    default: op
+    description: /god
+  trolls.utils.jump:
+    default: op
+    description: /jump
+  trolls.utils.vanish:
+    default: op
+    description: /vanish
+  trolls.utils.sudo:
+    default: op
+    description: /sudo
