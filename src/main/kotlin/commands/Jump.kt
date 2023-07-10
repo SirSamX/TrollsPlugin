@@ -14,7 +14,8 @@ class Jump : CommandExecutor {
     private val utils = Utilities()
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>?): Boolean {
-        if (sender !is Player) { utils.isNotPlayerMessage(sender); return true }
+        if (sender !is Player) { utils.notPlayerMessage(sender); return true }
+        if (!sender.hasPermission("trolls.utils.jump")) { utils.noPermissionMessage(sender); return true }
         var target: Player? = null
         if (args!!.isNotEmpty()) {
             target = Bukkit.getPlayer(args[0])

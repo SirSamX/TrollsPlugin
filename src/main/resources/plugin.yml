@@ -5,35 +5,91 @@ description: Plugin for trolls
 author: SirSam
 website: programming4life.github.io
 api-version: "1.20"
+
 commands:
   jump:
     description: Launches you high in the air!
-    permission: op
+    permission: trolls.utils.god
     permission-message: You do not have permission to use this Command!
     usage: /<command> player
   fly:
     description: Allows you to toggle flight.
-    permission: op
+    permission: trolls.utils.fly
     permission-message: You do not have permission to use this Command!
     usage: /<command> player
   godmode:
     description: Makes you invulnerable.
-    permission: op
+    permission: trolls.utils.god
     permission-message: You do not have permission to use this command!
     aliases: god
     usage: /<command> player
   sudo:
     description: Allows you to send something or execute a command from another players chat.
-    permission: op
+    permission: trolls.utils.sudo
     permission-message: You do not have permission to use this Command!
     usage: /<command> player message
   troll:
     description: Allows you to get troll items.
-    permission: op
+    permission: trolls.troll
     permission-message: You do not have permission to use this Command!
-    usage: /<command>
+    usage: /<command> [get|reload|items|head|version|help]
   vanish:
     description: Allows you to become invisible.
-    permission: op
+    permission: trolls.utils.vanish
     permission-message: You do not have permission to use this Command!
     usage: /<command> player
+
+permissions:
+  trolls.*:
+    description: Access to all Trolls features
+    children:
+      trolls.troll: true
+      trolls.utils: true
+  trolls.troll:
+    description: All permissions for the /troll command
+    children:
+      trolls.troll.get: true
+      trolls.troll.reload: true
+      trolls.troll.items: true
+      trolls.troll.head: true
+      trolls.troll.version: true
+      trolls.troll.help: true
+  trolls.troll.reload:
+    default: op
+    description: /troll reload
+  trolls.troll.items:
+    default: true
+    description: /troll items
+  trolls.troll.head:
+    default: op
+    description: /troll head
+  trolls.troll.version:
+    default: true
+    description: /troll version
+  trolls.troll.help:
+    default: true
+    description: /troll help
+  trolls.utils:
+    default: op
+    description: All permissions for utility commands
+    children:
+      trolls.utils.fly: true
+      trolls.utils.god: true
+      trolls.utils.jump: true
+      trolls.utils.vanish: true
+      trolls.utils.sudo: true
+  trolls.utils.fly:
+    default: op
+    description: /fly
+  trolls.utils.god:
+    default: op
+    description: /god
+  trolls.utils.jump:
+    default: op
+    description: /jump
+  trolls.utils.vanish:
+    default: op
+    description: /vanish
+  trolls.utils.sudo:
+    default: op
+    description: /sudo
