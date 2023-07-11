@@ -48,6 +48,7 @@ class Trolls : JavaPlugin(), Listener {
         getCommand("troll")?.setExecutor(Troll())
         getCommand("godmode")?.setExecutor(Godmode())
         getCommand("vanish")?.setExecutor(Vanish())
+        getCommand("freeze")?.setExecutor(Freeze())
     }
 
     private fun registerEvents() {
@@ -59,6 +60,6 @@ class Trolls : JavaPlugin(), Listener {
         Bukkit.getPluginManager().registerEvents(OnLeave(), this)
         Bukkit.getPluginManager().registerEvents(OnChat(), this)
         Bukkit.getPluginManager().registerEvents(OnUse(), this)
-
+        Bukkit.getPluginManager().registerEvents(Freeze(), this)
     }
 }

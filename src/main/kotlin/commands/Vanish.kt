@@ -38,7 +38,6 @@ class Vanish : CommandExecutor, Listener {
             target.isInvulnerable = true
             target.allowFlight = true
             target.sendMessage((Component.text("You are now vanished!", NamedTextColor.GREEN)))
-            return true
         } else {
             for (pl in Bukkit.getServer().onlinePlayers) {
                 pl.showPlayer(plugin, target)
@@ -47,9 +46,8 @@ class Vanish : CommandExecutor, Listener {
             target.isInvulnerable = false
             target.allowFlight = false
             target.sendMessage((Component.text("You are not vanished anymore!", NamedTextColor.RED)))
-            return true
-
         }
+        return true
     }
 
     @EventHandler

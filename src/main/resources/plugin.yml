@@ -5,6 +5,7 @@ description: Plugin for trolls
 author: SirSam
 website: programming4life.github.io
 api-version: "1.20"
+loadbefore: [Essentials]
 
 commands:
   jump:
@@ -36,6 +37,11 @@ commands:
   vanish:
     description: Allows you to become invisible.
     permission: trolls.utils.vanish
+    permission-message: You do not have permission to use this Command!
+    usage: /<command> player
+  freeze:
+    description: Allows you to freeze a player.
+    permission: trolls.utils.freeze
     permission-message: You do not have permission to use this Command!
     usage: /<command> player
 
@@ -78,6 +84,7 @@ permissions:
       trolls.utils.jump: true
       trolls.utils.vanish: true
       trolls.utils.sudo: true
+      trolls.utils.freeze: true
   trolls.utils.fly:
     default: op
     description: /fly
@@ -93,3 +100,6 @@ permissions:
   trolls.utils.sudo:
     default: op
     description: /sudo
+  trolls.utils.freeze:
+    default: op
+    description:  /freeze
