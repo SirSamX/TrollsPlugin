@@ -51,7 +51,7 @@ class Vanish : CommandExecutor, Listener {
     }
 
     @EventHandler
-    fun onPlayerJoin(e: PlayerJoinEvent) {
+    fun onJoin(e: PlayerJoinEvent) {
         for (p in vanished) {
             e.player.hidePlayer(plugin, p)
         }
