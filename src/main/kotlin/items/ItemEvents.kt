@@ -7,6 +7,7 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.*
 import org.bukkit.block.Block
+import org.bukkit.block.data.Orientable
 import org.bukkit.entity.*
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -34,17 +35,13 @@ class ItemEvents : Listener {
         val player = event.player
         val item = player.inventory.itemInMainHand
         val data = item.itemMeta.persistentDataContainer
-        val strength = .3
 
-        if (data.get(
-                utils.idKey,
-                PersistentDataType.STRING
-            ) == "grappling_hook" && event.state == PlayerFishEvent.State.REEL_IN
-        ) {
-            val hookLocation = event.hook.location
-            val change = hookLocation.subtract(player.location)
-            player.velocity = change.toVector().multiply(strength)
-        }
+        if (data.get(utils.idKey, PersistentDataType.STRING) != "grappling_hook" || event.state != PlayerFishEvent.State.REEL_IN) return
+
+        val strength = .3
+        val hookLocation = event.hook.location
+        val change = hookLocation.subtract(player.location)
+        player.velocity = change.toVector().multiply(strength)
     }
 
     @EventHandler
@@ -52,85 +49,67 @@ class ItemEvents : Listener {
         val player = event.player
         val item = player.inventory.itemInMainHand
 
-        if (item.itemMeta != null) {
-            val data = item.itemMeta.persistentDataContainer
+        if (item.itemMeta == null) return
+        val data = item.itemMeta.persistentDataContainer
+        if (data.get(utils.idKey, PersistentDataType.STRING) != "throwable_tnt" || !event.action.isRightClick) return
 
-            if (data.get(utils.idKey, PersistentDataType.STRING) == "throwable_tnt" && event.action.isRightClick) {
-                val strength = 1.4
-                event.isCancelled = true
-                if (player.gameMode != GameMode.CREATIVE) {
-                    utils.destroy(item, 1)
-                }
-                val direction = player.location.direction
-                val tntEntity = player.world.spawnEntity(player.location, EntityType.PRIMED_TNT)
-                tntEntity.velocity = direction.multiply(strength)
-            }
+        val strength = 1.4
+        event.isCancelled = true
+        if (player.gameMode != GameMode.CREATIVE) {
+            utils.destroy(item, 1)
         }
+        val direction = player.location.direction
+        val tntEntity = player.world.spawnEntity(player.location, EntityType.PRIMED_TNT)
+        tntEntity.velocity = direction.multiply(strength)
     }
 
     @EventHandler
-    fun openShootyBoxGui(event: PlayerInteractEvent) {
+    fun shootyBox(event: PlayerInteractEvent) {
         val player = event.player
         val item = player.inventory.itemInMainHand
-        if (item.itemMeta != null) {
-            if (item.itemMeta.persistentDataContainer.get(
-                    utils.idKey,
-                    PersistentDataType.STRING
-                ) == "shooty_box" && event.action.isRightClick
-            ) {
-                event.isCancelled = true
-                if (player.isSneaking) {
-                    val inv = utils.getInventoryInItem(item)
-                    if (inv == null) {
-                        player.openInventory(
-                            Bukkit.createInventory(
-                                null,
-                                InventoryType.DISPENSER,
-                                Component.text("Shooty Box")
-                            )
-                        )
-                    } else {
-                        player.openInventory(inv)
-                    }
-                }
+
+        if (item.itemMeta != null) return
+        if (item.itemMeta.persistentDataContainer.get(utils.idKey, PersistentDataType.STRING) != "shooty_box" || !event.action.isRightClick) return
+
+        event.isCancelled = true
+        if (player.isSneaking) {
+            val inv = utils.getInventoryInItem(item)
+            if (inv == null) {
+                player.openInventory(
+                    Bukkit.createInventory(
+                        null,
+                        InventoryType.DISPENSER,
+                        Component.text("Shooty Box")
+                    )
+                )
+            } else {
+                player.openInventory(inv)
             }
-        }
+        } else return //Code für shooting
     }
 
     @EventHandler
     fun closeShootyBoxGui(event: InventoryCloseEvent) {
         val item = event.player.inventory.itemInMainHand
-        if (event.view.title().contains(Component.text("Shooty Box")) && item.itemMeta.persistentDataContainer.get(
-                utils.idKey,
-                PersistentDataType.STRING
-            ) == "shooty_box"
-        ) {
-            utils.storeInventoryInItem(item, event.inventory)
-        }
+        if (item.itemMeta.persistentDataContainer.get(utils.idKey, PersistentDataType.STRING) != "shooty_box") return
+        utils.storeInventoryInItem(item, event.inventory)
     }
 
     @EventHandler
     fun explosiveBowShoot(event: EntityShootBowEvent) {
-        if (event.entity is Player) {
-            val player = event.entity as Player
-            if (player.inventory.itemInMainHand.itemMeta.persistentDataContainer.get(
-                    utils.idKey,
-                    PersistentDataType.STRING
-                ) == "explosive_bow"
-            ) {
-                event.projectile.customName(Component.text("Explosive Arrow"))
-            }
-        }
+        if (event.entity !is Player) return
+        val player = event.entity as Player
+        if (player.inventory.itemInMainHand.itemMeta.persistentDataContainer.get(utils.idKey, PersistentDataType.STRING) != "explosive_bow") return
+        event.projectile.customName(Component.text("Explosive Arrow"))
     }
 
     @EventHandler
     fun explosiveBowHit(event: ProjectileHitEvent) {
-        if (event.entity.customName() != null) {
-            if (event.entity.customName() == Component.text("Explosive Arrow")) {
-                event.entity.world.createExplosion(event.entity.location, 2.5f, false, true)
-                event.entity.remove()
-            }
-        }
+        if (event.entity.customName() == null) return
+        if (event.entity.customName() != Component.text("Explosive Arrow")) return
+
+        event.entity.world.createExplosion(event.entity.location, 2.5f, false, true)
+        event.entity.remove()
     }
 
     @EventHandler
@@ -138,21 +117,16 @@ class ItemEvents : Listener {
         val player = event.player
         val item = player.inventory.itemInMainHand
 
-        if (item.itemMeta != null) {
-            val data = item.itemMeta.persistentDataContainer
+        if (item.itemMeta != null) return
+        val data = item.itemMeta.persistentDataContainer
+        if (data.get(utils.idKey, PersistentDataType.STRING) != "throwable_fireball" || !event.action.isRightClick) return
 
-            if (data.get(utils.idKey, PersistentDataType.STRING) == "throwable_fireball" && event.action.isRightClick) {
-                val strength = 2
-                event.isCancelled = true
-                if (player.gameMode != GameMode.CREATIVE) {
-                    utils.destroy(item, 1)
-                }
-                player.launchProjectile(
-                    LargeFireball::class.java,
-                    player.eyeLocation.direction.normalize().multiply(strength)
-                )
-            }
+        val strength = 2
+        event.isCancelled = true
+        if (player.gameMode != GameMode.CREATIVE) {
+            utils.destroy(item, 1)
         }
+        player.launchProjectile(LargeFireball::class.java, player.eyeLocation.direction.normalize().multiply(strength))
     }
 
     @EventHandler
@@ -160,13 +134,13 @@ class ItemEvents : Listener {
         val player = event.player
         val item = player.inventory.itemInMainHand
 
-        if (item.itemMeta != null) {
-            val data = item.itemMeta.persistentDataContainer
-            if (event.action.isLeftClick && data.get(utils.idKey, PersistentDataType.STRING) == "terminator") {
-                val arrow = player.launchProjectile(Arrow::class.java)
-                shootSpreadArrows(player, arrow, 3, 5f, 8.0)
-            }
-        }
+        if (item.itemMeta == null) return
+        val data = item.itemMeta.persistentDataContainer
+        if (data.get(utils.idKey, PersistentDataType.STRING) != "terminator") return
+
+        val arrow = player.launchProjectile(Arrow::class.java)
+        event.isCancelled = true
+        shootSpreadArrows(player, arrow, 3, 5f, 8.0)
     }
 
     private fun shootSpreadArrows(player: Player, arrow: Arrow, amount: Int, angle: Float, damage: Double) {
@@ -190,36 +164,19 @@ class ItemEvents : Listener {
     fun onBlockBreak(event: BlockBreakEvent) {
         val block: Block = event.block
 
-        val logMaterials = setOf(
-            Material.ACACIA_LOG,
-            Material.BIRCH_LOG,
-            Material.DARK_OAK_LOG,
-            Material.JUNGLE_LOG,
-            Material.OAK_LOG,
-            Material.SPRUCE_LOG,
-            Material.CHERRY_LOG,
-            Material.MANGROVE_LOG,
-            Material.MANGROVE_ROOTS,
-            Material.MUDDY_MANGROVE_ROOTS
-        )
+        if (block !is Orientable) return
 
-        if (block.type in logMaterials) {
-            when (event.player.inventory.itemInMainHand.itemMeta.persistentDataContainer.get(
-                utils.idKey,
-                PersistentDataType.STRING
-            )) {
-                "treecapitator" -> {
-                    breakTree(block, logMaterials, 50, 1L); event.isCancelled = true
-                }
-
-                "jungle_axe" -> {
-                    breakTree(block, logMaterials, 25, 3L); event.isCancelled = true
-                }
+        when (event.player.inventory.itemInMainHand.itemMeta.persistentDataContainer.get(utils.idKey, PersistentDataType.STRING)) {
+            "treecapitator" -> {
+                breakTree(block, 50, 1L); event.isCancelled = true
+            }
+            "jungle_axe" -> {
+                breakTree(block, 25, 3L); event.isCancelled = true
             }
         }
     }
 
-    private fun breakTree(centerBlock: Block, logMaterials: Set<Material>, maxBlocks: Int, delay: Long) {
+    private fun breakTree(centerBlock: Block, maxBlocks: Int, delay: Long) {
         val treeBlocks: MutableList<Block> = mutableListOf(centerBlock)
         val processedBlocks: MutableSet<Block> = mutableSetOf(centerBlock)
 
@@ -231,7 +188,7 @@ class ItemEvents : Listener {
                 for (y in -1..1) {
                     for (z in -1..1) {
                         val relativeBlock: Block = currentBlock.getRelative(x, y, z)
-                        if (relativeBlock.type in logMaterials) {
+                        if (relativeBlock is Orientable) {
                             if (relativeBlock !in processedBlocks) {
                                 treeBlocks.add(relativeBlock)
                                 processedBlocks.add(relativeBlock)
@@ -325,37 +282,33 @@ class ItemEvents : Listener {
         val player = event.player
         val item = player.inventory.itemInMainHand
 
-        if (item.itemMeta != null) {
-            val itemMeta = item.itemMeta
-            val data = itemMeta.persistentDataContainer
+        if (item.itemMeta == null) return
+        val itemMeta = item.itemMeta
+        val data = itemMeta.persistentDataContainer
 
-            if (data.get(utils.idKey, PersistentDataType.STRING) == "magical_wand") {
-                val wandKey = NamespacedKey(plugin, "ability")
-
-                if (event.action.isRightClick && wandCooldown.can(player)) {
-                    wandCooldown.add(player, 1000)
-                    val loc = player.location
-
-                    when (data.get(wandKey, PersistentDataType.STRING)) {
-                        "Circle" -> particle(loc)
-                        "Wave" -> bigParticle(loc)
-                        "Shoot" -> shootParticle(loc)
-                        else -> {
-                            player.sendMessage(Component.text("Invalid spell!", NamedTextColor.RED))
-                        }
-                    }
-                } else if (event.action.isLeftClick) {
-                    val newAbility = when (data.get(wandKey, PersistentDataType.STRING)) {
-                        "Circle" -> "Wave"
-                        "Wave" -> "Shoot"
-                        "Shoot" -> "Circle"
-                        else -> "Circle"
-                    }
-                    data.set(wandKey, PersistentDataType.STRING, newAbility)
-                    item.itemMeta = itemMeta
-                    player.sendMessage(Component.text("§eChanged ability to §a§l$newAbility"))
-                } else utils.cooldownMessage(player, wandCooldown.eta(player))
+        if (data.get(utils.idKey, PersistentDataType.STRING) != "magical_wand") return
+        val wandKey = NamespacedKey(plugin, "ability")
+        if (event.action.isRightClick && wandCooldown.can(player)) {
+            wandCooldown.add(player, 1000)
+            val loc = player.location
+            when (data.get(wandKey, PersistentDataType.STRING)) {
+                "Circle" -> particle(loc)
+                "Wave" -> bigParticle(loc)
+                "Shoot" -> shootParticle(loc)
+                else -> {
+                    player.sendMessage(Component.text("Invalid spell!", NamedTextColor.RED))
+                }
             }
-        }
+        } else if (event.action.isLeftClick) {
+            val newAbility = when (data.get(wandKey, PersistentDataType.STRING)) {
+                "Circle" -> "Wave"
+                "Wave" -> "Shoot"
+                "Shoot" -> "Circle"
+                else -> "Circle"
+            }
+            data.set(wandKey, PersistentDataType.STRING, newAbility)
+            item.itemMeta = itemMeta
+            player.sendMessage(Component.text("§eChanged ability to §a§l$newAbility"))
+        } else utils.cooldownMessage(player, wandCooldown.eta(player))
     }
 }

@@ -1,7 +1,6 @@
 package me.sirsam.trolls.guis
 
 import me.sirsam.trolls.items.ItemManager
-import me.sirsam.trolls.items.TrollItem
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextDecoration
@@ -13,7 +12,6 @@ import kotlin.math.ceil
 
 class Items : InventoryHolder {
     private val gui = GuiManager()
-    private val items = ItemManager()
     private val itemsPerPage = 45
     var page = 1
     var maxPage = 1
@@ -24,19 +22,15 @@ class Items : InventoryHolder {
             throw IllegalArgumentException("Page cannot be negative")
         }
 
-        val registeredItems: MutableList<TrollItem> = mutableListOf<TrollItem>().apply { addAll(items.items + items.ingredients) }
-
-        for (i in 0 until 1000) {
-            registeredItems.add(TrollItem("test_item", Material.OAK_PLANKS, "z"))
-        }
+        val registeredItems: Array<ItemManager> = ItemManager.values()
 
         val startIdx = (page - 1) * itemsPerPage
         val endIdx = minOf(startIdx + itemsPerPage, registeredItems.size)
         maxPage = ceil(registeredItems.size / itemsPerPage.toDouble()).toInt()
         val inv = Bukkit.createInventory(this, 54, Component.text("Items & Ingredients ($page/$maxPage)"))
 
-        registeredItems.sortedBy { it.getName() }.subList(startIdx, endIdx).forEachIndexed { index, item ->
-            inv.setItem(index, item.createItem())
+        registeredItems.sortedBy { it.item.name() }.subList(startIdx, endIdx).forEachIndexed { index, item ->
+            inv.setItem(index, item.item.item())
         }
 
         if (page != 1) {

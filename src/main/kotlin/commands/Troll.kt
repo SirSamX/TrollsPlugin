@@ -18,7 +18,6 @@ import org.bukkit.inventory.meta.SkullMeta
 import java.util.*
 
 class Troll : CommandExecutor {
-    private val itemManager = ItemManager()
     private val utils = Utilities()
     private val plugin = Trolls.instance
 
@@ -35,15 +34,15 @@ class Troll : CommandExecutor {
                 if (amount > 3000) { utils.formattingErrorMessage(sender); return true }
 
                 lateinit var givenItem: ItemStack
-                for (item in itemManager.items) {
-                    if (item.getId() == args[1]) {
-                        givenItem = item.createItem()
+                for (item in ItemManager.values()) {
+                    if (item.item.id() == args[1]) {
+                        givenItem = item.item.item()
                         var i = 0
                         while (i < amount) {
                             i += 1
                             sender.inventory.addItem(givenItem)
                         }
-                        utils.receiveItemMessage(sender, amount, item.getNameComponent())
+                        utils.receiveItemMessage(sender, amount, item.item.nameComponent())
                         return true
                     }
                 }

@@ -23,7 +23,7 @@ class OnLeave : Listener {
                 event.quitMessage(Component.text("- ", NamedTextColor.RED).append(Component.text("Der Bannhammer hat gesprochen!", NamedTextColor.DARK_RED)))
             }
             "Blueberry1873" -> {
-                event.quitMessage(Component.text("- ", NamedTextColor.RED).append(Component.text("*Emanuel fäht Schwanz aus*", NamedTextColor.DARK_PURPLE).decorate(TextDecoration.ITALIC)))
+                event.quitMessage(Component.text("- ", NamedTextColor.RED).append(Component.text("*Emanuel fährt Schwanz aus*", NamedTextColor.DARK_PURPLE).decorate(TextDecoration.ITALIC)))
             }
             "EnderMo23" -> {
                 event.quitMessage(Component.text("- ", NamedTextColor.RED).append(Component.text("Ender Klo", NamedTextColor.GOLD)))
@@ -32,7 +32,7 @@ class OnLeave : Listener {
                 event.quitMessage(Component.text("- ", NamedTextColor.RED).append(Component.text("Se Kaiser of la Redstöne is weg!", NamedTextColor.RED)))
             }
             "hbjju" -> {
-                event.quitMessage(Component.text("- ", NamedTextColor.RED).append(Component.text("Herobrine joined the game", NamedTextColor.YELLOW)))
+                event.quitMessage(Component.text("Herobrine left the game", NamedTextColor.YELLOW))
             }
         }
     }

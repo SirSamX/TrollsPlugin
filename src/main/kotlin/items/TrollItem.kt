@@ -9,6 +9,7 @@ import org.bukkit.enchantments.Enchantment
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
+import java.util.UUID
 
 class TrollItem(
     private val id: String,
@@ -27,13 +28,15 @@ class TrollItem(
 ) {
     private val utils = Utilities()
 
-    fun createItem(): ItemStack {
+    fun item(): ItemStack {
         val item = ItemStack(material)
         val meta = item.itemMeta
+        val data = meta.persistentDataContainer
 
-        meta.persistentDataContainer.set(utils.idKey, PersistentDataType.STRING, id)
-        meta.persistentDataContainer.set(utils.stackableKey, PersistentDataType.BOOLEAN, stackable)
-        meta.displayName(getNameComponent())
+        data.set(utils.idKey, PersistentDataType.STRING, id)
+        data.set(utils.stackableKey, PersistentDataType.BOOLEAN, stackable)
+        if (!stackable) { data.set(utils.uuidKey, PersistentDataType.STRING, UUID.randomUUID().toString()) }
+        meta.displayName(nameComponent())
         meta.lore(addLore())
         meta.isUnbreakable = unbreakable
         meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE)
@@ -44,11 +47,11 @@ class TrollItem(
         return item
     }
 
-    fun getId(): String { return id }
+    fun id(): String { return id }
 
-    fun getName(): String { return name }
+    fun name(): String { return name }
 
-    fun getNameComponent(colored: Boolean = true): Component {
+    fun nameComponent(colored: Boolean = true): Component {
         return if (colored) {
             Component.text(name, rarity.color).decoration(TextDecoration.ITALIC, false)
         }

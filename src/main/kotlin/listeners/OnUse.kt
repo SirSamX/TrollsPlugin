@@ -1,13 +1,17 @@
 package me.sirsam.trolls.listeners
 
+import me.sirsam.trolls.Trolls
 import me.sirsam.trolls.helpers.Utilities
 import org.bukkit.Material
 import org.bukkit.Sound
+import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
+import org.bukkit.persistence.PersistentDataType
+import org.bukkit.scheduler.BukkitRunnable
 
 class OnUse : Listener {
     val utils = Utilities()
@@ -64,5 +68,24 @@ class OnUse : Listener {
             }
             else p.openAnvil(null, true)
         }
+    }
+    @EventHandler
+    fun onPlayerInteract(event: PlayerInteractEvent) {
+        val item = event.player.inventory.itemInMainHand
+        if (item.itemMeta == null) return
+        val data = item.itemMeta.persistentDataContainer
+        if (data.get(utils.idKey, PersistentDataType.STRING) != "jukebox" || !event.action.isRightClick) return
+
+        event.isCancelled = true
+        playJukeboxSound(event.player)
+    }
+
+    private fun playJukeboxSound(player: Player) {
+        player.playSound(player.location, Sound.MUSIC_DISC_13, 1.0f, 1.0f)
+        object : BukkitRunnable() {
+            override fun run() {
+                player.stopSound(Sound.MUSIC_DISC_13)
+            }
+        }.runTaskLater(Trolls.getPlugin(), 20*10L)
     }
 }

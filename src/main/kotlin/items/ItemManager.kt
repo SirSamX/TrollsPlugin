@@ -3,17 +3,19 @@ package me.sirsam.trolls.items
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
 
-class ItemManager{
-    val items = listOf(
-        TrollItem(//0
+enum class ItemManager(val item: TrollItem) {
+    GRAPPLING_HOOK(
+        TrollItem(
             id = "grappling_hook",
             material = Material.FISHING_ROD,
             name = "Grappling Hook",
             description = "Travel in style...",
             note = null,
             rarity = TrollRarity.RARE
-        ),
-        TrollItem(//1
+        )
+    ),
+    THROWABLE_TNT(
+        TrollItem(
             id = "throwable_tnt",
             material = Material.TNT,
             name = "Throwable TNT",
@@ -23,8 +25,11 @@ class ItemManager{
             oneTimeUse = true,
             abilities = mapOf(TrollAbility.RIGHT_CLICK to "Throw TNT"),
             stackable = true
-        ),
-        TrollItem(//2
+        )
+    ),
+
+    THROWABLE_FIREBALL(
+        TrollItem(
             id = "throwable_fireball",
             material = Material.FIRE_CHARGE,
             name = "Throwable Fireball",
@@ -33,8 +38,10 @@ class ItemManager{
             oneTimeUse = true,
             abilities = mapOf(TrollAbility.RIGHT_CLICK to "Throw Fireball"),
             stackable = true
-        ),
-        TrollItem(//3
+        )
+    ),
+    EXPLOSIVE_BOW(
+        TrollItem(
             id = "explosive_bow",
             material = Material.BOW,
             name = "Explosive Bow",
@@ -42,8 +49,10 @@ class ItemManager{
             note = null,
             rarity = TrollRarity.LEGENDARY,
             raritySuffix = "BOW"
-        ),
-        TrollItem(//4
+        )
+    ),
+    POGERONI_SWORD(
+        TrollItem(
             id = "pogeroni_sword",
             material = Material.NETHERITE_SWORD,
             name = "Pogeroni Sword",
@@ -53,15 +62,19 @@ class ItemManager{
             raritySuffix = "SWORD",
             enchantments = mutableMapOf(Enchantment.DAMAGE_ALL to 5, Enchantment.DURABILITY to 3),
             unbreakable = false
-        ),
-        TrollItem(//5
+        )
+    ),
+    SHHOTY_BOX(
+        TrollItem(
             id = "shooty_box",
             material = Material.DISPENSER,
             name = "Shooty Box",
             abilities = mapOf(TrollAbility.RIGHT_CLICK to "Shoot!", TrollAbility.SHIFT_RIGHT_CLICK to "Open inventory"),
             rarity = TrollRarity.UNFINISHED
-        ),
-        TrollItem(//6
+        )
+    ),
+    TERMINATOR(
+        TrollItem(
             id = "terminator",
             material = Material.BOW,
             name = "Terminator",
@@ -69,8 +82,10 @@ class ItemManager{
             note = "Infinite arrows!",
             rarity = TrollRarity.MYTHIC,
             raritySuffix = "BOW"
-        ),
-        TrollItem(//7
+        )
+    ),
+    TREECAPITATOR(
+        TrollItem(
             id = "treecapitator",
             material = Material.GOLDEN_AXE,
             name = "Treecapitator",
@@ -78,8 +93,10 @@ class ItemManager{
             note = "Blocks: 50, Delay: 1 Ticks",
             rarity = TrollRarity.EPIC,
             raritySuffix = "AXE"
-        ),
-        TrollItem(//8
+        )
+    ),
+    JUNGLE_AXE(
+        TrollItem(
             id = "jungle_axe",
             material = Material.WOODEN_AXE,
             name = "Jungle Axe",
@@ -87,8 +104,10 @@ class ItemManager{
             note = "Blocks: 25, Delay: 3 Tick",
             rarity = TrollRarity.UNCOMMON,
             raritySuffix = "AXE"
-        ),
-        TrollItem(//9
+        )
+    ),
+    MAGICAL_WAND(
+        TrollItem(
             id = "magical_wand",
             material = Material.BLAZE_ROD,
             name = "Magical Wand",
@@ -96,18 +115,30 @@ class ItemManager{
             note = "TestItem",
             rarity = TrollRarity.ADMIN,
             raritySuffix = "WAND"
-        ),
-    )
-    val ingredients = listOf(
-        TrollItem(//0
+        )
+    ),
+    JUKEBOX(
+        TrollItem(
+            id = "jukebox",
+            material = Material.JUKEBOX,
+            name = "Jukebox",
+            abilities = mapOf(TrollAbility.RIGHT_CLICK to "Play Music!"),
+            rarity = TrollRarity.RARE,
+            stackable = false
+        )
+    ),
+    COMPRESSED_JUNGLE_WOOD(
+        TrollItem(
             id = "compressed_jungle_wood",
             material = Material.JUNGLE_LOG,
             name = "Compressed Jungle Log",
             rarity = TrollRarity.COMMON,
             raritySuffix = "INGREDIENT",
             stackable = true
-        ),
-        TrollItem(//1
+        )
+    ),
+    COMPRESSED_NETHER_STAR(
+        TrollItem(
             id = "compressed_nether_star",
             material = Material.NETHER_STAR,
             name = "Compressed Nether Star",
@@ -115,5 +146,5 @@ class ItemManager{
             raritySuffix = "INGREDIENT",
             stackable = true
         ),
-    )
+    ),
 }

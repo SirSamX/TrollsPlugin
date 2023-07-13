@@ -11,8 +11,6 @@ import org.bukkit.inventory.recipe.CraftingBookCategory
 
 class ItemRecipes {
     private val plugin = Trolls.getPlugin()
-    private val items = ItemManager().items
-    private val ingredients = ItemManager().ingredients
     private val discoverRecipes = NamespacedKey(plugin, "recipe")
 
     fun unlockRecipes(player: Player) {
@@ -20,15 +18,15 @@ class ItemRecipes {
     }
 
     fun registerRecipes() {
-        val expBottle = ShapedRecipe(discoverRecipes, items[8].createItem())
-        expBottle.shape(
+        val jungleAxe = ShapedRecipe(discoverRecipes, ItemManager.JUNGLE_AXE.item.item())
+        jungleAxe.shape(
             " WW",
             " SW",
             " S "
         )
-        expBottle.setIngredient("W"[0], RecipeChoice.ExactChoice(ingredients[0].createItem()))
-        expBottle.setIngredient("S"[0], Material.STICK)
-        expBottle.category = CraftingBookCategory.MISC
-        Bukkit.addRecipe(expBottle)
+        jungleAxe.setIngredient("W"[0], RecipeChoice.ExactChoice(ItemManager.COMPRESSED_JUNGLE_WOOD.item.item()))
+        jungleAxe.setIngredient("S"[0], Material.STICK)
+        jungleAxe.category = CraftingBookCategory.MISC
+        Bukkit.addRecipe(jungleAxe)
     }
 }
