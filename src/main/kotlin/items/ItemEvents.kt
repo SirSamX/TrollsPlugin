@@ -1,5 +1,6 @@
 package me.sirsam.trolls.items
 
+import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent
 import me.sirsam.trolls.Trolls
 import me.sirsam.trolls.helpers.Cooldown
 import me.sirsam.trolls.helpers.Utilities
@@ -18,6 +19,8 @@ import org.bukkit.event.inventory.InventoryCloseEvent
 import org.bukkit.event.inventory.InventoryType
 import org.bukkit.event.player.PlayerFishEvent
 import org.bukkit.event.player.PlayerInteractEvent
+import org.bukkit.event.player.PlayerJoinEvent
+import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.scheduler.BukkitRunnable
 import org.bukkit.util.Vector
@@ -310,5 +313,13 @@ class ItemEvents : Listener {
             item.itemMeta = itemMeta
             player.sendMessage(Component.text("§eChanged ability to §a§l$newAbility"))
         } else utils.cooldownMessage(player, wandCooldown.eta(player))
+    }
+
+    private val magicalBootsPlayer = ArrayList<Player>()
+    @EventHandler
+    fun magicalBoots(armour: PlayerArmorChangeEvent, join: PlayerJoinEvent) {
+        if (armour.newItem != ItemStack(Material.GOLDEN_BOOTS) || armour.slotType != PlayerArmorChangeEvent.SlotType.FEET) return
+        if (join.player.inventory.boots != ItemStack(Material.GOLDEN_BOOTS)) return
+
     }
 }
