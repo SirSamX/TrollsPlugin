@@ -33,19 +33,19 @@ class OnJoin : Listener {
                 //p.getAttribute(Attribute.GENERIC_ATTACK_SPEED)?.baseValue = 100.0
             }
             "Blueberry1873" -> {
-                event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text("*Emanuel zieht schwanz ein*", NamedTextColor.GOLD).decorate(TextDecoration.ITALIC)))
+                event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text("*Ich Blaubeere bekenne mich offiziel als dumm*", NamedTextColor.GOLD).decorate(TextDecoration.ITALIC)))
 
             }
             "EnderMo23" -> {
-                event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text("Ender Klo", NamedTextColor.GOLD)))
+                event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text("ICh lebe in einem einsamen Canjon", NamedTextColor.GOLD)))
             }
             "RedstoneKaiser" -> {
                 event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text("Se Kaiser of la Redstöne is da!", NamedTextColor.DARK_PURPLE)))
             }
             "hbjju" -> {
-                event.joinMessage(Component.text("Herobrine joined the game", NamedTextColor.YELLOW))
+                event.joinMessage(Component.text("Se Herobrine of hbjju joined the game und will nicht von se Kaiser la REdstöne genervt werdem", NamedTextColor.YELLOW))
             }
-            else ->  event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text("${p.name} ist motiviert etwas großes zu bauen!", NamedTextColor.GOLD)))
+            else ->  event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text("${p.name} moin bein neu hier oder spiele nicht so aktiv!", NamedTextColor.GOLD)))
         }
     }
 }
