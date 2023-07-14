@@ -87,12 +87,12 @@ class ItemEvents : Listener {
     }
 
     private fun throwItem(player: Player, item: ItemStack, strength: Float, keepItem: Boolean = false) {
+        val thrownItem = player.world.dropItem(player.location, item)
+        thrownItem.velocity = player.location.direction.multiply(strength)
+
         if (player.gameMode != GameMode.CREATIVE && !keepItem) {
             utils.destroy(item, 1)
         }
-
-        val thrownItem = player.world.dropItem(player.location, item)
-        thrownItem.velocity = player.location.direction.multiply(strength)
     }
 
     @EventHandler
