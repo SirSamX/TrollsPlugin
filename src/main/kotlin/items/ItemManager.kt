@@ -60,8 +60,9 @@ enum class ItemManager(val item: TrollItem) {
             note = "Hallo",
             rarity = TrollRarity.RARE,
             raritySuffix = "SWORD",
-            enchantments = mutableMapOf(Enchantment.DAMAGE_ALL to 5, Enchantment.DURABILITY to 3),
+            enchantments = mutableMapOf(Enchantment.FIRE_ASPECT to 5, Enchantment.DURABILITY to 3),
             unbreakable = false
+
         )
     ),
     SHHOTY_BOX(

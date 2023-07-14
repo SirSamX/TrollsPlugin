@@ -26,7 +26,7 @@ class OnLeave : Listener {
                 event.quitMessage(Component.text("- ", NamedTextColor.RED).append(Component.text("*Emanuel fährt Schwanz aus*", NamedTextColor.DARK_PURPLE).decorate(TextDecoration.ITALIC)))
             }
             "EnderMo23" -> {
-                event.quitMessage(Component.text("- ", NamedTextColor.RED).append(Component.text("Ender Klo", NamedTextColor.GOLD)))
+                event.quitMessage(Component.text("- ", NamedTextColor.RED).append(Component.text("EnderMo23 war zu cool für den Server!", NamedTextColor.GOLD)))
             }
             "RedstoneKaiser" -> {
                 event.quitMessage(Component.text("- ", NamedTextColor.RED).append(Component.text("Se Kaiser of la Redstöne is weg!", NamedTextColor.RED)))
