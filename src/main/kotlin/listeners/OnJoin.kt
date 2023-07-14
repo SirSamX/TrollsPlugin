@@ -62,7 +62,6 @@ class OnJoin : Listener {
             }
             "hbjju" -> {
                 event.joinMessage(Component.text("Tabeas dummer Bruder is da!", NamedTextColor.YELLOW))
-                p.kick()
             }
             else ->  event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text("${p.name} moin bein neu hier oder spiele nicht so aktiv!", NamedTextColor.GOLD)))
         }
