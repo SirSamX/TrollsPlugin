@@ -73,25 +73,35 @@ class ItemEvents : Listener {
         if (item.itemMeta == null) return
         if (item.itemMeta.persistentDataContainer.get(utils.idKey, PersistentDataType.STRING) != "pogeroni_sword" || !event.action.isRightClick) return
 
-        val location = player.location
-        val armorStand = location.world!!.dropItem(player.eyeLocation, item)
-
-        val strength = 2.0
-        event.isCancelled = true
-        if (player.gameMode != GameMode.CREATIVE) {
-            utils.destroy(item, 1)
-        }
-        val direction = player.location.direction
-        armorStand.velocity = direction.multiply(strength)
+        throwItem(player, item, 2f)
     }
 
+    @EventHandler
+    fun throwShuriken(event: PlayerInteractEvent) {
+        val player = event.player
+        val item = player.inventory.itemInMainHand
+
+        if (item.itemMeta == null) return
+        if (item.itemMeta.persistentDataContainer.get(utils.idKey, PersistentDataType.STRING) != "shuriken" || !event.action.isRightClick) return
+
+        throwItem(player, item, 2f)
+    }
+
+    private fun throwItem(player: Player, item: ItemStack, strength: Float, keepItem: Boolean = false) {
+        if (player.gameMode != GameMode.CREATIVE && !keepItem) {
+            utils.destroy(item, 1)
+        }
+
+        val thrownItem = player.world.dropItem(player.location, item)
+        thrownItem.velocity = player.location.direction.multiply(strength)
+    }
 
     @EventHandler
     fun shootyBox(event: PlayerInteractEvent) {
         val player = event.player
         val item = player.inventory.itemInMainHand
 
-        if (item.itemMeta != null) return
+        if (item.itemMeta == null) return
         if (item.itemMeta.persistentDataContainer.get(utils.idKey, PersistentDataType.STRING) != "shooty_box" || !event.action.isRightClick) return
 
         event.isCancelled = true
@@ -140,7 +150,7 @@ class ItemEvents : Listener {
         val player = event.player
         val item = player.inventory.itemInMainHand
 
-        if (item.itemMeta != null) return
+        if (item.itemMeta == null) return
         val data = item.itemMeta.persistentDataContainer
         if (data.get(utils.idKey, PersistentDataType.STRING) != "throwable_fireball" || !event.action.isRightClick) return
 
@@ -185,21 +195,35 @@ class ItemEvents : Listener {
 
     @EventHandler
     fun onBlockBreak(event: BlockBreakEvent) {
-        val block: Block = event.block
+        val block = event.block
 
-        if (block !is Orientable) return
+        val logMaterials = setOf(
+            Material.ACACIA_LOG,
+            Material.BIRCH_LOG,
+            Material.DARK_OAK_LOG,
+            Material.JUNGLE_LOG,
+            Material.OAK_LOG,
+            Material.SPRUCE_LOG,
+            Material.CHERRY_LOG,
+            Material.MANGROVE_LOG,
+            Material.MANGROVE_ROOTS,
+            Material.MUDDY_MANGROVE_ROOTS
+        )
 
-        when (event.player.inventory.itemInMainHand.itemMeta.persistentDataContainer.get(utils.idKey, PersistentDataType.STRING)) {
+        if (block.type !in logMaterials) return
+
+        val meta = event.player.inventory.itemInMainHand.itemMeta ?: return
+        when (meta.persistentDataContainer.get(utils.idKey, PersistentDataType.STRING)) {
             "treecapitator" -> {
-                breakTree(block, 50, 1L); event.isCancelled = true
+                veinMine(block, logMaterials, 50, 1L); event.isCancelled = true
             }
             "jungle_axe" -> {
-                breakTree(block, 25, 3L); event.isCancelled = true
+                veinMine(block, logMaterials, 50, 1L); event.isCancelled = true
             }
         }
     }
 
-    private fun breakTree(centerBlock: Block, maxBlocks: Int, delay: Long) {
+    private fun veinMine(centerBlock: Block, materials: Set<Material>, maxBlocks: Int, delay: Long) {
         val treeBlocks: MutableList<Block> = mutableListOf(centerBlock)
         val processedBlocks: MutableSet<Block> = mutableSetOf(centerBlock)
 
@@ -212,7 +236,7 @@ class ItemEvents : Listener {
                     for (z in -1..1) {
                         val relativeBlock: Block = currentBlock.getRelative(x, y, z)
                         if (relativeBlock is Orientable) {
-                            if (relativeBlock !in processedBlocks) {
+                            if (relativeBlock.type in materials) {
                                 treeBlocks.add(relativeBlock)
                                 processedBlocks.add(relativeBlock)
                             }
@@ -231,14 +255,14 @@ class ItemEvents : Listener {
         }
     }
 
-    private fun circle(loc: Location, rotation: Float = 0f) {
+    private fun circle(loc: Location, size: Float) {
         object : BukkitRunnable() {
             var t = 0.0
             override fun run() {
                 t += Math.PI / 16
-                val x: Double = rotation * cos(t)
-                val y: Double = rotation * sin(t)
-                val z: Double = rotation * sin(t)
+                val x: Double = size * cos(t)
+                val y: Double = size * sin(t)
+                val z: Double = size * sin(t)
                 loc.add(x, y, z)
                 loc.world.spawnParticle(Particle.DRIP_LAVA, loc, 1, 0.0, 0.0, 0.0)
                 loc.subtract(x, y, z)
@@ -343,9 +367,9 @@ class ItemEvents : Listener {
             object : BukkitRunnable() {
                 override fun run() {
                     if (p.inventory.boots != ItemStack(Material.GOLDEN_BOOTS)) { cancel() }
-                    circle(p.location)
+                    circle(p.location, 1f)
                 }
-            }.runTask(plugin)
+            }.runTaskTimer(plugin, 0 , 20)
         } else magicalBootsPlayers.remove(p)
     }
 }
