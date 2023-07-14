@@ -8,7 +8,6 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.*
 import org.bukkit.block.Block
-import org.bukkit.block.data.Orientable
 import org.bukkit.entity.*
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -70,7 +69,7 @@ class ItemEvents : Listener {
         val player = event.player
         val item = player.inventory.itemInMainHand
 
-        if (item.itemMeta != null) return
+        if (item.itemMeta == null) return
         if (item.itemMeta.persistentDataContainer.get(utils.idKey, PersistentDataType.STRING) != "shooty_box" || !event.action.isRightClick) return
 
         event.isCancelled = true
@@ -93,6 +92,7 @@ class ItemEvents : Listener {
     @EventHandler
     fun closeShootyBoxGui(event: InventoryCloseEvent) {
         val item = event.player.inventory.itemInMainHand
+        if (item.itemMeta == null) return
         if (item.itemMeta.persistentDataContainer.get(utils.idKey, PersistentDataType.STRING) != "shooty_box") return
         utils.storeInventoryInItem(item, event.inventory)
     }
@@ -119,7 +119,7 @@ class ItemEvents : Listener {
         val player = event.player
         val item = player.inventory.itemInMainHand
 
-        if (item.itemMeta != null) return
+        if (item.itemMeta == null) return
         val data = item.itemMeta.persistentDataContainer
         if (data.get(utils.idKey, PersistentDataType.STRING) != "throwable_fireball" || !event.action.isRightClick) return
 
@@ -164,21 +164,34 @@ class ItemEvents : Listener {
 
     @EventHandler
     fun onBlockBreak(event: BlockBreakEvent) {
-        val block: Block = event.block
+        val block = event.block
 
-        if (block !is Orientable) return
+        val logMaterials = setOf(
+            Material.ACACIA_LOG,
+            Material.BIRCH_LOG,
+            Material.DARK_OAK_LOG,
+            Material.JUNGLE_LOG,
+            Material.OAK_LOG,
+            Material.SPRUCE_LOG,
+            Material.CHERRY_LOG,
+            Material.MANGROVE_LOG,
+            Material.MANGROVE_ROOTS,
+            Material.MUDDY_MANGROVE_ROOTS
+        )
+
+        if (block.type !in logMaterials) return
 
         when (event.player.inventory.itemInMainHand.itemMeta.persistentDataContainer.get(utils.idKey, PersistentDataType.STRING)) {
             "treecapitator" -> {
-                breakTree(block, 50, 1L); event.isCancelled = true
+                veinMine(block, logMaterials, 50, 1L); event.isCancelled = true
             }
             "jungle_axe" -> {
-                breakTree(block, 25, 3L); event.isCancelled = true
+                veinMine(block, logMaterials, 25, 3L); event.isCancelled = true
             }
         }
     }
 
-    private fun breakTree(centerBlock: Block, maxBlocks: Int, delay: Long) {
+    private fun veinMine(centerBlock: Block, materials: Set<Material>, maxBlocks: Int, delay: Long) {
         val treeBlocks: MutableList<Block> = mutableListOf(centerBlock)
         val processedBlocks: MutableSet<Block> = mutableSetOf(centerBlock)
 
@@ -190,7 +203,7 @@ class ItemEvents : Listener {
                 for (y in -1..1) {
                     for (z in -1..1) {
                         val relativeBlock: Block = currentBlock.getRelative(x, y, z)
-                        if (relativeBlock is Orientable) {
+                        if (relativeBlock.type in materials) {
                             if (relativeBlock !in processedBlocks) {
                                 treeBlocks.add(relativeBlock)
                                 processedBlocks.add(relativeBlock)
@@ -210,14 +223,14 @@ class ItemEvents : Listener {
         }
     }
 
-    private fun circle(loc: Location, rotation: Float = 0f) {
+    private fun circle(loc: Location, radius: Float) {
         object : BukkitRunnable() {
             var t = 0.0
             override fun run() {
                 t += Math.PI / 16
-                val x: Double = rotation * cos(t)
-                val y: Double = rotation * sin(t)
-                val z: Double = rotation * sin(t)
+                val x: Double = radius * cos(t)
+                val y: Double = radius * sin(t)
+                val z: Double = radius * sin(t)
                 loc.add(x, y, z)
                 loc.world.spawnParticle(Particle.DRIP_LAVA, loc, 1, 0.0, 0.0, 0.0)
                 loc.subtract(x, y, z)
@@ -322,9 +335,9 @@ class ItemEvents : Listener {
             object : BukkitRunnable() {
                 override fun run() {
                     if (p.inventory.boots != ItemStack(Material.GOLDEN_BOOTS)) { cancel() }
-                    circle(p.location)
+                    circle(p.location, 1f)
                 }
-            }.runTask(plugin)
+            }.runTaskTimer(plugin, 0 , 60)
         } else magicalBootsPlayers.remove(p)
     }
 }
