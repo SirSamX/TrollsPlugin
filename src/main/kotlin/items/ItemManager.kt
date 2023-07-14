@@ -21,7 +21,7 @@ enum class ItemManager(val item: TrollItem) {
             name = "Throwable TNT",
             note = "Don't grief!",
             rarity = TrollRarity.UNCOMMON,
-            raritySuffix = "THROWABLE",
+            raritySuffix = "TNT",
             oneTimeUse = true,
             abilities = mapOf(TrollAbility.RIGHT_CLICK to "Throw TNT"),
             stackable = true
@@ -34,7 +34,7 @@ enum class ItemManager(val item: TrollItem) {
             material = Material.FIRE_CHARGE,
             name = "Throwable Fireball",
             rarity = TrollRarity.UNCOMMON,
-            raritySuffix = "THROWABLE",
+            raritySuffix = "FIREBALL",
             oneTimeUse = true,
             abilities = mapOf(TrollAbility.RIGHT_CLICK to "Throw Fireball"),
             stackable = true
@@ -134,7 +134,18 @@ enum class ItemManager(val item: TrollItem) {
             name = "Shuriken",
             abilities = mapOf( TrollAbility.RIGHT_CLICK to "Throw Shuriken"),
             rarity = TrollRarity.UNCOMMON,
-            raritySuffix = "THROWABLE"
+            raritySuffix = "SHURIKEN",
+            customModelData = 69001
+        )
+    ),
+    PIRATE_HAT(
+        TrollItem(
+            id = "pirate_hat",
+            material = Material.CARVED_PUMPKIN,
+            name = "Pirate Hat",
+            rarity = TrollRarity.UNCOMMON,
+            raritySuffix = "HAT",
+            customModelData = 690003
         )
     ),
     COMPRESSED_JUNGLE_WOOD(
