@@ -66,6 +66,31 @@ class ItemEvents : Listener {
     }
 
     @EventHandler
+    fun throwSword(event: PlayerInteractEvent) {
+        val player = event.player
+        val item = player.inventory.itemInMainHand
+
+        val location = player.location
+        val armorStand = location.world!!.spawnEntity(location, EntityType.ARMOR_STAND) as ArmorStand
+        armorStand.isVisible = false
+        armorStand.isInvulnerable = true
+
+
+        if (item.itemMeta == null) return
+        val data = item.itemMeta.persistentDataContainer
+        if (data.get(utils.idKey, PersistentDataType.STRING) != "pogeroni_sword" || !event.action.isRightClick) return
+
+        val strength = 2.0
+        event.isCancelled = true
+        if (player.gameMode != GameMode.CREATIVE) {
+            utils.destroy(item, 1)
+        }
+        val direction = player.location.direction
+        armorStand.velocity = direction.multiply(strength)
+    }
+
+
+    @EventHandler
     fun shootyBox(event: PlayerInteractEvent) {
         val player = event.player
         val item = player.inventory.itemInMainHand
