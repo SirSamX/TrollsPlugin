@@ -38,7 +38,6 @@ class OnJoin : Listener {
             }
             "EnderMo23" -> {
                 event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text("Ich lebe in einem einsamen Canjon", NamedTextColor.GOLD)))
-                p.kick()
             }
             "RedstoneKaiser" -> {
                 event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text("Se Kaiser of la Redstöne is da!", NamedTextColor.DARK_PURPLE)))
