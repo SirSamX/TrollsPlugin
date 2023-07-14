@@ -1,6 +1,7 @@
 package me.sirsam.trolls.commands
 
 import me.sirsam.trolls.Trolls
+import me.sirsam.trolls.helpers.Utilities
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Bukkit
@@ -15,34 +16,42 @@ import org.bukkit.event.player.PlayerJoinEvent
 class Vanish : CommandExecutor, Listener {
     private val vanished = ArrayList<Player>()
     private val plugin = Trolls.getPlugin()
+    private val utils = Utilities()
 
-    override fun onCommand(p: CommandSender, command: Command, label: String, args: Array<out String>?): Boolean {
-        if (p !is Player) return false
 
-        if (!vanished.contains(p)) {
+    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>?): Boolean {
+        if (sender !is Player) { utils.notPlayerMessage(sender); return true }
+        if (!sender.hasPermission("trolls.utils.vanish")) { utils.noPermissionMessage(sender); return true }
+        var target: Player? = null
+        if (args!!.isNotEmpty()) {
+            target = Bukkit.getPlayer(args[0])
+        }
+        if (target == null) {
+            target = sender
+        }
+
+        if (!vanished.contains(target)) {
             for (pl in Bukkit.getServer().onlinePlayers) {
-                pl.hidePlayer(plugin, p)
+                pl.hidePlayer(plugin, target)
             }
-            vanished.add(p)
-            p.isInvulnerable = true
-            p.allowFlight = true
-            p.sendMessage((Component.text("You are now vanished!", NamedTextColor.GREEN)))
-            return true
+            vanished.add(target)
+            target.isInvulnerable = true
+            target.allowFlight = true
+            target.sendMessage((Component.text("You are now vanished!", NamedTextColor.GREEN)))
         } else {
             for (pl in Bukkit.getServer().onlinePlayers) {
-                pl.showPlayer(plugin, p)
+                pl.showPlayer(plugin, target)
             }
-            vanished.remove(p)
-            p.isInvulnerable = false
-            p.allowFlight = false
-            p.sendMessage((Component.text("You are not vanished anymore!", NamedTextColor.RED)))
-            return true
-
+            vanished.remove(target)
+            target.isInvulnerable = false
+            target.allowFlight = false
+            target.sendMessage((Component.text("You are not vanished anymore!", NamedTextColor.RED)))
         }
+        return true
     }
 
     @EventHandler
-    fun onPlayerJoin(e: PlayerJoinEvent) {
+    fun onJoin(e: PlayerJoinEvent) {
         for (p in vanished) {
             e.player.hidePlayer(plugin, p)
         }
