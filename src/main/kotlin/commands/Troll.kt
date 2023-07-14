@@ -1,6 +1,7 @@
 package me.sirsam.trolls.commands
 
 import com.destroystokyo.paper.profile.ProfileProperty
+import it.unimi.dsi.fastutil.Hash
 import me.sirsam.trolls.Trolls
 import me.sirsam.trolls.guis.Items
 import me.sirsam.trolls.helpers.Utilities
@@ -87,6 +88,9 @@ class Troll : CommandExecutor {
                 sender.sendMessage(Component.text("i cant help", NamedTextColor.YELLOW))
             }
 
+            "pack" -> {
+                sender.setResourcePack("http://resourcepack.host/dl/GtgRMhi7zJDSU6YaSJ9uKVIvxKYE3Ltu/PureBDcraft 256x MC119.zip", "954A60CDD6ADFD538080B48702768308EF5E49FA")
+            }
             else -> { utils.formattingErrorMessage(sender)}
         }
 
