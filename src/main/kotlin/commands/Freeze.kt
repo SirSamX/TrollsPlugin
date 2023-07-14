@@ -50,6 +50,4 @@ class Freeze : CommandExecutor, Listener {
         p.freezeTicks = 60
             e.isCancelled = true
     }
-
-
 }

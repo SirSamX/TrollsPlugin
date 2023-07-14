@@ -19,7 +19,6 @@ import org.bukkit.event.inventory.InventoryCloseEvent
 import org.bukkit.event.inventory.InventoryType
 import org.bukkit.event.player.PlayerFishEvent
 import org.bukkit.event.player.PlayerInteractEvent
-import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.scheduler.BukkitRunnable
@@ -211,15 +210,14 @@ class ItemEvents : Listener {
         }
     }
 
-    private fun particle(loc: Location) {
+    private fun circle(loc: Location, rotation: Float = 0f) {
         object : BukkitRunnable() {
             var t = 0.0
-            var r = 2.0
             override fun run() {
                 t += Math.PI / 16
-                val x: Double = r * cos(t)
-                val y: Double = r * sin(t)
-                val z: Double = r * sin(t)
+                val x: Double = rotation * cos(t)
+                val y: Double = rotation * sin(t)
+                val z: Double = rotation * sin(t)
                 loc.add(x, y, z)
                 loc.world.spawnParticle(Particle.DRIP_LAVA, loc, 1, 0.0, 0.0, 0.0)
                 loc.subtract(x, y, z)
@@ -295,7 +293,7 @@ class ItemEvents : Listener {
             wandCooldown.add(player, 1000)
             val loc = player.location
             when (data.get(wandKey, PersistentDataType.STRING)) {
-                "Circle" -> particle(loc)
+                "Circle" -> circle(loc, 2f)
                 "Wave" -> bigParticle(loc)
                 "Shoot" -> shootParticle(loc)
                 else -> {
@@ -315,11 +313,18 @@ class ItemEvents : Listener {
         } else utils.cooldownMessage(player, wandCooldown.eta(player))
     }
 
-    private val magicalBootsPlayer = ArrayList<Player>()
+    private val magicalBootsPlayers = ArrayList<Player>()
     @EventHandler
-    fun magicalBoots(armour: PlayerArmorChangeEvent, join: PlayerJoinEvent) {
-        if (armour.newItem != ItemStack(Material.GOLDEN_BOOTS) || armour.slotType != PlayerArmorChangeEvent.SlotType.FEET) return
-        if (join.player.inventory.boots != ItemStack(Material.GOLDEN_BOOTS)) return
-
+    fun magicalBoots(event: PlayerArmorChangeEvent) {
+        val p = event.player
+        if (event.newItem == ItemStack(Material.GOLDEN_BOOTS) || event.slotType == PlayerArmorChangeEvent.SlotType.FEET) {
+            magicalBootsPlayers.add(p)
+            object : BukkitRunnable() {
+                override fun run() {
+                    if (p.inventory.boots != ItemStack(Material.GOLDEN_BOOTS)) { cancel() }
+                    circle(p.location)
+                }
+            }.runTask(plugin)
+        } else magicalBootsPlayers.remove(p)
     }
 }
