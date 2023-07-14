@@ -70,13 +70,15 @@ class ItemEvents : Listener {
         val player = event.player
         val item = player.inventory.itemInMainHand
 
-        if (item.itemMeta == null) return
-        if (item.itemMeta.persistentDataContainer.get(utils.idKey, PersistentDataType.STRING) != "pogeroni_sword" || !event.action.isRightClick) return
-
         val location = player.location
         val armorStand = location.world!!.spawnEntity(location, EntityType.ARMOR_STAND) as ArmorStand
         armorStand.isVisible = false
         armorStand.isInvulnerable = true
+
+
+        if (item.itemMeta == null) return
+        val data = item.itemMeta.persistentDataContainer
+        if (data.get(utils.idKey, PersistentDataType.STRING) != "pogeroni_sword" || !event.action.isRightClick) return
 
         val strength = 2.0
         event.isCancelled = true
