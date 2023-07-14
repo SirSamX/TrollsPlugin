@@ -8,7 +8,6 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.*
 import org.bukkit.block.Block
-import org.bukkit.block.data.Orientable
 import org.bukkit.entity.*
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -235,8 +234,8 @@ class ItemEvents : Listener {
                 for (y in -1..1) {
                     for (z in -1..1) {
                         val relativeBlock: Block = currentBlock.getRelative(x, y, z)
-                        if (relativeBlock is Orientable) {
-                            if (relativeBlock.type in materials) {
+                        if (relativeBlock.type in materials) {
+                            if (relativeBlock !in processedBlocks) {
                                 treeBlocks.add(relativeBlock)
                                 processedBlocks.add(relativeBlock)
                             }
