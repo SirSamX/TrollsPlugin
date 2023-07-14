@@ -37,13 +37,31 @@ class OnJoin : Listener {
 
             }
             "EnderMo23" -> {
-                event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text("Ich lebe in einem einsamen Canjon", NamedTextColor.GOLD)))
+                event.joinMessage(Component.text("⠀⠀⠀⠀⠀⠀⡠⠔⠚⡏⠉⠉⠙⠛⠓⠒⠒⠒⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                        "⠀⠀⠀⠀⠀⠀⡇⠀⠀⡇⠀⠀⢀⣰⠁⠀⠐⡆⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                        "⠀⠀⠀⠀⠀⠀⡇⠀⠀⡇⢰⢲⢺⠀⠀⡤⡤⣧⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                        "⠀⠀⠀⠀⠀⠀⡇⠀⠀⡇⢸⠉⢉⣀⣀⡉⠉⡇⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                        "⠀⠀⠀⢀⡤⠤⠧⢤⣀⣧⣼⣀⣈⣠⣍⣡⣠⣇⡇⢀⡀⢀⡤⠶⠶⡚⢖⣄⠀⠀\n" +
+                        "⠀⠀⢀⡎⢀⠀⠀⠈⡇⠀⠀⡆⡇⠀⣰⠚⠀⡏⠉⢀⡾⠁⠀⣀⣤⣛⠉⠙⣷⡀\n" +
+                        "⠀⢠⠏⢃⠜⠀⠐⢲⡇⠀⠀⡇⠀⠀⠀⠀⠀⣿⢎⠉⠉⠓⢻⡽⢡⣬⣧⡀⠘⣿\n" +
+                        "⢠⠋⢀⠎⠉⠁⢲⡇⡗⠰⠴⠇⠀⠀⠀⠀⠀⣿⠀⠑⡄⢀⣶⢁⣾⡞⠉⠷⢶⣿\n" +
+                        "⡇⠠⠃⠀⠀⣠⠃⡇⡇⠀⠀⠀⠀⠀⠀⠀⠀⡟⢆⠀⠈⣺⠃⡞⢾⣙⣆⠀⠀⠀\n" +
+                        "⠳⣁⣀⣀⡰⠃⠀⠇⡇⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⢱⣤⠏⡜⢨⠏⠀⡇⠀⠀⠀\n" +
+                        "⠀⠀⠀⠀⠀⠀⢸⡗⡇⠀⠀⠒⠒⠒⠒⠒⣒⡇⠀⠈⢯⣤⠥⠯⠖⠚⠀⠀⠀⠀\n" +
+                        "⠀⠀⠀⠀⠀⠀⠀⣿⠉⠉⠉⠉⢯⠉⠉⠉⠙⡅⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                        "⠀⠀⠀⠀⠀⠀⠀⢹⡇⠀⠀⠀⢸⡦⠤⠤⠤⡧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                        "⠀⠀⠀⠀⠀⠀⠀⢸⢡⠀⠀⠀⠈⡅⠀⠀⢠⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                        "⠀⠀⠀⠀⠀⠀⠀⠈⣼⠀⠀⠀⠀⡇⠀⠀⡎⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                        "⠀⠀⠀⠀⠀⠀⠀⠀⡇⡆⠀⠀⠀⢱⠤⠼⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                        "⠀⠀⠀⠀⠀⠀⠀⠀⢷⢧⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                        "⠀⠀⠀⠀⠀⠀⠀⠀⢸⡌⠉⠉⠉⡽⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀", NamedTextColor.GREEN))
+
             }
             "RedstoneKaiser" -> {
                 event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text("Se Kaiser of la Redstöne is da!", NamedTextColor.DARK_PURPLE)))
             }
             "hbjju" -> {
-                event.joinMessage(Component.text("Se Herobrine of hbjju joined the game und will nicht von se Kaiser la REdstöne genervt werdem", NamedTextColor.YELLOW))
+                event.joinMessage(Component.text("Tabeas dummer Bruder is da!", NamedTextColor.YELLOW))
                 p.kick()
             }
             else ->  event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text("${p.name} moin bein neu hier oder spiele nicht so aktiv!", NamedTextColor.GOLD)))
