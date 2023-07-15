@@ -58,11 +58,11 @@ enum class ItemManager(val item: TrollItem) {
             name = "Pogeroni Sword",
             description = "Fickt Emanuel.",
             note = "Hallo",
-            rarity = TrollRarity.RARE,
+            rarity = TrollRarity.LEGENDARY,
             raritySuffix = "SWORD",
             enchantments = mutableMapOf(Enchantment.FIRE_ASPECT to 5, Enchantment.DURABILITY to 3),
             abilities = mapOf(TrollAbility.RIGHT_CLICK to "Throw Sword!"),
-            unbreakable = false
+            unbreakable = true
 
         )
     ),
