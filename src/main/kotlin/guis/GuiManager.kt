@@ -20,7 +20,7 @@ class GuiManager : Listener {
     private val instance = Trolls.getPlugin()
     private val utils = Utilities()
 
-    fun item(material: Material, amount: Int = 1, name: Component, lore: MutableList<Component>? = null): ItemStack {
+    fun item(material: Material, name: Component, lore: MutableList<Component>? = null, amount: Int = 1): ItemStack {
         val item = ItemStack(material, amount)
         val meta = item.itemMeta
 

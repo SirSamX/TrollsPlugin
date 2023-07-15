@@ -1,7 +1,6 @@
 package me.sirsam.trolls.commands
 
 import com.destroystokyo.paper.profile.ProfileProperty
-import it.unimi.dsi.fastutil.Hash
 import me.sirsam.trolls.Trolls
 import me.sirsam.trolls.guis.Items
 import me.sirsam.trolls.helpers.Utilities
