@@ -13,7 +13,7 @@ import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 
 
-class Trolls : JavaPlugin(), Listener {
+class Trolls : JavaPlugin(), Listener {//a
     companion object {
         lateinit var instance: Trolls
 
