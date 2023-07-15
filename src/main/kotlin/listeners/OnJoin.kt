@@ -53,7 +53,7 @@ class OnJoin : Listener {
                         "⠀⠀⠀⠀⠀⠀⠀⠈⣼⠀⠀⠀⠀⡇⠀⠀⡎⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
                         "⠀⠀⠀⠀⠀⠀⠀⠀⡇⡆⠀⠀⠀⢱⠤⠼⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
                         "⠀⠀⠀⠀⠀⠀⠀⠀⢷⢧⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                        "⠀⠀⠀⠀⠀⠀⠀⠀⢸⡌⠉⠉⠉⡽⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n", NamedTextColor.RED).append(Component.text("+ ", NamedTextColor.GOLD).append(Component.text("EnderMo23", NamedTextColor.GREEN))))
+                        "⠀⠀⠀⠀⠀⠀⠀⠀⢸⡌⠉⠉⠉⡽⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n", NamedTextColor.GOLD).append(Component.text("+ ", NamedTextColor.GREEN).append(Component.text("EnderMo23", NamedTextColor.GREEN))))
 
             }
             "RedstoneKaiser" -> {
@@ -62,7 +62,7 @@ class OnJoin : Listener {
             "hbjju" -> {
                 event.joinMessage(Component.text("Tabeas dummer Bruder is da!", NamedTextColor.YELLOW))
             }
-            else ->  event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text("${p.name} moin bein neu hier oder spiele nicht so aktiv!", NamedTextColor.GOLD)))
+            else ->  event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text(p.name, NamedTextColor.GOLD)))
         }
     }
 }
