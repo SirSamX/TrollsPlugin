@@ -71,7 +71,7 @@ class ItemEvents : Listener {
         if (item.itemMeta == null) return
         if (item.itemMeta.persistentDataContainer.get(utils.idKey, PersistentDataType.STRING) != "pogeroni_sword" || !event.action.isRightClick) return
 
-        throwItem(player, item, 2f)
+        throwItem(player, item, 0.7f, Particle.FLAME)
     }
 
     @EventHandler
@@ -82,12 +82,14 @@ class ItemEvents : Listener {
         if (item.itemMeta == null) return
         if (item.itemMeta.persistentDataContainer.get(utils.idKey, PersistentDataType.STRING) != "shuriken" || !event.action.isRightClick) return
 
-        throwItem(player, item, 2f)
+        throwItem(player, item, 0.7f, Particle.FIREWORKS_SPARK)
     }
 
-    private fun throwItem(player: Player, item: ItemStack, strength: Float, keepItem: Boolean = false) {
+    private fun throwItem(player: Player, item: ItemStack, strength: Float, particle: Particle, keepItem: Boolean = false) {
         val thrownItem = player.world.dropItem(player.eyeLocation, item)
+        val loc = player.eyeLocation
         thrownItem.velocity = player.eyeLocation.direction.multiply(strength)
+        player.world.spawnParticle(particle, loc, 50)
         if (player.gameMode != GameMode.CREATIVE || !keepItem) {
             utils.destroy(item, 1)
         }

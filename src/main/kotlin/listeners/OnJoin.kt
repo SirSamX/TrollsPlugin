@@ -16,7 +16,7 @@ class OnJoin : Listener {
         val p = event.player
         val playerCount = Bukkit.getOnlinePlayers().size
         p.sendMessage(Component.text("Welcome back ${p.name}!\nThere are currently ${playerCount - 1} other players online.", NamedTextColor.BLUE))
-
+        p.sendMessage(Component.text("Herzlich Willkommen auf dem Server ${p.name}!"))
         val header = Component.text("GAMING LEGENDEN SERVER", NamedTextColor.RED)
         val footer = Component.text("1.20 Trails and Tails", NamedTextColor.GREEN)
         p.sendPlayerListHeaderAndFooter(header, footer)
@@ -30,11 +30,10 @@ class OnJoin : Listener {
         when (p.name) {
             "niceleumas" -> {
                 event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text("Se Owner of le Server is wieder da um euch wegzubannen!", NamedTextColor.DARK_RED)))
-                //p.getAttribute(Attribute.GENERIC_ATTACK_SPEED)?.baseValue = 100.0
+            //p.getAttribute(Attribute.GENERIC_ATTACK_SPEED)?.baseValue = 100.0
             }
             "Blueberry1873" -> {
                 event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text("*Ich Blaubeere bekenne mich offiziel als dumm*", NamedTextColor.GOLD).decorate(TextDecoration.ITALIC)))
-
             }
             "EnderMo23" -> {
                 event.joinMessage(Component.text("⠀⠀⠀⠀⠀⠀⡠⠔⠚⡏⠉⠉⠙⠛⠓⠒⠒⠒⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
