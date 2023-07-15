@@ -61,6 +61,7 @@ enum class ItemManager(val item: TrollItem) {
             rarity = TrollRarity.RARE,
             raritySuffix = "SWORD",
             enchantments = mutableMapOf(Enchantment.FIRE_ASPECT to 5, Enchantment.DURABILITY to 3),
+            abilities = mapOf(TrollAbility.RIGHT_CLICK to "Throw Sword!"),
             unbreakable = false
 
         )

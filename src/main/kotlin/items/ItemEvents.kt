@@ -68,7 +68,6 @@ class ItemEvents : Listener {
     fun throwSword(event: PlayerInteractEvent) {
         val player = event.player
         val item = player.inventory.itemInMainHand
-
         if (item.itemMeta == null) return
         if (item.itemMeta.persistentDataContainer.get(utils.idKey, PersistentDataType.STRING) != "pogeroni_sword" || !event.action.isRightClick) return
 
@@ -89,7 +88,6 @@ class ItemEvents : Listener {
     private fun throwItem(player: Player, item: ItemStack, strength: Float, keepItem: Boolean = false) {
         val thrownItem = player.world.dropItem(player.eyeLocation, item)
         thrownItem.velocity = player.eyeLocation.direction.multiply(strength)
-
         if (player.gameMode != GameMode.CREATIVE || !keepItem) {
             utils.destroy(item, 1)
         }

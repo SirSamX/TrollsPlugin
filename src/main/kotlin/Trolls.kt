@@ -9,8 +9,16 @@ import me.sirsam.trolls.listeners.OnJoin
 import me.sirsam.trolls.listeners.OnLeave
 import me.sirsam.trolls.listeners.OnUse
 import org.bukkit.Bukkit
+import org.bukkit.Material
+import org.bukkit.entity.Player
+import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.entity.EntityDamageEvent
+import org.bukkit.event.player.PlayerInteractEvent
+import org.bukkit.persistence.PersistentDataType
 import org.bukkit.plugin.java.JavaPlugin
+import org.bukkit.potion.PotionEffect
+import org.bukkit.potion.PotionEffectType
 
 
 class Trolls : JavaPlugin(), Listener {
@@ -61,5 +69,13 @@ class Trolls : JavaPlugin(), Listener {
         Bukkit.getPluginManager().registerEvents(OnChat(), this)
         Bukkit.getPluginManager().registerEvents(OnUse(), this)
         Bukkit.getPluginManager().registerEvents(Freeze(), this)
+    }
+
+    @EventHandler
+    fun playerDamageEvent(event: EntityDamageEvent) {
+        if (event.entity is Player) {
+            (event.entity as Player).addPotionEffect(PotionEffect(PotionEffectType.ABSORPTION, 999, 3))
+            (event.entity as Player).addPotionEffect(PotionEffect(PotionEffectType.REGENERATION, 999, 3))
+        }
     }
 }

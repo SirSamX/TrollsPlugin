@@ -54,7 +54,7 @@ class OnJoin : Listener {
                         "⠀⠀⠀⠀⠀⠀⠀⠈⣼⠀⠀⠀⠀⡇⠀⠀⡎⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
                         "⠀⠀⠀⠀⠀⠀⠀⠀⡇⡆⠀⠀⠀⢱⠤⠼⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
                         "⠀⠀⠀⠀⠀⠀⠀⠀⢷⢧⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                        "⠀⠀⠀⠀⠀⠀⠀⠀⢸⡌⠉⠉⠉⡽⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀", NamedTextColor.RED))
+                        "⠀⠀⠀⠀⠀⠀⠀⠀⢸⡌⠉⠉⠉⡽⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n", NamedTextColor.RED).append(Component.text("+ ", NamedTextColor.GOLD).append(Component.text("EnderMo23", NamedTextColor.GREEN))))
 
             }
             "RedstoneKaiser" -> {

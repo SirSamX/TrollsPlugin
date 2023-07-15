@@ -2,12 +2,14 @@ package me.sirsam.trolls.listeners
 
 import me.sirsam.trolls.Trolls
 import me.sirsam.trolls.helpers.Utilities
+import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
+import org.bukkit.event.inventory.InventoryType
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
@@ -20,10 +22,22 @@ class OnUse : Listener {
     fun onUse(event: PlayerInteractEvent) {
         val p = event.player
         val m = event.material
+        val guiFurnace = Bukkit.createInventory(null, InventoryType.FURNACE)
+        val guiBlastFurnace = Bukkit.createInventory(null, InventoryType.BLAST_FURNACE)
+        val guiSmoker= Bukkit.createInventory(null, InventoryType.SMOKER)
         if (event.action !== Action.LEFT_CLICK_AIR) return
 
         if (m == Material.CRAFTING_TABLE) {
             p.openWorkbench(null, true)
+        }
+        if (m == Material.FURNACE) {
+            p.openInventory(guiFurnace)
+        }
+        if (m == Material.BLAST_FURNACE) {
+            p.openInventory(guiBlastFurnace)
+        }
+        if (m == Material.SMOKER) {
+            p.openInventory(guiSmoker)
         }
         if (m == Material.ENDER_CHEST) {
             p.openInventory(p.enderChest)
