@@ -12,7 +12,7 @@ class OnLeave : Listener {
     @EventHandler
     fun onLeave(event: PlayerQuitEvent) {
         val p = event.player
-        event.quitMessage(Component.text("- ", NamedTextColor.RED).append(Component.text(p.name, NamedTextColor.GOLD)))
+
 
         val loc = p.location
         loc.y++
@@ -34,6 +34,7 @@ class OnLeave : Listener {
             "hbjju" -> {
                 event.quitMessage(Component.text("Herobrine left the game", NamedTextColor.YELLOW))
             }
+            else -> event.quitMessage(Component.text("- ", NamedTextColor.RED).append(Component.text(p.name, NamedTextColor.GOLD)))
         }
     }
 }

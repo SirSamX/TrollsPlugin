@@ -23,7 +23,7 @@ enum class ItemManager(val item: TrollItem) {
             rarity = TrollRarity.UNCOMMON,
             raritySuffix = "TNT",
             oneTimeUse = true,
-            abilities = mapOf(TrollAbility.RIGHT_CLICK to "Throw TNT"),
+            abilities = mapOf(AbilityType.RIGHT_CLICK to "Throw TNT"),
             stackable = true
         )
     ),
@@ -36,7 +36,7 @@ enum class ItemManager(val item: TrollItem) {
             rarity = TrollRarity.UNCOMMON,
             raritySuffix = "FIREBALL",
             oneTimeUse = true,
-            abilities = mapOf(TrollAbility.RIGHT_CLICK to "Throw Fireball"),
+            abilities = mapOf(AbilityType.RIGHT_CLICK to "Throw Fireball"),
             stackable = true
         )
     ),
@@ -61,7 +61,7 @@ enum class ItemManager(val item: TrollItem) {
             rarity = TrollRarity.LEGENDARY,
             raritySuffix = "SWORD",
             enchantments = mutableMapOf(Enchantment.FIRE_ASPECT to 5, Enchantment.DURABILITY to 3),
-            abilities = mapOf(TrollAbility.RIGHT_CLICK to "Throw Sword!"),
+            abilities = mapOf(AbilityType.RIGHT_CLICK to "Throw Sword!"),
             unbreakable = true
 
         )
@@ -71,7 +71,7 @@ enum class ItemManager(val item: TrollItem) {
             id = "shooty_box",
             material = Material.DISPENSER,
             name = "Shooty Box",
-            abilities = mapOf(TrollAbility.RIGHT_CLICK to "Shoot!", TrollAbility.SHIFT_RIGHT_CLICK to "Open inventory"),
+            abilities = mapOf(AbilityType.RIGHT_CLICK to "Shoot!", AbilityType.SHIFT_RIGHT_CLICK to "Open inventory"),
             rarity = TrollRarity.UNFINISHED
         )
     ),
@@ -80,7 +80,7 @@ enum class ItemManager(val item: TrollItem) {
             id = "terminator",
             material = Material.BOW,
             name = "Terminator",
-            abilities = mapOf(TrollAbility.LEFT_CLICK to "Shoot 3 arrows!"),
+            abilities = mapOf(AbilityType.LEFT_CLICK to "Shoot 3 arrows!"),
             note = "Infinite arrows!",
             rarity = TrollRarity.MYTHIC,
             raritySuffix = "BOW"
@@ -113,7 +113,7 @@ enum class ItemManager(val item: TrollItem) {
             id = "magical_wand",
             material = Material.BLAZE_ROD,
             name = "Magical Wand",
-            abilities = mapOf(TrollAbility.RIGHT_CLICK to "Cast spell", TrollAbility.LEFT_CLICK to "Switch ability"),
+            abilities = mapOf(AbilityType.RIGHT_CLICK to "Cast spell", AbilityType.LEFT_CLICK to "Switch ability"),
             note = "TestItem",
             rarity = TrollRarity.ADMIN,
             raritySuffix = "WAND"
@@ -124,7 +124,7 @@ enum class ItemManager(val item: TrollItem) {
             id = "jukebox",
             material = Material.JUKEBOX,
             name = "Jukebox",
-            abilities = mapOf(TrollAbility.RIGHT_CLICK to "Play Music!"),
+            abilities = mapOf(AbilityType.RIGHT_CLICK to "Play Music!"),
             rarity = TrollRarity.RARE
         )
     ),
@@ -133,7 +133,7 @@ enum class ItemManager(val item: TrollItem) {
             id = "shuriken",
             material = Material.IRON_SWORD,
             name = "Shuriken",
-            abilities = mapOf( TrollAbility.RIGHT_CLICK to "Throw Shuriken"),
+            abilities = mapOf( AbilityType.RIGHT_CLICK to "Throw Shuriken"),
             rarity = TrollRarity.UNCOMMON,
             raritySuffix = "SHURIKEN",
             customModelData = 69001
@@ -169,4 +169,14 @@ enum class ItemManager(val item: TrollItem) {
             stackable = true
         ),
     ),
+    CHICKZOOKA(
+        TrollItem(
+            id = "chickzooka",
+            material = Material.PLAYER_HEAD,
+            name = "Chickzooka",
+            rarity = TrollRarity.SPECIAL,
+            skullMeta = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGU4YTQxMDU4MmQxZGIwZjE2MDdlYjRkMDczMjJkZWNhMjFkZjM5Y2I5YzMzZTM3MDM0ZDBkY2ZlM2ZjNzNhNSJ9fX0=",
+            stackable = false
+        )
+    )
 }

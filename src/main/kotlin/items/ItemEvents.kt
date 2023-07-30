@@ -1,6 +1,5 @@
 package me.sirsam.trolls.items
 
-import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent
 import me.sirsam.trolls.Trolls
 import me.sirsam.trolls.helpers.Cooldown
 import me.sirsam.trolls.helpers.Utilities
@@ -71,7 +70,7 @@ class ItemEvents : Listener {
         if (item.itemMeta == null) return
         if (item.itemMeta.persistentDataContainer.get(utils.idKey, PersistentDataType.STRING) != "pogeroni_sword" || !event.action.isRightClick) return
 
-        throwItem(player, item, 0.7f, Particle.FLAME)
+        throwItem(player, item, 1.2f, Particle.FLAME)
     }
 
     @EventHandler
@@ -82,7 +81,7 @@ class ItemEvents : Listener {
         if (item.itemMeta == null) return
         if (item.itemMeta.persistentDataContainer.get(utils.idKey, PersistentDataType.STRING) != "shuriken" || !event.action.isRightClick) return
 
-        throwItem(player, item, 0.7f, Particle.FIREWORKS_SPARK)
+        throwItem(player, item, 1.7f, Particle.FIREWORKS_SPARK)
     }
 
     private fun throwItem(player: Player, item: ItemStack, strength: Float, particle: Particle, keepItem: Boolean = false) {
@@ -123,6 +122,7 @@ class ItemEvents : Listener {
     @EventHandler
     fun closeShootyBoxGui(event: InventoryCloseEvent) {
         val item = event.player.inventory.itemInMainHand
+        if (item.itemMeta == null) return
         if (item.itemMeta.persistentDataContainer.get(utils.idKey, PersistentDataType.STRING) != "shooty_box") return
         utils.storeInventoryInItem(item, event.inventory)
     }
@@ -357,18 +357,18 @@ class ItemEvents : Listener {
         } else utils.cooldownMessage(player, wandCooldown.eta(player))
     }
 
-    private val magicalBootsPlayers = ArrayList<Player>()
     @EventHandler
-    fun magicalBoots(event: PlayerArmorChangeEvent) {
-        val p = event.player
-        if (event.newItem == ItemStack(Material.GOLDEN_BOOTS) || event.slotType == PlayerArmorChangeEvent.SlotType.FEET) {
-            magicalBootsPlayers.add(p)
-            object : BukkitRunnable() {
-                override fun run() {
-                    if (p.inventory.boots != ItemStack(Material.GOLDEN_BOOTS)) { cancel() }
-                    circle(p.location, 1f)
-                }
-            }.runTaskTimer(plugin, 0 , 20)
-        } else magicalBootsPlayers.remove(p)
+    fun chickzooka(event: PlayerInteractEvent) {
+        val player = event.player
+        val item = player.inventory.itemInMainHand
+
+        if (item.itemMeta == null) return
+        if (item.itemMeta.persistentDataContainer.get(utils.idKey, PersistentDataType.STRING) != "chickzooka") return
+
+        val loc = player.eyeLocation
+        loc.add(loc.direction.normalize())
+
+        val chicken = player.world.spawn(loc, Chicken::class.java)
+        chicken.velocity = loc.direction.multiply(2)
     }
 }

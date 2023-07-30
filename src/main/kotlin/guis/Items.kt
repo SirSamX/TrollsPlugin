@@ -34,13 +34,13 @@ class Items : InventoryHolder {
         }
 
         if (page != 1) {
-            inv.setItem(45, gui.item(Material.ARROW, name = Component.text("← Previous Page", NamedTextColor.GREEN).decoration(TextDecoration.ITALIC, false)))
+            inv.setItem(45, gui.item(Material.ARROW, Component.text("← Previous Page", NamedTextColor.GREEN).decoration(TextDecoration.ITALIC, false)))
         }
 
-        inv.setItem(49, gui.item(Material.BARRIER, name = Component.text("Close ❌", NamedTextColor.RED).decoration(TextDecoration.ITALIC, false)))
+        inv.setItem(49, gui.item(Material.BARRIER, Component.text("Close ❌", NamedTextColor.RED).decoration(TextDecoration.ITALIC, false)))
 
         if (endIdx < registeredItems.size) {
-            inv.setItem(53, gui.item(Material.ARROW, name = Component.text("Next Page →", NamedTextColor.GREEN).decoration(TextDecoration.ITALIC, false)))
+            inv.setItem(53, gui.item(Material.ARROW, Component.text("Next Page →", NamedTextColor.GREEN).decoration(TextDecoration.ITALIC, false)))
         }
 
         return inv

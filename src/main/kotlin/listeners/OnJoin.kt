@@ -29,11 +29,11 @@ class OnJoin : Listener {
 
         when (p.name) {
             "niceleumas" -> {
-                event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text("Se Owner of le Server is wieder da um euch wegzubannen!", NamedTextColor.DARK_RED)))
+                event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text("꧁ඞ꧂", NamedTextColor.DARK_RED)))
             //p.getAttribute(Attribute.GENERIC_ATTACK_SPEED)?.baseValue = 100.0
             }
             "Blueberry1873" -> {
-                event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text("*Ich Blaubeere bekenne mich offiziel als dumm*", NamedTextColor.GOLD).decorate(TextDecoration.ITALIC)))
+                event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text("*Ich Blaubeere bekenne mich offiziell als dumm*", NamedTextColor.GOLD).decorate(TextDecoration.ITALIC)))
             }
             "EnderMo23" -> {
                 event.joinMessage(Component.text("⠀⠀⠀⠀⠀⠀⡠⠔⠚⡏⠉⠉⠙⠛⠓⠒⠒⠒⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
@@ -53,16 +53,16 @@ class OnJoin : Listener {
                         "⠀⠀⠀⠀⠀⠀⠀⠈⣼⠀⠀⠀⠀⡇⠀⠀⡎⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
                         "⠀⠀⠀⠀⠀⠀⠀⠀⡇⡆⠀⠀⠀⢱⠤⠼⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
                         "⠀⠀⠀⠀⠀⠀⠀⠀⢷⢧⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                        "⠀⠀⠀⠀⠀⠀⠀⠀⢸⡌⠉⠉⠉⡽⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n", NamedTextColor.RED).append(Component.text("+ ", NamedTextColor.GOLD).append(Component.text("EnderMo23", NamedTextColor.GREEN))))
+                        "⠀⠀⠀⠀⠀⠀⠀⠀⢸⡌⠉⠉⠉⡽⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n", NamedTextColor.GOLD).append(Component.text("+ ", NamedTextColor.GREEN).append(Component.text("EnderMo23", NamedTextColor.GREEN))))
 
             }
             "RedstoneKaiser" -> {
-                event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text("Se Kaiser of la Redstöne is da!", NamedTextColor.DARK_PURPLE)))
+                event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text("Se Kaiser of la Redstone is da!", NamedTextColor.DARK_PURPLE)))
             }
             "hbjju" -> {
                 event.joinMessage(Component.text("Tabeas dummer Bruder is da!", NamedTextColor.YELLOW))
             }
-            else ->  event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text("${p.name} moin bein neu hier oder spiele nicht so aktiv!", NamedTextColor.GOLD)))
+            else ->  event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text(p.name, NamedTextColor.GOLD)))
         }
     }
 }
