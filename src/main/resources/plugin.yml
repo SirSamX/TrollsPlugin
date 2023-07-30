@@ -8,23 +8,23 @@ api-version: "1.20"
 loadbefore: [Essentials]
 
 commands:
-  jump:
+  tjump:
     description: Launches you high in the air!
     permission: trolls.utils.god
     permission-message: You do not have permission to use this Command!
     usage: /<command> player
-  fly:
+  tfly:
     description: Allows you to toggle flight.
     permission: trolls.utils.fly
     permission-message: You do not have permission to use this Command!
     usage: /<command> player
-  godmode:
+  tgodmode:
     description: Makes you invulnerable.
     permission: trolls.utils.god
     permission-message: You do not have permission to use this command!
     aliases: god
     usage: /<command> player
-  sudo:
+  tsudo:
     description: Allows you to send something or execute a command from another players chat.
     permission: trolls.utils.sudo
     permission-message: You do not have permission to use this Command!
@@ -34,16 +34,18 @@ commands:
     permission: trolls.troll
     permission-message: You do not have permission to use this Command!
     usage: /<command> [get|reload|items|head|version|help]
-  vanish:
+  tvanish:
     description: Allows you to become invisible.
     permission: trolls.utils.vanish
     permission-message: You do not have permission to use this Command!
     usage: /<command> player
-  freeze:
+  tfreeze:
     description: Allows you to freeze a player.
     permission: trolls.utils.freeze
     permission-message: You do not have permission to use this Command!
     usage: /<command> player
+  bomber:
+    permission: op
 
 permissions:
   trolls.*:
