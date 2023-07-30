@@ -43,7 +43,7 @@ class Trolls : JavaPlugin(), Listener {
 
     private fun registerCommands() {
         getCommand("tjump")?.setExecutor(Jump())
-        getCommand("ffly")?.setExecutor(Fly())
+        getCommand("tfly")?.setExecutor(Fly())
         getCommand("tsudo")?.setExecutor(Sudo())
         getCommand("tgodmode")?.setExecutor(Godmode())
         getCommand("tvanish")?.setExecutor(Vanish())
