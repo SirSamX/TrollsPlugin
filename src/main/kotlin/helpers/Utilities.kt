@@ -18,6 +18,7 @@ class Utilities {
     private val compactInventoryKey = NamespacedKey(plugin, "compactInventory")
     val idKey = NamespacedKey(plugin, "ID")
     val stackableKey = NamespacedKey(plugin, "stackable")
+    val mobKey = NamespacedKey(plugin, "trollMob")
     val uuidKey = NamespacedKey(plugin, "uuid")
 
     fun isTrollItem(i: ItemStack): Boolean { return i.itemMeta.persistentDataContainer.get(idKey, PersistentDataType.STRING) !== null }
@@ -31,8 +32,6 @@ class Utilities {
     fun playerNotExistingMessage(p: CommandSender) { p.sendMessage(Component.text("This player does not exist!", NamedTextColor.RED)) }
 
     fun noPermissionMessage(p: CommandSender) { p.sendMessage(Component.text("You don't have permission to do that!", NamedTextColor.RED)) }
-
-    fun cooldownMessage(p: Player, eta: Long) { p.sendMessage(Component.text("Please wait ${"%.1f".format(eta.toFloat())}s before using this!", NamedTextColor.YELLOW)) }
 
     fun isNumeric(input: String): Boolean { return input.toDoubleOrNull() != null }
 

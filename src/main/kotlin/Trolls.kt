@@ -48,6 +48,7 @@ class Trolls : JavaPlugin(), Listener {
         getCommand("tgodmode")?.setExecutor(Godmode())
         getCommand("tvanish")?.setExecutor(Vanish())
         getCommand("tfreeze")?.setExecutor(Freeze())
+        getCommand("repeat")?.setExecutor(Repeat())
         getCommand("troll")?.setExecutor(Troll())
         getCommand("troll")?.tabCompleter = Troll()
         getCommand("bomber")?.setExecutor(BomberCommand())

@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.SkullMeta
 import org.bukkit.persistence.PersistentDataType
-import java.util.UUID
+import java.util.*
 
 class TrollItem(
     private val id: String,
@@ -28,7 +28,8 @@ class TrollItem(
     private val oneTimeUse: Boolean = false,
     private val unbreakable: Boolean = true,
     private val customModelData: Int? = null,
-    private val skullMeta: String? = null
+    private val skullMeta: String? = null,
+    private val color: NamedTextColor? = null
 ) {
     private val utils = Utilities()
 
@@ -68,6 +69,9 @@ class TrollItem(
 
     fun nameComponent(colored: Boolean = true): Component {
         return if (colored) {
+            if (color != null) {
+                Component.text(name, color).decoration(TextDecoration.ITALIC, false)
+            }
             Component.text(name, rarity.color).decoration(TextDecoration.ITALIC, false)
         }
         else Component.text(name)

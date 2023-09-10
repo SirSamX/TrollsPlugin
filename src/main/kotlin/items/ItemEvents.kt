@@ -322,6 +322,7 @@ class ItemEvents : Listener {
     }
 
     private val wandCooldown = Cooldown()
+
     @EventHandler
     fun magicalWand(event: PlayerInteractEvent) {
         val player = event.player
@@ -334,7 +335,7 @@ class ItemEvents : Listener {
         if (data.get(utils.idKey, PersistentDataType.STRING) != "magical_wand") return
         val wandKey = NamespacedKey(plugin, "ability")
         if (event.action.isRightClick && wandCooldown.can(player)) {
-            wandCooldown.add(player, 1000)
+            wandCooldown.set(player, 1000)
             val loc = player.location
             when (data.get(wandKey, PersistentDataType.STRING)) {
                 "Circle" -> circle(loc, 2f)
@@ -354,8 +355,10 @@ class ItemEvents : Listener {
             data.set(wandKey, PersistentDataType.STRING, newAbility)
             item.itemMeta = itemMeta
             player.sendMessage(Component.text("§eChanged ability to §a§l$newAbility"))
-        } else utils.cooldownMessage(player, wandCooldown.eta(player))
+        } else wandCooldown.cooldownMessage(player)
     }
+
+    private val chickzookaCooldown = Cooldown()
 
     @EventHandler
     fun chickzooka(event: PlayerInteractEvent) {
@@ -364,11 +367,33 @@ class ItemEvents : Listener {
 
         if (item.itemMeta == null) return
         if (item.itemMeta.persistentDataContainer.get(utils.idKey, PersistentDataType.STRING) != "chickzooka") return
+        if (!chickzookaCooldown.can(player)) { chickzookaCooldown.cooldownMessage(player); return }
+
+        chickzookaCooldown.set(player, 250)
 
         val loc = player.eyeLocation
         loc.add(loc.direction.normalize())
 
         val chicken = player.world.spawn(loc, Chicken::class.java)
+        chicken.persistentDataContainer.set(utils.mobKey, PersistentDataType.STRING, "explosive_chicken")
         chicken.velocity = loc.direction.multiply(2)
+
+        object : BukkitRunnable() {
+            override fun run() {
+                if (!chicken.isValid) { cancel(); return }
+
+                chicken.remove()
+                chicken.location.createExplosion(chicken, 1f, false, true)
+            }
+        }.runTaskLater(plugin, 99)
+
+        object : BukkitRunnable() {
+            val counter = 0
+
+            override fun run() {
+                if (!chicken.isValid) { cancel(); return }
+                chicken.eggLayTime = 0
+            }
+        }.runTaskTimer(plugin, 20, 20)
     }
 }
