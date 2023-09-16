@@ -109,12 +109,12 @@ class Utilities {
         return head
     }
 
-    fun setTexture(skullMeta: SkullMeta, id: String): SkullMeta {
+    fun setPlayerHeadTexture(skullMeta: SkullMeta, id: String): SkullMeta {
         skullMeta.playerProfile = Utilities().getProfileById(id)
         return skullMeta
     }
 
-    fun setTexture(meta: ItemMeta, id: String): SkullMeta {
-        return setTexture(meta as SkullMeta, id)
+    fun setPlayerHeadTexture(meta: ItemMeta, id: String): SkullMeta {
+        return setPlayerHeadTexture(meta as SkullMeta, id)
     }
 }
