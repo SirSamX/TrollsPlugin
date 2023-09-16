@@ -67,7 +67,11 @@ class Troll : CommandExecutor, TabCompleter {
                 if (!sender.hasPermission("trolls.troll.head")) { utils.noPermissionMessage(sender); return true }
                 val head = ItemStack(Material.PLAYER_HEAD)
                 val meta = head.itemMeta as SkullMeta
-                meta.setOwningPlayer(Bukkit.getOfflinePlayer(args[1]))
+                if (args.size == 2) {
+                    meta.setOwningPlayer(Bukkit.getOfflinePlayer(args[1]))
+                } else {
+                    meta.setOwningPlayer(Bukkit.getOfflinePlayer(sender.name))
+                }
                 head.itemMeta = meta
                 sender.inventory.addItem(head)
             }
