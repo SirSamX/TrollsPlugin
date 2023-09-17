@@ -28,7 +28,7 @@ class TrollItem(
     private val oneTimeUse: Boolean = false,
     private val unbreakable: Boolean = true,
     private val customModelData: Int? = null,
-    private val skullMeta: String? = null,
+    private val headTexture: TrollHead? = null,
     private val color: NamedTextColor? = null
 ) {
     private val utils = Utilities()
@@ -45,15 +45,14 @@ class TrollItem(
         meta.lore(addLore())
         meta.isUnbreakable = unbreakable
         meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE)
-        item.setItemMeta(meta)
 
         if (enchantments != null) { item.addUnsafeEnchantments(enchantments) }
         if (customModelData != null) { item.itemMeta.setCustomModelData(customModelData) }
-        if (skullMeta != null) {
-            utils.set
-            item.setItemMeta(skullMeta)
+        if (headTexture != null) {
+            TrollHead.valueOf(headTexture.name).setTexture(meta)
         }
 
+        item.setItemMeta(meta)
         return item
     }
 
