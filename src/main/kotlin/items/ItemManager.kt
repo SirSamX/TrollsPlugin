@@ -175,7 +175,25 @@ enum class ItemManager(val item: TrollItem) {
             material = Material.PLAYER_HEAD,
             name = "Chickzooka",
             rarity = TrollRarity.SPECIAL,
-            skullMeta = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGU4YTQxMDU4MmQxZGIwZjE2MDdlYjRkMDczMjJkZWNhMjFkZjM5Y2I5YzMzZTM3MDM0ZDBkY2ZlM2ZjNzNhNSJ9fX0=",
+            headTexture = TrollHead.CHICKEN,
+            stackable = false
+        )
+    ),
+    CRAFTYPHONE_X(
+        TrollItem(
+            id = "craftyphone_x",
+            material = Material.PLAYER_HEAD,
+            name = "Craftyphone",
+            headTexture = TrollHead.PHONE_BLACK,
+            stackable = false
+        )
+    ),
+    COLORED_CRAFTYCASE(
+        TrollItem(
+            id = "colored_craftycase",
+            material = Material.PLAYER_HEAD,
+            name = "Colored Craftycase",
+            headTexture = TrollHead.PHONE_BLACK,
             stackable = false
         )
     )

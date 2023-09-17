@@ -1,6 +1,5 @@
 package me.sirsam.trolls.commands
 
-import com.destroystokyo.paper.profile.ProfileProperty
 import me.sirsam.trolls.Trolls
 import me.sirsam.trolls.guis.Items
 import me.sirsam.trolls.helpers.Utilities
@@ -12,12 +11,12 @@ import org.bukkit.Material
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
+import org.bukkit.command.TabCompleter
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.SkullMeta
-import java.util.*
 
-class Troll : CommandExecutor {
+class Troll : CommandExecutor, TabCompleter {
     private val utils = Utilities()
     private val plugin = Trolls.instance
 
@@ -68,15 +67,19 @@ class Troll : CommandExecutor {
                 if (!sender.hasPermission("trolls.troll.head")) { utils.noPermissionMessage(sender); return true }
                 val head = ItemStack(Material.PLAYER_HEAD)
                 val meta = head.itemMeta as SkullMeta
-                meta.setOwningPlayer(Bukkit.getOfflinePlayer(args[1]))
+                if (args.size == 2) {
+                    meta.setOwningPlayer(Bukkit.getOfflinePlayer(args[1]))
+                } else {
+                    meta.setOwningPlayer(Bukkit.getOfflinePlayer(sender.name))
+                }
                 head.itemMeta = meta
                 sender.inventory.addItem(head)
             }
 
             "version", "ver", "v" -> {
                 if (!sender.hasPermission("trolls.troll.version")) { utils.noPermissionMessage(sender); return true }
-                @Suppress("DEPRECATION")
-                sender.sendMessage(Component.text("Version: ${plugin.description.version}", NamedTextColor.YELLOW))
+                @Suppress("UnstableApiUsage")
+                sender.sendMessage(Component.text("Version: ${plugin.pluginMeta.version}", NamedTextColor.YELLOW))
             }
 
             "help", "info" -> {
@@ -91,5 +94,9 @@ class Troll : CommandExecutor {
         }
 
         return true
+    }
+
+    override fun onTabComplete(sender: CommandSender, command: Command, label: String, args: Array<out String>?): MutableList<String> {
+        return mutableListOf("get", "reload", "head", "items", "version", "help", "pack")
     }
 }

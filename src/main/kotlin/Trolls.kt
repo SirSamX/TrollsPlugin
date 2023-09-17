@@ -42,13 +42,16 @@ class Trolls : JavaPlugin(), Listener {
     }
 
     private fun registerCommands() {
-        getCommand("jump")?.setExecutor(Jump())
-        getCommand("fly")?.setExecutor(Fly())
-        getCommand("sudo")?.setExecutor(Sudo())
+        getCommand("tjump")?.setExecutor(Jump())
+        getCommand("tfly")?.setExecutor(Fly())
+        getCommand("tsudo")?.setExecutor(Sudo())
+        getCommand("tgodmode")?.setExecutor(Godmode())
+        getCommand("tvanish")?.setExecutor(Vanish())
+        getCommand("tfreeze")?.setExecutor(Freeze())
+        getCommand("repeat")?.setExecutor(Repeat())
         getCommand("troll")?.setExecutor(Troll())
-        getCommand("godmode")?.setExecutor(Godmode())
-        getCommand("vanish")?.setExecutor(Vanish())
-        getCommand("freeze")?.setExecutor(Freeze())
+        getCommand("troll")?.tabCompleter = Troll()
+        getCommand("bomber")?.setExecutor(BomberCommand())
     }
 
     private fun registerEvents() {
