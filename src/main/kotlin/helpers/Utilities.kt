@@ -5,14 +5,11 @@ import me.sirsam.trolls.Trolls
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Bukkit
-import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
-import org.bukkit.inventory.meta.ItemMeta
-import org.bukkit.inventory.meta.SkullMeta
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.profile.PlayerTextures
 import java.net.MalformedURLException
@@ -99,22 +96,5 @@ class Utilities {
 
     fun getProfileById(id: String): PlayerProfile {
         return getProfile("http://textures.minecraft.net/texture/$id")
-    }
-
-    fun createSkull(id: String): ItemStack {
-        val head = ItemStack(Material.PLAYER_HEAD)
-        val headMeta = head.itemMeta as SkullMeta
-        headMeta.playerProfile = Utilities().getProfileById(id)
-        head.setItemMeta(headMeta)
-        return head
-    }
-
-    fun setPlayerHeadTexture(skullMeta: SkullMeta, id: String): SkullMeta {
-        skullMeta.playerProfile = Utilities().getProfileById(id)
-        return skullMeta
-    }
-
-    fun setPlayerHeadTexture(meta: ItemMeta, id: String): SkullMeta {
-        return setPlayerHeadTexture(meta as SkullMeta, id)
     }
 }
