@@ -206,7 +206,10 @@ class ItemEvents : Listener {
             Material.CHERRY_LOG,
             Material.MANGROVE_LOG,
             Material.MANGROVE_ROOTS,
-            Material.MUDDY_MANGROVE_ROOTS
+            Material.MUDDY_MANGROVE_ROOTS,
+            Material.MUSHROOM_STEM,
+            Material.CRIMSON_STEM,
+            Material.WARPED_STEM
         )
 
         if (block.type !in logMaterials) return
