@@ -8,7 +8,10 @@ import org.bukkit.inventory.meta.SkullMeta
 
 @Suppress("MemberVisibilityCanBePrivate")
 enum class TrollHead(val id: String) {
-    //https://minecraft-heads.com/custom-heads/tags/var/Device?start=320
+    /**
+    * Use https://minecraft-heads.com/custom-heads/ to get custom heads.
+    * Register Them using // TODO: Add register for custom heads
+     **/
 
     PHONE_BLACK("8e07ac02d9e947e562a7f73952c29ef682a1fc60da115cbc8154a5c4b99120e9"),
     CHICKEN("9f26883dc28a49cb582b60c6dccdca173d45f7b1a7b8690ca8ce43cde0e13589");

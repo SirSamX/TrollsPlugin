@@ -5,30 +5,28 @@ import me.sirsam.trolls.core.item.abilities.AbilityType
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextDecoration
-import org.bukkit.Material
-import org.bukkit.enchantments.Enchantment
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 import java.util.*
 
-class TrollItem(
-    private val id: String,
-    private val material: Material,
-    private val name: String,
-    private val description: String? = null,
-    private val note: String? = null,
-    private val rarity: TrollRarity = TrollRarity.UNFINISHED,
-    private val raritySuffix: String = "",
-    private val stackable: Boolean = false,
-    private val enchantments: MutableMap<Enchantment, Int>? = null,
-    private val abilities: Map<AbilityType, String>? = null,
-    private val oneTimeUse: Boolean = false,
-    private val unbreakable: Boolean = true,
-    private val customModelData: Int? = null,
-    private val headTexture: TrollHead? = null,
-    private val color: NamedTextColor? = null
-) {
+class TrollItem(val properties: TrollItemProperties) {
+    private val id = properties.id
+    private val material = properties.material
+    private val name = properties.name
+    private val description = properties.description
+    private val note = properties.note
+    private val rarity = properties.rarity
+    private val raritySuffix = properties.raritySuffix
+    private val stackable = properties.stackable
+    private val enchantments = properties.enchantments
+    private val abilities = properties.abilities
+    private val oneTimeUse = properties.oneTimeUse
+    private val unbreakable = properties.unbreakable
+    private val customModelData = properties.customModelData
+    private val headTexture = properties.headTexture
+    private val color = properties.color
+
     fun item(): ItemStack {
         val item = ItemStack(material)
         val meta = item.itemMeta

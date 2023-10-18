@@ -27,9 +27,6 @@ class Trolls : JavaPlugin(), Listener {
         Trolls.config = config
         Trolls.logger = logger
 
-        config.addDefault("aaaaa.aaaa.aaa.aa.a", "ello")
-        saveDefaultConfig()
-
         registerCommands()
         registerEvents()
 
