@@ -1,7 +1,7 @@
 package me.sirsam.trolls.commands
 
+import core.helpers.Utils
 import me.sirsam.trolls.Trolls
-import me.sirsam.trolls.helpers.Utilities
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Bukkit
@@ -15,8 +15,8 @@ import org.bukkit.event.player.PlayerJoinEvent
 
 class Vanish : CommandExecutor, Listener {
     private val vanished = ArrayList<Player>()
-    private val plugin = Trolls.getPlugin()
-    private val utils = Utilities()
+    private val plugin = Trolls.instance
+    private val utils = Utils
 
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>?): Boolean {

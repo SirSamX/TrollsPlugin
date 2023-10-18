@@ -1,7 +1,7 @@
 package me.sirsam.trolls.listeners
 
+import core.helpers.Utils
 import me.sirsam.trolls.Trolls
-import me.sirsam.trolls.helpers.Utilities
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.entity.Player
@@ -14,7 +14,6 @@ import org.bukkit.persistence.PersistentDataType
 import org.bukkit.scheduler.BukkitRunnable
 
 class OnUse : Listener {
-    val utils = Utilities()
 
     @EventHandler
     fun onUse(event: PlayerInteractEvent) {
@@ -47,14 +46,14 @@ class OnUse : Listener {
             p.openStonecutter(null, true)
         }
         if (m == Material.ANVIL) {
-            if (utils.randomPercentage(12)) {
+            if (Utils.randomPercentage(12)) {
                 p.inventory.setItem(p.inventory.heldItemSlot, ItemStack(Material.CHIPPED_ANVIL))
                 p.playSound(p.location, Sound.BLOCK_ANVIL_DESTROY, 1f, 1f)
             }
             p.openAnvil(null, true)
         }
         if (m == Material.CHIPPED_ANVIL) {
-            if (utils.randomPercentage(12)) {
+            if (Utils.randomPercentage(12)) {
                 p.inventory.setItem(p.inventory.heldItemSlot, ItemStack(Material.DAMAGED_ANVIL))
                 p.playSound(p.location, Sound.BLOCK_ANVIL_DESTROY, 1f, 1f)
             }
@@ -62,7 +61,7 @@ class OnUse : Listener {
 
         }
         if (m == Material.DAMAGED_ANVIL) {
-            if (utils.randomPercentage(12)) {
+            if (Utils.randomPercentage(12)) {
                 p.inventory.setItem(p.inventory.heldItemSlot, ItemStack(Material.AIR))
                 p.playSound(p.location, Sound.BLOCK_ANVIL_DESTROY, 1f, 1f)
             }
@@ -74,7 +73,7 @@ class OnUse : Listener {
         val item = event.player.inventory.itemInMainHand
         if (item.itemMeta == null) return
         val data = item.itemMeta.persistentDataContainer
-        if (data.get(utils.idKey, PersistentDataType.STRING) != "jukebox" || !event.action.isRightClick) return
+        if (data.get(Utils.ID_KEY, PersistentDataType.STRING) != "jukebox" || !event.action.isRightClick) return
 
         event.isCancelled = true
         playJukeboxSound(event.player)
@@ -86,6 +85,6 @@ class OnUse : Listener {
             override fun run() {
                 player.stopSound(Sound.MUSIC_DISC_13)
             }
-        }.runTaskLater(Trolls.getPlugin(), 20*10L)
+        }.runTaskLater(Trolls.instance, 20*10L)
     }
 }

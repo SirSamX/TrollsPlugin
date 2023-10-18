@@ -46,6 +46,6 @@ class Bomber(loc: Location) {
                 )
                 zombie.world.createExplosion(explosionLoc, 2f)
             }
-        }.runTaskTimer(Trolls.getPlugin(), 40L, 40L)
+        }.runTaskTimer(Trolls.instance, 40L, 40L)
     }
 }

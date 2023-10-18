@@ -1,4 +1,4 @@
-package me.sirsam.trolls.items
+package me.sirsam.trolls.core.item.abilities
 
 enum class AbilityType {
     RIGHT_CLICK,

@@ -1,8 +1,8 @@
 package me.sirsam.trolls.commands
 
+import core.helpers.Utils
 import me.sirsam.trolls.Trolls
 import me.sirsam.trolls.guis.Items
-import me.sirsam.trolls.helpers.Utilities
 import me.sirsam.trolls.items.ItemManager
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
@@ -17,7 +17,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.SkullMeta
 
 class Troll : CommandExecutor, TabCompleter {
-    private val utils = Utilities()
+    private val utils = Utils
     private val plugin = Trolls.instance
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>?): Boolean {
@@ -58,7 +58,7 @@ class Troll : CommandExecutor, TabCompleter {
                 Bukkit.broadcast(Component.text("Reloaded Server!", NamedTextColor.YELLOW), "op")
             }
 
-            "items" -> {
+            "item" -> {
                 if (!sender.hasPermission("trolls.troll.items")) { utils.noPermissionMessage(sender); return true }
                 sender.openInventory(Items().inventory)
             }
@@ -97,6 +97,6 @@ class Troll : CommandExecutor, TabCompleter {
     }
 
     override fun onTabComplete(sender: CommandSender, command: Command, label: String, args: Array<out String>?): MutableList<String> {
-        return mutableListOf("get", "reload", "head", "items", "version", "help", "pack")
+        return mutableListOf("get", "reload", "head", "item", "version", "help", "pack")
     }
 }

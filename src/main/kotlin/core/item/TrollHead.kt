@@ -1,6 +1,6 @@
-package me.sirsam.trolls.items
+package me.sirsam.trolls.core.item
 
-import me.sirsam.trolls.helpers.Utilities
+import core.helpers.Utils
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.ItemMeta
@@ -17,13 +17,13 @@ enum class TrollHead(val id: String) {
         fun createSkull(id: String): ItemStack {
             val head = ItemStack(Material.PLAYER_HEAD)
             val headMeta = head.itemMeta as SkullMeta
-            headMeta.playerProfile = Utilities().getProfileById(id)
+            headMeta.playerProfile = Utils.getProfileById(id)
             head.setItemMeta(headMeta)
             return head
         }
 
         fun setTexture(skullMeta: SkullMeta, id: String): SkullMeta {
-            skullMeta.playerProfile = Utilities().getProfileById(id)
+            skullMeta.playerProfile = Utils.getProfileById(id)
             return skullMeta
         }
 

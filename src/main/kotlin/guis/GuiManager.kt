@@ -1,7 +1,7 @@
 package me.sirsam.trolls.guis
 
+import core.helpers.Utils
 import me.sirsam.trolls.Trolls
-import me.sirsam.trolls.helpers.Utilities
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextDecoration
@@ -17,8 +17,7 @@ import org.bukkit.scheduler.BukkitRunnable
 
 
 class GuiManager : Listener {
-    private val instance = Trolls.getPlugin()
-    private val utils = Utilities()
+    private val plugin = Trolls.instance
 
     fun item(material: Material, name: Component, lore: MutableList<Component>? = null, amount: Int = 1): ItemStack {
         val item = ItemStack(material, amount)
@@ -52,7 +51,7 @@ class GuiManager : Listener {
                             override fun run() {
                                 p.closeInventory()
                             }
-                        }.runTaskLater(Trolls.getPlugin(), 1L)
+                        }.runTaskLater(Trolls.instance, 1L)
                     }
                     53 -> {
                         e.isCancelled = true
@@ -68,14 +67,14 @@ class GuiManager : Listener {
                         val item = e.currentItem?.clone()
                         if (item != null) {
                             if (e.isShiftClick) {
-                                if (e.isLeftClick && item.itemMeta.persistentDataContainer.get(utils.stackableKey, PersistentDataType.BOOLEAN) == true) {
+                                if (e.isLeftClick && item.itemMeta.persistentDataContainer.get(Utils.STACKABLE_KEY, PersistentDataType.BOOLEAN) == true) {
                                     item.amount = item.maxStackSize
                                 }
                                 p.inventory.addItem(item)
                             } else if (e.isRightClick) {
                                 p.setItemOnCursor(item)
                             } else {
-                                if (item.itemMeta.persistentDataContainer.get(utils.stackableKey, PersistentDataType.BOOLEAN) == true) {
+                                if (item.itemMeta.persistentDataContainer.get(Utils.STACKABLE_KEY, PersistentDataType.BOOLEAN) == true) {
                                     item.amount = item.maxStackSize
                                 }
                                 p.setItemOnCursor(item)

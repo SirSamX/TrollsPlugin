@@ -9,21 +9,23 @@ import me.sirsam.trolls.listeners.OnJoin
 import me.sirsam.trolls.listeners.OnLeave
 import me.sirsam.trolls.listeners.OnUse
 import org.bukkit.Bukkit
+import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
+import java.util.logging.Logger
 
 
 class Trolls : JavaPlugin(), Listener {
     companion object {
         lateinit var instance: Trolls
-
-        fun getPlugin(): Trolls {
-            return instance
-        }
+        lateinit var config: FileConfiguration
+        lateinit var logger: Logger
     }
 
     override fun onEnable() {
         instance = this
+        Trolls.config = config
+        Trolls.logger = logger
 
         config.addDefault("aaaaa.aaaa.aaa.aa.a", "ello")
         saveDefaultConfig()
