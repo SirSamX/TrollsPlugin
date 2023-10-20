@@ -1,6 +1,7 @@
 package me.sirsam.trolls.core.item
 
 import core.helper.Utils
+import core.item.recipes.RecipeItem
 import me.sirsam.trolls.core.item.abilities.AbilityItem
 import me.sirsam.trolls.core.item.abilities.AbilityType
 import net.kyori.adventure.text.Component
@@ -11,7 +12,11 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 import java.util.*
 
-open class TrollItem(properties: TrollItemProperties) : AbilityItem {
+/**
+ * Only use if you know how to use this!
+ * Use [AbilityItem] or [RecipeItem] instead.
+ */
+open class TrollItem(properties: TrollItemProperties) {
     private val id = properties.id
     private val material = properties.material
     private val name = properties.name

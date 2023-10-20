@@ -1,11 +1,17 @@
 package me.sirsam.trolls.core.item.abilities
 
 import com.destroystokyo.paper.event.player.PlayerJumpEvent
+import me.sirsam.trolls.core.item.TrollItem
+import me.sirsam.trolls.core.item.TrollItemProperties
 import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.entity.PlayerDeathEvent
 import org.bukkit.event.player.*
 
-interface AbilityItem {
+/**
+ * For with abilities.
+ */
+@Suppress("unused", "UNUSED_PARAMETER")
+class AbilityItem(properties: TrollItemProperties) : TrollItem(properties) {
     fun rightClick(event: PlayerInteractEvent): AbilityResult { return AbilityResult.SUCESS }
 
     fun leftClick(event: PlayerInteractEvent): AbilityResult { return AbilityResult.SUCESS }
