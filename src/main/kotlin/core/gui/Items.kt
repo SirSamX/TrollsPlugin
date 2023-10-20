@@ -1,4 +1,4 @@
-package me.sirsam.trolls.guis
+package me.sirsam.trolls.core.gui
 
 import item.ItemManager
 import net.kyori.adventure.text.Component

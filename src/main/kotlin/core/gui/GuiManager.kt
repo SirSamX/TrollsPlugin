@@ -1,6 +1,6 @@
-package me.sirsam.trolls.guis
+package me.sirsam.trolls.core.gui
 
-import core.helpers.Utils
+import core.helper.Utils
 import me.sirsam.trolls.Trolls
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
@@ -17,8 +17,6 @@ import org.bukkit.scheduler.BukkitRunnable
 
 
 class GuiManager : Listener {
-    private val plugin = Trolls.instance
-
     fun item(material: Material, name: Component, lore: MutableList<Component>? = null, amount: Int = 1): ItemStack {
         val item = ItemStack(material, amount)
         val meta = item.itemMeta

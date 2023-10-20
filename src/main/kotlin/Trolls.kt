@@ -1,21 +1,19 @@
 package me.sirsam.trolls
 
 import me.sirsam.trolls.commands.*
-import me.sirsam.trolls.guis.GuiManager
-import me.sirsam.trolls.items.ItemEvents
+import me.sirsam.trolls.core.Main
+import item.ItemEvents
 import me.sirsam.trolls.items.ItemRecipes
-import me.sirsam.trolls.listeners.OnChat
-import me.sirsam.trolls.listeners.OnJoin
-import me.sirsam.trolls.listeners.OnLeave
-import me.sirsam.trolls.listeners.OnUse
+import me.sirsam.trolls.listeners.*
 import org.bukkit.Bukkit
+import org.bukkit.command.CommandExecutor
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.logging.Logger
 
 
-class Trolls : JavaPlugin(), Listener {
+class Trolls : JavaPlugin() {
     companion object {
         lateinit var instance: Trolls
         lateinit var config: FileConfiguration
@@ -26,6 +24,8 @@ class Trolls : JavaPlugin(), Listener {
         instance = this
         Trolls.config = config
         Trolls.logger = logger
+
+        Main(this)
 
         registerCommands()
         registerEvents()
@@ -41,27 +41,31 @@ class Trolls : JavaPlugin(), Listener {
     }
 
     private fun registerCommands() {
-        getCommand("tjump")?.setExecutor(Jump())
-        getCommand("tfly")?.setExecutor(Fly())
-        getCommand("tsudo")?.setExecutor(Sudo())
-        getCommand("tgodmode")?.setExecutor(Godmode())
-        getCommand("tvanish")?.setExecutor(Vanish())
-        getCommand("tfreeze")?.setExecutor(Freeze())
-        getCommand("repeat")?.setExecutor(Repeat())
-        getCommand("troll")?.setExecutor(Troll())
-        getCommand("troll")?.tabCompleter = Troll()
-        getCommand("bomber")?.setExecutor(BomberCommand())
+        fun register(name: String, executor: CommandExecutor) {
+            getCommand(name)?.setExecutor(executor)
+        }
+
+        register("tjump", Jump())
+        register("tfly", Fly())
+        register("tsudo", Sudo())
+        register("tgodmode", Godmode())
+        register("tvanish", Vanish())
+        register("tfreeze", Freeze())
+        register("repeat", Repeat())
     }
 
     private fun registerEvents() {
-        Bukkit.getPluginManager().registerEvents(this,this)
-        Bukkit.getPluginManager().registerEvents(ItemEvents(), this)
-        Bukkit.getPluginManager().registerEvents(GuiManager(), this)
-        Bukkit.getPluginManager().registerEvents(Vanish(), this)
-        Bukkit.getPluginManager().registerEvents(OnJoin(), this)
-        Bukkit.getPluginManager().registerEvents(OnLeave(), this)
-        Bukkit.getPluginManager().registerEvents(OnChat(), this)
-        Bukkit.getPluginManager().registerEvents(OnUse(), this)
-        Bukkit.getPluginManager().registerEvents(Freeze(), this)
+        fun register(listener: Listener) {
+            Bukkit.getPluginManager().registerEvents(listener, this)
+        }
+
+        register(ItemEvents())
+        register(Vanish())
+        register(OnJoin())
+        register(OnLeave())
+        register(OnChat())
+        register(OnUse())
+        register(Freeze())
+        register(OnDeath())
     }
 }

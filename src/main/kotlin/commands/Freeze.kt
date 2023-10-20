@@ -1,7 +1,6 @@
 package me.sirsam.trolls.commands
 
-import core.helpers.Utils
-import me.sirsam.trolls.Trolls
+import core.helper.Utils
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Bukkit
@@ -14,7 +13,6 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
 
 class Freeze : CommandExecutor, Listener {
-    private val plugin = Trolls.instance
     private val frozen = ArrayList<Player>()
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>?): Boolean {

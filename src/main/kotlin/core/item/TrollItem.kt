@@ -1,6 +1,7 @@
 package me.sirsam.trolls.core.item
 
-import core.helpers.Utils
+import core.helper.Utils
+import me.sirsam.trolls.core.item.abilities.AbilityItem
 import me.sirsam.trolls.core.item.abilities.AbilityType
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
@@ -10,7 +11,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 import java.util.*
 
-class TrollItem(val properties: TrollItemProperties) {
+open class TrollItem(properties: TrollItemProperties) : AbilityItem {
     private val id = properties.id
     private val material = properties.material
     private val name = properties.name

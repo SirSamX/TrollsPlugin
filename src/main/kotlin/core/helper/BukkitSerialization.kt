@@ -1,4 +1,4 @@
-package me.sirsam.trolls.helpers
+package core.helper
 
 import org.bukkit.Bukkit
 import org.bukkit.inventory.Inventory
@@ -10,7 +10,6 @@ import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.IOException
-
 
 class BukkitSerialization {
     /**
@@ -26,7 +25,7 @@ class BukkitSerialization {
      * @throws IllegalStateException
      */
     @Throws(IllegalStateException::class)
-    fun playerInventoryToBase64(playerInventory: PlayerInventory): Array<String>? {
+    fun playerInventoryToBase64(playerInventory: PlayerInventory): Array<String> {
         //get the main content part, this doesn't return the armor
         val content = toBase64(playerInventory)
         val armor = itemStackArrayToBase64(playerInventory.armorContents)

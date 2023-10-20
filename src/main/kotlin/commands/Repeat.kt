@@ -1,6 +1,6 @@
 package me.sirsam.trolls.commands
 
-import core.helpers.Utils
+import core.helper.Utils
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender

@@ -1,8 +1,8 @@
-package me.sirsam.trolls.items
+package item
 
-import core.helpers.Utils
+import core.helper.Cooldown
+import core.helper.Utils
 import me.sirsam.trolls.Trolls
-import me.sirsam.trolls.helpers.Cooldown
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.*
@@ -390,8 +390,6 @@ class ItemEvents : Listener {
         }.runTaskLater(plugin, 99)
 
         object : BukkitRunnable() {
-            val counter = 0
-
             override fun run() {
                 if (!chicken.isValid) { cancel(); return }
                 chicken.eggLayTime = 0

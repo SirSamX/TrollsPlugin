@@ -1,8 +1,7 @@
-package core.helpers
+package core.helper
 
 import com.destroystokyo.paper.profile.PlayerProfile
 import me.sirsam.trolls.Trolls
-import me.sirsam.trolls.helpers.BukkitSerialization
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Bukkit
@@ -20,7 +19,6 @@ import kotlin.random.Random
 
 object Utils {
     private val plugin = Trolls.instance
-    private val config = plugin.config
 
     private val compactInventoryKey = NamespacedKey(plugin, "compactInventory")
     val ID_KEY = NamespacedKey(plugin, "ID")
@@ -29,7 +27,7 @@ object Utils {
     val UUID_KEY = NamespacedKey(plugin, "uuid")
 
     fun isTrollItem(i: ItemStack): Boolean {
-        return i.itemMeta.persistentDataContainer.get(ID_KEY, PersistentDataType.STRING) !== null
+        return i.itemMeta.persistentDataContainer.get(ID_KEY, PersistentDataType.STRING) != null
     }
 
     fun receiveItemMessage(p: Player, a: Int, i: Component) {
