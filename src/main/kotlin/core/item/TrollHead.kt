@@ -1,6 +1,6 @@
 package me.sirsam.trolls.core.item
 
-import core.helper.Utils
+import me.sirsam.trolls.core.helper.Utils
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.ItemMeta

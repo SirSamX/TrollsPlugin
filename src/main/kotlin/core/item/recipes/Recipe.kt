@@ -1,4 +1,4 @@
-package core.item.recipes
+package me.sirsam.trolls.core.item.recipes
 
 interface Recipe {
 }

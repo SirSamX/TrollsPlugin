@@ -1,4 +1,4 @@
-package core.helper
+package me.sirsam.trolls.core.helper
 
 import com.destroystokyo.paper.profile.PlayerProfile
 import me.sirsam.trolls.Trolls

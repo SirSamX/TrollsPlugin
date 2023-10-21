@@ -1,7 +1,7 @@
 package item
 
-import core.helper.Cooldown
-import core.helper.Utils
+import me.sirsam.trolls.core.helper.Cooldown
+import me.sirsam.trolls.core.helper.Utils
 import me.sirsam.trolls.Trolls
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor

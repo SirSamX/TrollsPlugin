@@ -1,4 +1,4 @@
-package core.helper
+package me.sirsam.trolls.core.helper
 
 import org.bukkit.Bukkit
 import org.bukkit.inventory.Inventory

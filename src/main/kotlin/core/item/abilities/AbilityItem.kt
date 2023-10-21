@@ -10,41 +10,41 @@ import org.bukkit.event.player.*
 /**
  * For with abilities.
  */
-@Suppress("unused", "UNUSED_PARAMETER")
-class AbilityItem(properties: TrollItemProperties) : TrollItem(properties) {
-    fun rightClick(event: PlayerInteractEvent): AbilityResult { return AbilityResult.SUCESS }
+@Suppress("unused")
+open class AbilityItem(properties: TrollItemProperties) : TrollItem(properties) {
+    open fun rightClick(event: PlayerInteractEvent): AbilityResult { return AbilityResult.SUCCESS }
 
-    fun leftClick(event: PlayerInteractEvent): AbilityResult { return AbilityResult.SUCESS }
+    open fun leftClick(event: PlayerInteractEvent): AbilityResult { return AbilityResult.SUCCESS }
 
-    fun rightClickBlock(event: PlayerInteractEvent): AbilityResult { return AbilityResult.SUCESS }
+    open fun rightClickBlock(event: PlayerInteractEvent): AbilityResult { return AbilityResult.SUCCESS }
 
-    fun leftClickBlock(event: PlayerInteractEvent): AbilityResult { return AbilityResult.SUCESS }
+    open fun leftClickBlock(event: PlayerInteractEvent): AbilityResult { return AbilityResult.SUCCESS }
 
-    fun rightClickAir(event: PlayerInteractEvent): AbilityResult { return AbilityResult.SUCESS }
+    open fun rightClickAir(event: PlayerInteractEvent): AbilityResult { return AbilityResult.SUCCESS }
 
-    fun leftClickAir(event: PlayerInteractEvent): AbilityResult { return AbilityResult.SUCESS }
+    open fun leftClickAir(event: PlayerInteractEvent): AbilityResult { return AbilityResult.SUCCESS }
 
-    fun move(event: PlayerMoveEvent): AbilityResult { return AbilityResult.SUCESS }
+    open fun move(event: PlayerMoveEvent): AbilityResult { return AbilityResult.SUCCESS }
 
-    fun shear(event: PlayerShearEntityEvent): AbilityResult { return AbilityResult.SUCESS }
+    open fun shear(event: PlayerShearEntityEvent): AbilityResult { return AbilityResult.SUCCESS }
 
-    fun teleport(event: PlayerTeleportEvent): AbilityResult { return AbilityResult.SUCESS }
+    open fun teleport(event: PlayerTeleportEvent): AbilityResult { return AbilityResult.SUCCESS }
 
-    fun die(event: PlayerDeathEvent): AbilityResult { return AbilityResult.SUCESS }
+    open fun die(event: PlayerDeathEvent): AbilityResult { return AbilityResult.SUCCESS }
 
-    fun damage(event: EntityDamageEvent): AbilityResult { return AbilityResult.SUCESS }
+    open fun damage(event: EntityDamageEvent): AbilityResult { return AbilityResult.SUCCESS }
 
-    fun jump(event: PlayerJumpEvent): AbilityResult { return AbilityResult.SUCESS }
+    open fun jump(event: PlayerJumpEvent): AbilityResult { return AbilityResult.SUCCESS }
 
-    fun toggleFlight(event: PlayerToggleFlightEvent): AbilityResult { return AbilityResult.SUCESS }
+    open fun toggleFlight(event: PlayerToggleFlightEvent): AbilityResult { return AbilityResult.SUCCESS }
 
-    fun toggleSneak(event: PlayerToggleSneakEvent): AbilityResult { return AbilityResult.SUCESS }
+    open fun toggleSneak(event: PlayerToggleSneakEvent): AbilityResult { return AbilityResult.SUCCESS }
 
-    fun toggleSprint(event: PlayerToggleSprintEvent): AbilityResult { return AbilityResult.SUCESS }
+    open fun toggleSprint(event: PlayerToggleSprintEvent): AbilityResult { return AbilityResult.SUCCESS }
 
-    fun fish(event: PlayerFishEvent): AbilityResult { return AbilityResult.SUCESS }
+    open fun fish(event: PlayerFishEvent): AbilityResult { return AbilityResult.SUCCESS }
 
-    fun interactEntity(event: PlayerInteractAtEntityEvent): AbilityResult { return AbilityResult.SUCESS }
+    open fun interactEntity(event: PlayerInteractAtEntityEvent): AbilityResult { return AbilityResult.SUCCESS }
 
-    fun interactPhysically(event: PlayerInteractEvent): AbilityResult { return AbilityResult.SUCESS }
+    open fun interactPhysically(event: PlayerInteractEvent): AbilityResult { return AbilityResult.SUCCESS }
 }

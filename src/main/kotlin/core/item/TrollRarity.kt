@@ -14,10 +14,4 @@ enum class TrollRarity(val color: NamedTextColor) {
     VERY_SPECIAL(NamedTextColor.DARK_RED),
     ADMIN(NamedTextColor.DARK_RED),
     UNFINISHED(NamedTextColor.DARK_RED);
-
-    var suffix = ""
-
-    constructor(rarity: TrollRarity, suffix: String) : this(rarity.color) {
-        this.suffix = suffix
-    }
 }

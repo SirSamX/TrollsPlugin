@@ -1,4 +1,4 @@
-package core.item.recipes
+package me.sirsam.trolls.core.item.recipes
 
 import me.sirsam.trolls.core.item.TrollItem
 import me.sirsam.trolls.core.item.TrollItemProperties
@@ -6,4 +6,4 @@ import me.sirsam.trolls.core.item.TrollItemProperties
 /**
  * For items in recipes without abilities or another use.
  */
-class RecipeItem(properties: TrollItemProperties) : TrollItem(properties)
+open class RecipeItem(properties: TrollItemProperties) : TrollItem(properties)

@@ -1,4 +1,4 @@
-package core.helper
+package me.sirsam.trolls.core.helper
 
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor

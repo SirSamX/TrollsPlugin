@@ -1,6 +1,6 @@
 package me.sirsam.trolls.listeners
 
-import core.helper.Utils
+import me.sirsam.trolls.core.helper.Utils
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityDeathEvent

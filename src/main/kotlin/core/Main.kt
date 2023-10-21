@@ -1,6 +1,6 @@
 package me.sirsam.trolls.core
 
-import me.sirsam.trolls.commands.Troll
+import me.sirsam.trolls.core.command.Troll
 import me.sirsam.trolls.core.gui.GuiManager
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandExecutor

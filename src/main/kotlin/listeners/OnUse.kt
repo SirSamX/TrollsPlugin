@@ -1,6 +1,6 @@
 package me.sirsam.trolls.listeners
 
-import core.helper.Utils
+import me.sirsam.trolls.core.helper.Utils
 import me.sirsam.trolls.Trolls
 import org.bukkit.Material
 import org.bukkit.Sound

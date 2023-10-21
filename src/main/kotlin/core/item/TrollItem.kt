@@ -1,7 +1,7 @@
 package me.sirsam.trolls.core.item
 
-import core.helper.Utils
-import core.item.recipes.RecipeItem
+import me.sirsam.trolls.core.helper.Utils
+import me.sirsam.trolls.core.item.recipes.RecipeItem
 import me.sirsam.trolls.core.item.abilities.AbilityItem
 import me.sirsam.trolls.core.item.abilities.AbilityType
 import net.kyori.adventure.text.Component

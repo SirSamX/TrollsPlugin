@@ -1,7 +1,7 @@
 package me.sirsam.trolls.core.registry
 
-import core.item.recipes.RecipeItem
-import core.item.recipes.Recipe
+import me.sirsam.trolls.core.item.recipes.RecipeItem
+import me.sirsam.trolls.core.item.recipes.Recipe
 import me.sirsam.trolls.core.item.TrollItem
 import me.sirsam.trolls.core.item.abilities.AbilityItem
 
@@ -11,11 +11,10 @@ import me.sirsam.trolls.core.item.abilities.AbilityItem
  */
 @Suppress("unused", "MemberVisibilityCanBePrivate")
 object Registry {
-    private val items = mutableMapOf<Identifier, TrollItem>()
-    private val recipeItems = mutableMapOf<Identifier, RecipeItem>()
-    private val abilityItems = mutableMapOf<Identifier, AbilityItem>()
-    private val recipes = mutableMapOf<Identifier, Recipe>()
-
+    val items = mutableMapOf<Identifier, TrollItem>()
+    val recipeItems = mutableMapOf<Identifier, RecipeItem>()
+    val abilityItems = mutableMapOf<Identifier, AbilityItem>()
+    val recipes = mutableMapOf<Identifier, Recipe>()
 
     fun register(identifier: Identifier, item: TrollItem) {
         registerItem(identifier, item)
