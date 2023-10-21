@@ -1,6 +1,6 @@
 package me.sirsam.trolls.listeners
 
-import me.sirsam.trolls.items.ItemRecipes
+import me.sirsam.trolls.item.ItemRecipes
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextDecoration

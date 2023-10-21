@@ -2,8 +2,10 @@ package me.sirsam.trolls
 
 import me.sirsam.trolls.commands.*
 import me.sirsam.trolls.core.Main
-import item.ItemEvents
-import me.sirsam.trolls.items.ItemRecipes
+import me.sirsam.trolls.core.registry.Registry
+import me.sirsam.trolls.item.ItemEvents
+import me.sirsam.trolls.item.ItemManager
+import me.sirsam.trolls.item.ItemRecipes
 import me.sirsam.trolls.listeners.*
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandExecutor
@@ -26,11 +28,13 @@ class Trolls : JavaPlugin() {
         Trolls.logger = logger
 
         Main(this)
+        for (item in ItemManager.values()) {
+            Registry.register(item.item)
+        }
 
         registerCommands()
         registerEvents()
 
-        ItemRecipes().registerRecipes()
         Bukkit.getOnlinePlayers().forEach { p -> ItemRecipes().unlockRecipes(p)}
 
         logger.info("Plugin enabled!")

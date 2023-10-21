@@ -1,4 +1,4 @@
-package item
+package me.sirsam.trolls.item
 
 import me.sirsam.trolls.core.item.Head
 import me.sirsam.trolls.core.item.Item

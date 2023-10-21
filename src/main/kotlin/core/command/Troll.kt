@@ -2,8 +2,8 @@ package me.sirsam.trolls.core.command
 
 import me.sirsam.trolls.core.helper.Utils
 import me.sirsam.trolls.Trolls
-import me.sirsam.trolls.core.gui.Items
-import item.ItemManager
+import me.sirsam.trolls.core.gui.ItemsGUI
+import me.sirsam.trolls.core.registry.Registry
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Bukkit
@@ -33,15 +33,15 @@ class Troll : CommandExecutor, TabCompleter {
                 if (amount > 3000) { utils.formattingErrorMessage(sender); return true }
 
                 lateinit var givenItem: ItemStack
-                for (item in ItemManager.values()) {
-                    if (item.item.id() == args[1]) {
-                        givenItem = item.item.item()
+                for (item in Registry.items) {
+                    if (item.id() == args[1]) {
+                        givenItem = item.item()
                         var i = 0
                         while (i < amount) {
                             i += 1
                             sender.inventory.addItem(givenItem)
                         }
-                        utils.receiveItemMessage(sender, amount, item.item.nameComponent())
+                        utils.receiveItemMessage(sender, amount, item.nameComponent())
                         return true
                     }
                 }
@@ -60,7 +60,7 @@ class Troll : CommandExecutor, TabCompleter {
 
             "items" -> {
                 if (!sender.hasPermission("trolls.troll.items")) { utils.noPermissionMessage(sender); return true }
-                sender.openInventory(Items().inventory) // TODO: ADD SORTING FOR RECIPE ITEMS & ABILITY ITEMS AND RARITIES
+                sender.openInventory(ItemsGUI().inventory) // TODO: ADD SORTING FOR RECIPE ITEMS & ABILITY ITEMS AND RARITIES
             }
 
             "heads" -> {

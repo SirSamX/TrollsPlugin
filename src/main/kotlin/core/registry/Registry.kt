@@ -9,37 +9,38 @@ import java.net.URL
 
 /**
  * [Item], [AbilityItem], [RecipeItem] and [Recipe] need to get registered to show up in the GUIs.
+ * Do not modify any of the values, or it could cause errors!
  */
 @Suppress("unused", "MemberVisibilityCanBePrivate")
 object Registry {
-    private val items = mutableMapOf<Identifier, Item>()
-    private val recipeItems = mutableMapOf<Identifier, RecipeItem>()
-    private val abilityItems = mutableMapOf<Identifier, AbilityItem>()
-    private val recipes = mutableMapOf<Identifier, Recipe>()
-    private val heads = mutableMapOf<Identifier, URL>()
+    val items = mutableListOf<Item>()
+    val recipeItems = mutableListOf<RecipeItem>()
+    val abilityItems = mutableListOf<AbilityItem>()
+    val recipes = mutableListOf<Recipe>()
+    val heads = mutableListOf<URL>()
 
-    fun register(identifier: Identifier, item: Item) {
-        registerItem(identifier, item)
+    fun register(item: Item) {
+        registerItem(item)
     }
 
-    fun register(identifier: Identifier, item: RecipeItem) {
-        recipeItems[identifier] = item
-        registerItem(identifier, item)
+    fun register(item: RecipeItem) {
+        recipeItems.add(item)
+        registerItem(item)
     }
 
-    fun register(identifier: Identifier, item: AbilityItem) {
-        abilityItems[identifier] = item
-        registerItem(identifier, item)
+    fun register(item: AbilityItem) {
+        abilityItems.add(item)
+        registerItem(item)
     }
-    fun register(identifier: Identifier, recipe: Recipe) {
-        recipes[identifier] = recipe
-    }
-
-    fun register(identifier: Identifier, skin: URL?) {
-        heads[identifier] = skin ?: throw NullPointerException("Skin must not be null!")
+    fun register(recipe: Recipe) {
+        recipes.add(recipe)
     }
 
-    private fun registerItem(identifier: Identifier, item: Item) {
-        items[identifier] = item
+    fun register(skin: URL?) {
+        heads.add(skin ?: throw NullPointerException("Skin must not be null!"))
+    }
+
+    private fun registerItem(item: Item) {
+        items.add(item)
     }
 }

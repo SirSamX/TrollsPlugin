@@ -1,9 +1,9 @@
 package me.sirsam.trolls.core
 
 import me.sirsam.trolls.core.command.Troll
-import me.sirsam.trolls.core.gui.GuiManager
+import me.sirsam.trolls.core.gui.ItemsGUI
 import me.sirsam.trolls.core.item.Head
-import me.sirsam.trolls.core.registry.Identifier
+import me.sirsam.trolls.core.listener.ability.AbilityEvents
 import me.sirsam.trolls.core.registry.Registry
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandExecutor
@@ -16,17 +16,13 @@ import org.bukkit.plugin.java.JavaPlugin
  * Initialize this at [JavaPlugin.onEnable]!
  */
 class Main(val plugin: JavaPlugin) {
-    companion object {
-        const val TROLLS_CORE_ID = "trolls_core"
-    }
-
     private val logger = plugin.logger
 
     init {
         registerCommands()
         registerEvents()
         for (head in Head.values()) {
-            Registry.register(Identifier(TROLLS_CORE_ID, head.name), head.skin)
+            Registry.register(head.skin)
         }
 
         logger.info("TrollsCore initialized!")
@@ -48,6 +44,7 @@ class Main(val plugin: JavaPlugin) {
             Bukkit.getPluginManager().registerEvents(listener, plugin)
         }
 
-        register(GuiManager())
+        register(AbilityEvents())
+        register(ItemsGUI())
     }
 }

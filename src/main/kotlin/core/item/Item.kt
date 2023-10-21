@@ -1,9 +1,9 @@
 package me.sirsam.trolls.core.item
 
 import me.sirsam.trolls.core.helper.Utils
-import me.sirsam.trolls.core.item.recipes.RecipeItem
 import me.sirsam.trolls.core.item.abilities.AbilityItem
 import me.sirsam.trolls.core.item.abilities.AbilityType
+import me.sirsam.trolls.core.item.recipes.RecipeItem
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextDecoration
@@ -39,8 +39,9 @@ open class Item(properties: ItemProperties) {
         val data = meta.persistentDataContainer
 
         data.set(Utils.ID_KEY, PersistentDataType.STRING, id)
+
         data.set(Utils.STACKABLE_KEY, PersistentDataType.BOOLEAN, stackable)
-        if (!stackable) { data.set(Utils.UUID_KEY, PersistentDataType.STRING, UUID.randomUUID().toString()) }
+        if (!stackable) { data.set(Utils.UNSTACKABLE_KEY, PersistentDataType.STRING, UUID.randomUUID().toString()) }
         meta.displayName(nameComponent())
         meta.lore(addLore())
         meta.isUnbreakable = unbreakable
