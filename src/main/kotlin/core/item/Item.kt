@@ -16,7 +16,7 @@ import java.util.*
  * Only use if you know how to use this!
  * Use [AbilityItem] or [RecipeItem] instead.
  */
-open class TrollItem(properties: TrollItemProperties) {
+open class Item(properties: ItemProperties) {
     private val id = properties.id
     private val material = properties.material
     private val name = properties.name
@@ -49,7 +49,7 @@ open class TrollItem(properties: TrollItemProperties) {
         if (enchantments != null) { item.addUnsafeEnchantments(enchantments) }
         if (customModelData != null) { item.itemMeta.setCustomModelData(customModelData) }
         if (headTexture != null) {
-            TrollHead.valueOf(headTexture.name).setTexture(meta)
+            Head.valueOf(headTexture.name).setTexture(meta)
         }
 
         item.setItemMeta(meta)
@@ -73,7 +73,7 @@ open class TrollItem(properties: TrollItemProperties) {
     private fun addLore(): MutableList<Component> {
         val lore = mutableListOf<Component>()
 
-        if (rarity === TrollRarity.UNFINISHED) {
+        if (rarity === Rarity.UNFINISHED) {
             lore.add(Component.text("§cThis item is UNFINISHED"))
             lore.add(Component.text("§cIt may not perform as expected"))
             lore.add(Component.text(""))

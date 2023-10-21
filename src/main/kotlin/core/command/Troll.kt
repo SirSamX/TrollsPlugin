@@ -58,9 +58,13 @@ class Troll : CommandExecutor, TabCompleter {
                 Bukkit.broadcast(Component.text("Reloaded Server!", NamedTextColor.YELLOW), "op")
             }
 
-            "item" -> {
+            "items" -> {
                 if (!sender.hasPermission("trolls.troll.items")) { utils.noPermissionMessage(sender); return true }
-                sender.openInventory(Items().inventory)
+                sender.openInventory(Items().inventory) // TODO: ADD SORTING FOR RECIPE ITEMS & ABILITY ITEMS AND RARITIES
+            }
+
+            "heads" -> {
+                // TODO: ADD GUI
             }
 
             "head" -> {
@@ -97,6 +101,6 @@ class Troll : CommandExecutor, TabCompleter {
     }
 
     override fun onTabComplete(sender: CommandSender, command: Command, label: String, args: Array<out String>?): MutableList<String> {
-        return mutableListOf("get", "reload", "head", "item", "version", "help", "pack")
+        return mutableListOf("get", "reload", "head", "items", "version", "help", "pack")
     }
 }

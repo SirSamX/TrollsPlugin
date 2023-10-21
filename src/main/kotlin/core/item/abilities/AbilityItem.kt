@@ -1,8 +1,8 @@
 package me.sirsam.trolls.core.item.abilities
 
 import com.destroystokyo.paper.event.player.PlayerJumpEvent
-import me.sirsam.trolls.core.item.TrollItem
-import me.sirsam.trolls.core.item.TrollItemProperties
+import me.sirsam.trolls.core.item.Item
+import me.sirsam.trolls.core.item.ItemProperties
 import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.entity.PlayerDeathEvent
 import org.bukkit.event.player.*
@@ -11,7 +11,7 @@ import org.bukkit.event.player.*
  * For with abilities.
  */
 @Suppress("unused")
-open class AbilityItem(properties: TrollItemProperties) : TrollItem(properties) {
+open class AbilityItem(properties: ItemProperties) : Item(properties) {
     open fun rightClick(event: PlayerInteractEvent): AbilityResult { return AbilityResult.SUCCESS }
 
     open fun leftClick(event: PlayerInteractEvent): AbilityResult { return AbilityResult.SUCCESS }

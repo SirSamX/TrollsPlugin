@@ -1,34 +1,34 @@
 package item
 
-import me.sirsam.trolls.core.item.TrollHead
-import me.sirsam.trolls.core.item.TrollItem
-import me.sirsam.trolls.core.item.TrollItemProperties
-import me.sirsam.trolls.core.item.TrollRarity
+import me.sirsam.trolls.core.item.Head
+import me.sirsam.trolls.core.item.Item
+import me.sirsam.trolls.core.item.ItemProperties
+import me.sirsam.trolls.core.item.Rarity
 import me.sirsam.trolls.core.item.abilities.AbilityType
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
 
-enum class ItemManager(val item: TrollItem) {
+enum class ItemManager(val item: Item) {
     GRAPPLING_HOOK(
-        TrollItem(
-            TrollItemProperties(
+        Item(
+            ItemProperties(
                 id = "grappling_hook",
                 material = Material.FISHING_ROD,
                 name = "Grappling Hook",
                 description = "Travel in style...",
                 note = null,
-                rarity = TrollRarity.RARE
+                rarity = Rarity.RARE
             )
         )
     ),
     THROWABLE_TNT(
-        TrollItem(
-            TrollItemProperties(
+        Item(
+            ItemProperties(
                 id = "throwable_tnt",
                 material = Material.TNT,
                 name = "Throwable TNT",
                 note = "Don't grief!",
-                rarity = TrollRarity.UNCOMMON,
+                rarity = Rarity.UNCOMMON,
                 raritySuffix = "TNT",
                 oneTimeUse = true,
                 abilities = mapOf(AbilityType.RIGHT_CLICK to "Throw TNT"),
@@ -38,12 +38,12 @@ enum class ItemManager(val item: TrollItem) {
     ),
 
     THROWABLE_FIREBALL(
-        TrollItem(
-            TrollItemProperties(
+        Item(
+            ItemProperties(
                 id = "throwable_fireball",
                 material = Material.FIRE_CHARGE,
                 name = "Throwable Fireball",
-                rarity = TrollRarity.UNCOMMON,
+                rarity = Rarity.UNCOMMON,
                 raritySuffix = "FIREBALL",
                 oneTimeUse = true,
                 abilities = mapOf(AbilityType.RIGHT_CLICK to "Throw Fireball"),
@@ -52,27 +52,27 @@ enum class ItemManager(val item: TrollItem) {
         )
     ),
     EXPLOSIVE_BOW(
-        TrollItem(
-            TrollItemProperties(
+        Item(
+            ItemProperties(
                 id = "explosive_bow",
                 material = Material.BOW,
                 name = "Explosive Bow",
                 description = "Shoot to create an explosion.",
                 note = null,
-                rarity = TrollRarity.LEGENDARY,
+                rarity = Rarity.LEGENDARY,
                 raritySuffix = "BOW"
             )
         )
     ),
     POGERONI_SWORD(
-        TrollItem(
-            TrollItemProperties(
+        Item(
+            ItemProperties(
                 id = "pogeroni_sword",
                 material = Material.NETHERITE_SWORD,
                 name = "Pogeroni Sword",
                 description = "Fickt Emanuel.",
                 note = "Hallo",
-                rarity = TrollRarity.LEGENDARY,
+                rarity = Rarity.LEGENDARY,
                 raritySuffix = "SWORD",
                 enchantments = mutableMapOf(Enchantment.FIRE_ASPECT to 5, Enchantment.DURABILITY to 3),
                 abilities = mapOf(AbilityType.RIGHT_CLICK to "Throw Sword!"),
@@ -81,158 +81,158 @@ enum class ItemManager(val item: TrollItem) {
         )
     ),
     SHHOTY_BOX(
-        TrollItem(
-            TrollItemProperties(
+        Item(
+            ItemProperties(
                 id = "shooty_box",
                 material = Material.DISPENSER,
                 name = "Shooty Box",
                 abilities = mapOf(AbilityType.RIGHT_CLICK to "Shoot!", AbilityType.SHIFT_RIGHT_CLICK to "Open inventory"),
-                rarity = TrollRarity.UNFINISHED
+                rarity = Rarity.UNFINISHED
             )
         )
     ),
     TERMINATOR(
-        TrollItem(
-            TrollItemProperties(
+        Item(
+            ItemProperties(
                 id = "terminator",
                 material = Material.BOW,
                 name = "Terminator",
                 abilities = mapOf(AbilityType.LEFT_CLICK to "Shoot 3 arrows!"),
                 note = "Infinite arrows!",
-                rarity = TrollRarity.MYTHIC,
+                rarity = Rarity.MYTHIC,
                 raritySuffix = "BOW"
             )
         )
     ),
     TREECAPITATOR(
-        TrollItem(
-            TrollItemProperties(
+        Item(
+            ItemProperties(
                 id = "treecapitator",
                 material = Material.GOLDEN_AXE,
                 name = "Treecapitator",
                 description = "Break wood to cut down a whole tree.",
                 note = "Blocks: 50, Delay: 1 Ticks",
-                rarity = TrollRarity.EPIC,
+                rarity = Rarity.EPIC,
                 raritySuffix = "AXE"
             )
         )
     ),
     JUNGLE_AXE(
-        TrollItem(
-            TrollItemProperties(
+        Item(
+            ItemProperties(
                 id = "jungle_axe",
                 material = Material.WOODEN_AXE,
                 name = "Jungle Axe",
                 description = "Break wood to cut down a whole tree.",
                 note = "Blocks: 25, Delay: 3 Tick",
-                rarity = TrollRarity.UNCOMMON,
+                rarity = Rarity.UNCOMMON,
                 raritySuffix = "AXE"
             )
         )
     ),
     MAGICAL_WAND(
-        TrollItem(
-            TrollItemProperties(
+        Item(
+            ItemProperties(
                 id = "magical_wand",
                 material = Material.BLAZE_ROD,
                 name = "Magical Wand",
                 abilities = mapOf(AbilityType.RIGHT_CLICK to "Cast spell", AbilityType.LEFT_CLICK to "Switch ability"),
                 note = "TestItem",
-                rarity = TrollRarity.ADMIN,
+                rarity = Rarity.ADMIN,
                 raritySuffix = "WAND"
             )
         )
     ),
     JUKEBOX(
-        TrollItem(
-            TrollItemProperties(
+        Item(
+            ItemProperties(
                 id = "jukebox",
                 material = Material.JUKEBOX,
                 name = "Jukebox",
                 abilities = mapOf(AbilityType.RIGHT_CLICK to "Play Music!"),
-                rarity = TrollRarity.RARE
+                rarity = Rarity.RARE
             )
         )
     ),
     SHURIKEN(
-        TrollItem(
-            TrollItemProperties(
+        Item(
+            ItemProperties(
                 id = "shuriken",
                 material = Material.IRON_SWORD,
                 name = "Shuriken",
                 abilities = mapOf( AbilityType.RIGHT_CLICK to "Throw Shuriken"),
-                rarity = TrollRarity.UNCOMMON,
+                rarity = Rarity.UNCOMMON,
                 raritySuffix = "SHURIKEN",
                 customModelData = 69001
             )
         )
     ),
     PIRATE_HAT(
-        TrollItem(
-            TrollItemProperties(
+        Item(
+            ItemProperties(
                 id = "pirate_hat",
                 material = Material.CARVED_PUMPKIN,
                 name = "Pirate Hat",
-                rarity = TrollRarity.UNCOMMON,
+                rarity = Rarity.UNCOMMON,
                 raritySuffix = "HAT",
                 customModelData = 690003
             )
         )
     ),
     COMPRESSED_JUNGLE_WOOD(
-        TrollItem(
-            TrollItemProperties(
+        Item(
+            ItemProperties(
                 id = "compressed_jungle_wood",
                 material = Material.JUNGLE_LOG,
                 name = "Compressed Jungle Log",
-                rarity = TrollRarity.COMMON,
+                rarity = Rarity.COMMON,
                 raritySuffix = "INGREDIENT",
                 stackable = true
             )
         )
     ),
     COMPRESSED_NETHER_STAR(
-        TrollItem(
-            TrollItemProperties(
+        Item(
+            ItemProperties(
                 id = "compressed_nether_star",
                 material = Material.NETHER_STAR,
                 name = "Compressed Nether Star",
-                rarity = TrollRarity.RARE,
+                rarity = Rarity.RARE,
                 raritySuffix = "INGREDIENT",
                 stackable = true
             )
         ),
     ),
     CHICKZOOKA(
-        TrollItem(
-            TrollItemProperties(
+        Item(
+            ItemProperties(
                 id = "chickzooka",
                 material = Material.PLAYER_HEAD,
                 name = "Chickzooka",
-                rarity = TrollRarity.SPECIAL,
-                headTexture = TrollHead.CHICKEN,
+                rarity = Rarity.SPECIAL,
+                headTexture = Head.CHICKEN,
                 stackable = false
             )
         )
     ),
     CRAFTYPHONE_X(
-        TrollItem(
-            TrollItemProperties(
+        Item(
+            ItemProperties(
                 id = "craftyphone_x",
                 material = Material.PLAYER_HEAD,
                 name = "Craftyphone",
-                headTexture = TrollHead.PHONE_BLACK,
+                headTexture = Head.PHONE_BLACK,
                 stackable = false
             )
         )
     ),
     COLORED_CRAFTYCASE(
-        TrollItem(
-            TrollItemProperties(
+        Item(
+            ItemProperties(
                 id = "colored_craftycase",
                 material = Material.PLAYER_HEAD,
                 name = "Colored Craftycase",
-                headTexture = TrollHead.PHONE_BLACK,
+                headTexture = Head.PHONE_BLACK,
                 stackable = false
             )
         )

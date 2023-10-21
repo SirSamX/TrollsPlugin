@@ -2,7 +2,7 @@ package me.sirsam.trolls.core.item
 
 import net.kyori.adventure.text.format.NamedTextColor
 
-enum class TrollRarity(val color: NamedTextColor) {
+enum class Rarity(val color: NamedTextColor) {
     COMMON(NamedTextColor.WHITE),
     UNCOMMON(NamedTextColor.GREEN),
     RARE(NamedTextColor.BLUE),

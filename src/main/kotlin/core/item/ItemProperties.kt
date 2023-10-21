@@ -5,13 +5,13 @@ import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
 
-data class TrollItemProperties(
+data class ItemProperties(
     var id: String,
     var material: Material,
     var name: String,
     var description: String? = null,
     var note: String? = null,
-    var rarity: TrollRarity = TrollRarity.UNFINISHED,
+    var rarity: Rarity = Rarity.UNFINISHED,
     var raritySuffix: String = "",
     var stackable: Boolean = false,
     var enchantments: MutableMap<Enchantment, Int>? = null,
@@ -19,6 +19,6 @@ data class TrollItemProperties(
     var oneTimeUse: Boolean = false,
     var unbreakable: Boolean = true,
     var customModelData: Int? = null,
-    var headTexture: TrollHead? = null,
+    var headTexture: Head? = null,
     var color: NamedTextColor? = null
 )
