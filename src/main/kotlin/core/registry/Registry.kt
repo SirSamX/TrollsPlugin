@@ -4,7 +4,7 @@ import me.sirsam.trolls.core.item.Item
 import me.sirsam.trolls.core.item.abilities.AbilityItem
 import me.sirsam.trolls.core.item.recipes.Recipe
 import me.sirsam.trolls.core.item.recipes.RecipeItem
-import org.bukkit.profile.PlayerTextures
+import java.net.URL
 
 
 /**
@@ -12,11 +12,11 @@ import org.bukkit.profile.PlayerTextures
  */
 @Suppress("unused", "MemberVisibilityCanBePrivate")
 object Registry {
-    val items = mutableMapOf<Identifier, Item>()
-    val recipeItems = mutableMapOf<Identifier, RecipeItem>()
-    val abilityItems = mutableMapOf<Identifier, AbilityItem>()
-    val recipes = mutableMapOf<Identifier, Recipe>()
-    val heads = mutableMapOf<Identifier, PlayerTextures>()
+    private val items = mutableMapOf<Identifier, Item>()
+    private val recipeItems = mutableMapOf<Identifier, RecipeItem>()
+    private val abilityItems = mutableMapOf<Identifier, AbilityItem>()
+    private val recipes = mutableMapOf<Identifier, Recipe>()
+    private val heads = mutableMapOf<Identifier, URL>()
 
     fun register(identifier: Identifier, item: Item) {
         registerItem(identifier, item)
@@ -35,8 +35,8 @@ object Registry {
         recipes[identifier] = recipe
     }
 
-    fun register(identifier: Identifier, headTextures: PlayerTextures) {
-        heads[identifier] = headTextures
+    fun register(identifier: Identifier, skin: URL?) {
+        heads[identifier] = skin ?: throw NullPointerException("Skin must not be null!")
     }
 
     private fun registerItem(identifier: Identifier, item: Item) {

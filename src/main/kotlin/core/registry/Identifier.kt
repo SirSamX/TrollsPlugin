@@ -1,18 +1,15 @@
 package me.sirsam.trolls.core.registry
 
-import org.bukkit.plugin.java.JavaPlugin
+import me.sirsam.trolls.core.helper.InvalidStringException
 
-class Identifier {
-    var namespace: String
-    var path: String
+data class Identifier(var namespace: String, var path: String) {
+    private val idPattern = Regex("[a-z0-9_]+")
 
-    constructor(namespace: String, path: String) {
-        this.namespace = namespace
-        this.path = path
+    init {
+        if (!namespace.matches(idPattern)) throw InvalidStringException("Input namespace does not match identifier regex pattern!")
     }
 
-    constructor(plugin: JavaPlugin, path: String) {
-        this.namespace = plugin.name
-        this.path = path
+    override fun toString(): String {
+        return "$namespace:$path"
     }
 }
