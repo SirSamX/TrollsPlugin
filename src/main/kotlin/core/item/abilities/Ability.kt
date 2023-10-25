@@ -1,3 +1,3 @@
 package me.sirsam.trolls.core.item.abilities
 
-class Ability(val type: AbilityType, val cooldown: Float)
+class Ability(var name: String, var type: AbilityType, var cooldown: Float = 0f, var oneTimeUse: Boolean = false)

@@ -1,9 +1,10 @@
-package me.sirsam.trolls.item
+package me.sirsam.trolls.managers
 
 import me.sirsam.trolls.core.item.Head
 import me.sirsam.trolls.core.item.Item
 import me.sirsam.trolls.core.item.ItemProperties
 import me.sirsam.trolls.core.item.Rarity
+import me.sirsam.trolls.core.item.abilities.Ability
 import me.sirsam.trolls.core.item.abilities.AbilityType
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
@@ -30,8 +31,7 @@ enum class ItemManager(val item: Item) {
                 note = "Don't grief!",
                 rarity = Rarity.UNCOMMON,
                 raritySuffix = "TNT",
-                oneTimeUse = true,
-                abilities = mapOf(AbilityType.RIGHT_CLICK to "Throw TNT"),
+                abilities = listOf(Ability("Throw TNT", AbilityType.RIGHT_CLICK, oneTimeUse = true)),
                 stackable = true
             )
         )
@@ -45,8 +45,7 @@ enum class ItemManager(val item: Item) {
                 name = "Throwable Fireball",
                 rarity = Rarity.UNCOMMON,
                 raritySuffix = "FIREBALL",
-                oneTimeUse = true,
-                abilities = mapOf(AbilityType.RIGHT_CLICK to "Throw Fireball"),
+                abilities = listOf(Ability("Throw Fireball", AbilityType.RIGHT_CLICK, oneTimeUse = true)),
                 stackable = true
             )
         )
@@ -75,18 +74,18 @@ enum class ItemManager(val item: Item) {
                 rarity = Rarity.LEGENDARY,
                 raritySuffix = "SWORD",
                 enchantments = mutableMapOf(Enchantment.FIRE_ASPECT to 5, Enchantment.DURABILITY to 3),
-                abilities = mapOf(AbilityType.RIGHT_CLICK to "Throw Sword!"),
+                abilities = listOf(Ability("Throw Sword!", AbilityType.RIGHT_CLICK)),
                 unbreakable = true
             )
         )
     ),
-    SHHOTY_BOX(
+    SHOOTY_BOX(
         Item(
             ItemProperties(
                 id = "shooty_box",
                 material = Material.DISPENSER,
                 name = "Shooty Box",
-                abilities = mapOf(AbilityType.RIGHT_CLICK to "Shoot!", AbilityType.SHIFT_RIGHT_CLICK to "Open inventory"),
+                abilities = listOf(Ability("Shoot!", AbilityType.RIGHT_CLICK), Ability("Open inventory", AbilityType.SHIFT_RIGHT_CLICK)),
                 rarity = Rarity.UNFINISHED
             )
         )
@@ -97,7 +96,7 @@ enum class ItemManager(val item: Item) {
                 id = "terminator",
                 material = Material.BOW,
                 name = "Terminator",
-                abilities = mapOf(AbilityType.LEFT_CLICK to "Shoot 3 arrows!"),
+                abilities = listOf(Ability("Shoot 3 arrows!", AbilityType.LEFT_CLICK)),
                 note = "Infinite arrows!",
                 rarity = Rarity.MYTHIC,
                 raritySuffix = "BOW"
@@ -136,7 +135,7 @@ enum class ItemManager(val item: Item) {
                 id = "magical_wand",
                 material = Material.BLAZE_ROD,
                 name = "Magical Wand",
-                abilities = mapOf(AbilityType.RIGHT_CLICK to "Cast spell", AbilityType.LEFT_CLICK to "Switch ability"),
+                abilities = listOf(Ability("Cast spell", AbilityType.RIGHT_CLICK), Ability("Switch ability", AbilityType.LEFT_CLICK)),
                 note = "TestItem",
                 rarity = Rarity.ADMIN,
                 raritySuffix = "WAND"
@@ -149,7 +148,7 @@ enum class ItemManager(val item: Item) {
                 id = "jukebox",
                 material = Material.JUKEBOX,
                 name = "Jukebox",
-                abilities = mapOf(AbilityType.RIGHT_CLICK to "Play Music!"),
+                abilities = listOf(Ability("Play Music!", AbilityType.RIGHT_CLICK)),
                 rarity = Rarity.RARE
             )
         )
@@ -160,7 +159,7 @@ enum class ItemManager(val item: Item) {
                 id = "shuriken",
                 material = Material.IRON_SWORD,
                 name = "Shuriken",
-                abilities = mapOf( AbilityType.RIGHT_CLICK to "Throw Shuriken"),
+                abilities = listOf(Ability("Throw Shuriken", AbilityType.RIGHT_CLICK)),
                 rarity = Rarity.UNCOMMON,
                 raritySuffix = "SHURIKEN",
                 customModelData = 69001

@@ -1,6 +1,6 @@
 package me.sirsam.trolls.core.item
 
-import me.sirsam.trolls.core.item.abilities.AbilityType
+import me.sirsam.trolls.core.item.abilities.Ability
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
@@ -15,8 +15,7 @@ data class ItemProperties(
     var raritySuffix: String = "",
     var stackable: Boolean = false,
     var enchantments: MutableMap<Enchantment, Int>? = null,
-    var abilities: Map<AbilityType, String>? = null,
-    var oneTimeUse: Boolean = false,
+    var abilities: List<Ability>? = null,
     var unbreakable: Boolean = true,
     var customModelData: Int? = null,
     var headTexture: Head? = null,

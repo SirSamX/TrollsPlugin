@@ -4,9 +4,10 @@ import me.sirsam.trolls.commands.*
 import me.sirsam.trolls.core.Main
 import me.sirsam.trolls.core.registry.Registry
 import me.sirsam.trolls.item.ItemEvents
-import me.sirsam.trolls.item.ItemManager
-import me.sirsam.trolls.item.ItemRecipes
+import me.sirsam.trolls.items.FlySwatter
+import me.sirsam.trolls.managers.ItemManager
 import me.sirsam.trolls.listeners.*
+import me.sirsam.trolls.managers.RecipeManager
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandExecutor
 import org.bukkit.configuration.file.FileConfiguration
@@ -27,15 +28,19 @@ class Trolls : JavaPlugin() {
         Trolls.config = config
         Trolls.logger = logger
 
-        Main(this)
         for (item in ItemManager.values()) {
             Registry.register(item.item)
         }
+        Registry.register(FlySwatter())
+
+        for (recipe in RecipeManager().getRecipes()) {
+            Registry.register(recipe)
+        }
+
+        Main.init(this)
 
         registerCommands()
         registerEvents()
-
-        Bukkit.getOnlinePlayers().forEach { p -> ItemRecipes().unlockRecipes(p)}
 
         logger.info("Plugin enabled!")
     }
