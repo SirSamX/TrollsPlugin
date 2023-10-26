@@ -1,12 +1,10 @@
 name: Trolls
 version: ${version}
 main: me.sirsam.trolls.Trolls
-description: Plugin for trolls
+description: Adds a lot of items!
 author: SirSam
-website: programming4life.github.io
+website: https://sirsamx.github.io/
 api-version: "1.20"
-loadbefore: [Essentials]
-
 commands:
   repeat:
     description: Lets you repeat a command.
@@ -49,8 +47,6 @@ commands:
     permission: trolls.utils.freeze
     permission-message: You do not have permission to use this Command!
     usage: /<command> player
-  bomber:
-    permission: op
 
 permissions:
   trolls.*:

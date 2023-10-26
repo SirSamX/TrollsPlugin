@@ -157,7 +157,7 @@ enum class ItemManager(val item: Item) {
         Item(
             ItemProperties(
                 id = "shuriken",
-                material = Material.IRON_SWORD,
+                material = Material.NETHER_STAR,
                 name = "Shuriken",
                 abilities = listOf(Ability("Throw Shuriken", AbilityType.RIGHT_CLICK)),
                 rarity = Rarity.UNCOMMON,

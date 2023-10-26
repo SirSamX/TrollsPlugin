@@ -5,12 +5,14 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
+import org.bukkit.Sound
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 import kotlin.random.Random
+import me.sirsam.trolls.core.helper.ActionSound.*
 
 object Utils {
     private val plugin = Trolls.instance // FIXME: Use Main 
@@ -22,28 +24,29 @@ object Utils {
     val UNSTACKABLE_KEY = NamespacedKey(plugin, "unstackable")
     val MOB_KEY = NamespacedKey(plugin, "troll_mob")
 
-    fun isTrollItem(i: ItemStack): Boolean {
-        return i.itemMeta.persistentDataContainer.get(ID_KEY, PersistentDataType.STRING) != null
+    fun isTrollItem(item: ItemStack?): Boolean {
+        if (item == null || !item.hasItemMeta()) return false
+        return item.itemMeta.persistentDataContainer.get(ID_KEY, PersistentDataType.STRING) != null
     }
 
-    fun receiveItemMessage(p: Player, a: Int, i: Component) {
-        p.sendMessage(Component.text("You received $a ").append(i).append(Component.text("!")))
+    fun receiveItemMessage(player: Player, amount: Int, item: Component) {
+        player.sendMessage(Component.text("You received $amount ").append(item).append(Component.text("!")))
     }
 
-    fun formattingErrorMessage(p: Player) {
-        p.sendMessage(Component.text("Formatting error, check your command syntax!", NamedTextColor.RED))
+    fun formattingErrorMessage(player: Player) {
+        player.sendMessage(Component.text("Formatting error, check your command syntax!", NamedTextColor.RED))
     }
 
-    fun notPlayerMessage(p: CommandSender) {
-        p.sendMessage(Component.text("Sender is not a player."))
+    fun notPlayerMessage(player: CommandSender) {
+        player.sendMessage(Component.text("Sender is not a player."))
     }
 
-    fun playerNotExistingMessage(p: CommandSender) {
-        p.sendMessage(Component.text("This player does not exist!", NamedTextColor.RED))
+    fun playerNotExistingMessage(player: CommandSender) {
+        player.sendMessage(Component.text("This player does not exist!", NamedTextColor.RED))
     }
 
-    fun noPermissionMessage(p: CommandSender) {
-        p.sendMessage(Component.text("You don't have permission to do that!", NamedTextColor.RED))
+    fun noPermissionMessage(player: CommandSender) {
+        player.sendMessage(Component.text("You don't have permission to do that!", NamedTextColor.RED))
     }
 
     fun isNumeric(input: String): Boolean {
@@ -83,5 +86,17 @@ object Utils {
         item.itemMeta = meta
 
         return item
+    }
+
+    fun playSound(sound: ActionSound, player: Player) {
+        when (sound) {
+            OPEN -> player.playSound(player.location, Sound.BLOCK_CHEST_OPEN, 1.0f, 1.0f)
+            MODIFY -> player.playSound(player.location, Sound.BLOCK_ANVIL_USE, 1.0f, 1.0f)
+            SELECT -> player.playSound(player.location, Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f)
+            CLICK -> player.playSound(player.location, Sound.UI_BUTTON_CLICK, 1.0f, 1.0f)
+            POP -> player.playSound(player.location, Sound.ENTITY_CHICKEN_EGG, 1.0f, 1.0f)
+            BREAK -> player.playSound(player.location, Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f)
+            ERROR -> player.playSound(player.location, Sound.ENTITY_ENDERMAN_TELEPORT, 1.0f, 0.5f)
+        }
     }
 }

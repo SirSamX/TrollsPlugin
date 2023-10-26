@@ -1,13 +1,14 @@
 package me.sirsam.trolls.core.listener.ability
 
 import me.sirsam.trolls.core.item.abilities.AbilityItem
+import me.sirsam.trolls.core.registry.Registry
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action.*
 import org.bukkit.event.player.PlayerInteractEvent
 
 class AbilityEvents : Listener {
-    private val items = listOf<AbilityItem>()
+    private val items = Registry.abilityItems
 
     // TODO: add missing events
     private fun runEvent(function: AbilityItem.() -> Unit) {

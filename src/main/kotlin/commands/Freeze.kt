@@ -11,9 +11,12 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
+import java.util.UUID
 
 class Freeze : CommandExecutor, Listener {
-    private val frozen = ArrayList<Player>()
+    companion object {
+        private val frozen = ArrayList<UUID>()
+    }
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>?): Boolean {
         if (sender !is Player) {
@@ -30,11 +33,11 @@ class Freeze : CommandExecutor, Listener {
             target = sender
         }
 
-        if (!frozen.contains(target)) {
-            frozen.add(target)
+        if (!frozen.contains(target.uniqueId)) {
+            frozen.add(target.uniqueId)
             target.sendMessage((Component.text("You are now frozen!", NamedTextColor.GREEN)))
         } else {
-            frozen.remove(target)
+            frozen.remove(target.uniqueId)
             target.sendMessage((Component.text("You are not frozen anymore!", NamedTextColor.RED)))
         }
         return true
@@ -43,8 +46,8 @@ class Freeze : CommandExecutor, Listener {
     @EventHandler
     fun freeze(e: PlayerMoveEvent) {
         val p = e.player
-        if (!frozen.contains(p)) return
-        p.freezeTicks = 60
-            e.isCancelled = true
+        if (!frozen.contains(p.uniqueId) || !e.hasChangedPosition()) return
+        p.freezeTicks = 100
+        e.isCancelled = true
     }
 }

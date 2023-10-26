@@ -4,6 +4,7 @@ import me.sirsam.trolls.core.command.Troll
 import me.sirsam.trolls.core.gui.ItemsGUI
 import me.sirsam.trolls.core.item.Head
 import me.sirsam.trolls.core.listener.ability.AbilityEvents
+import me.sirsam.trolls.core.listener.MiscEvents
 import me.sirsam.trolls.core.registry.Registry
 import org.bukkit.Bukkit
 import org.bukkit.Server
@@ -60,5 +61,6 @@ object Main {
 
         register(AbilityEvents())
         register(ItemsGUI())
+        register(MiscEvents())
     }
 }
