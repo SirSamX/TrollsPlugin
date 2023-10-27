@@ -3,10 +3,11 @@ package me.sirsam.trolls
 import me.sirsam.trolls.commands.*
 import me.sirsam.trolls.core.Main
 import me.sirsam.trolls.core.registry.Registry
-import me.sirsam.trolls.item.ItemEvents
-import me.sirsam.trolls.items.FlySwatter
-import me.sirsam.trolls.managers.ItemManager
+import me.sirsam.trolls.items.VacuumCleaner
+import me.sirsam.trolls.items.Terminator
 import me.sirsam.trolls.listeners.*
+import me.sirsam.trolls.managers.ItemEvents
+import me.sirsam.trolls.managers.ItemManager
 import me.sirsam.trolls.managers.RecipeManager
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandExecutor
@@ -31,7 +32,8 @@ class Trolls : JavaPlugin() {
         for (item in ItemManager.values()) {
             Registry.register(item.item)
         }
-        Registry.register(FlySwatter())
+        Registry.register(VacuumCleaner())
+        Registry.register(Terminator())
 
         for (recipe in RecipeManager().getRecipes()) {
             Registry.register(recipe)

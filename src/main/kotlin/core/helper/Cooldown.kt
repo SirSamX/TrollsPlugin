@@ -3,7 +3,7 @@ package me.sirsam.trolls.core.helper
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.entity.Player
-import java.util.UUID
+import java.util.*
 
 class Cooldown {
     private var cooldown = HashMap<UUID, Long>()
@@ -22,6 +22,7 @@ class Cooldown {
     }
 
     fun cooldownMessage(p: Player) {
-        p.sendMessage(Component.text("Please wait ${"%.1f".format(eta(p).toFloat())}s before using this!", NamedTextColor.YELLOW))
+        val formattedSeconds = String.format(Locale.US, "%.1f", eta(p).toFloat() / 1000)
+        p.sendMessage(Component.text("Please wait ${formattedSeconds}s before using this!", NamedTextColor.YELLOW))
     }
 }

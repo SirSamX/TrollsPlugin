@@ -90,19 +90,6 @@ enum class ItemManager(val item: Item) {
             )
         )
     ),
-    TERMINATOR(
-        Item(
-            ItemProperties(
-                id = "terminator",
-                material = Material.BOW,
-                name = "Terminator",
-                abilities = listOf(Ability("Shoot 3 arrows!", AbilityType.LEFT_CLICK)),
-                note = "Infinite arrows!",
-                rarity = Rarity.MYTHIC,
-                raritySuffix = "BOW"
-            )
-        )
-    ),
     TREECAPITATOR(
         Item(
             ItemProperties(
@@ -214,26 +201,4 @@ enum class ItemManager(val item: Item) {
             )
         )
     ),
-    CRAFTYPHONE_X(
-        Item(
-            ItemProperties(
-                id = "craftyphone_x",
-                material = Material.PLAYER_HEAD,
-                name = "Craftyphone",
-                headTexture = Head.PHONE_BLACK,
-                stackable = false
-            )
-        )
-    ),
-    COLORED_CRAFTYCASE(
-        Item(
-            ItemProperties(
-                id = "colored_craftycase",
-                material = Material.PLAYER_HEAD,
-                name = "Colored Craftycase",
-                headTexture = Head.PHONE_BLACK,
-                stackable = false
-            )
-        )
-    )
 }

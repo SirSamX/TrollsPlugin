@@ -12,6 +12,8 @@ import org.bukkit.event.player.*
  */
 @Suppress("unused")
 open class AbilityItem(properties: ItemProperties) : Item(properties) {
+    open fun interact(event: PlayerInteractEvent): AbilityResult { return AbilityResult.SUCCESS }
+
     open fun rightClick(event: PlayerInteractEvent): AbilityResult { return AbilityResult.SUCCESS }
 
     open fun leftClick(event: PlayerInteractEvent): AbilityResult { return AbilityResult.SUCCESS }

@@ -1,7 +1,7 @@
 package me.sirsam.trolls.managers
 
 import me.sirsam.trolls.core.helper.Utils
-import me.sirsam.trolls.items.FlySwatter
+import me.sirsam.trolls.items.VacuumCleaner
 import org.bukkit.Material
 import org.bukkit.inventory.Recipe
 import org.bukkit.inventory.ShapedRecipe
@@ -11,7 +11,7 @@ class RecipeManager {
     fun getRecipes(): List<Recipe> {
         val recipeKey = Utils.RECIPE_KEY
         return listOf<Recipe>(
-            ShapedRecipe(recipeKey, FlySwatter().item()).apply {
+            ShapedRecipe(recipeKey, VacuumCleaner().item()).apply {
                 shape(
                     " X ",
                     " S ",

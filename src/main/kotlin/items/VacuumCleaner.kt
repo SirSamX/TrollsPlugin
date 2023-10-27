@@ -14,11 +14,11 @@ import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import org.bukkit.scheduler.BukkitRunnable
 
-class FlySwatter : AbilityItem(ItemProperties(
-    "fly_swatter",
-    Material.IRON_SHOVEL,
-    "Fliegenklatsche",
-    abilities = listOf(Ability("Suck!", AbilityType.RIGHT_CLICK))
+class VacuumCleaner : AbilityItem(ItemProperties(
+    "vacuum_cleaner",
+    Material.HOPPER_MINECART,
+    "Staubsauger",
+    abilities = listOf(Ability("Suck!", AbilityType.RIGHT_CLICK_BLOCK))
 )) {
     override fun rightClickBlock(event: PlayerInteractEvent): AbilityResult {
         val player = event.player
@@ -33,7 +33,8 @@ class FlySwatter : AbilityItem(ItemProperties(
 
         for (entity in entities) {
             val levitation = 20
-            (entity as LivingEntity).addPotionEffect(PotionEffect(PotionEffectType.LEVITATION, levitation, 0))
+            (entity as LivingEntity).addPotionEffect(PotionEffect(PotionEffectType.SLOW, levitation, 3))
+            entity.addPotionEffect(PotionEffect(PotionEffectType.SLOW_FALLING, levitation, 1))
             val vectorToExplosion = location.toVector().subtract(entity.location.toVector())
             entity.velocity = vectorToExplosion.normalize().multiply(1.5)
         }

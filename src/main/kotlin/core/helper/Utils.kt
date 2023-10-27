@@ -1,6 +1,7 @@
 package me.sirsam.trolls.core.helper
 
 import me.sirsam.trolls.Trolls
+import me.sirsam.trolls.core.helper.ActionSound.*
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Material
@@ -12,7 +13,6 @@ import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 import kotlin.random.Random
-import me.sirsam.trolls.core.helper.ActionSound.*
 
 object Utils {
     private val plugin = Trolls.instance // FIXME: Use Main 
@@ -29,7 +29,8 @@ object Utils {
         return item.itemMeta.persistentDataContainer.get(ID_KEY, PersistentDataType.STRING) != null
     }
 
-    fun getTrollItem(item: ItemStack): String? {
+    fun getTrollItemId(item: ItemStack): String? {
+        if (!item.hasItemMeta()) return null
         return item.itemMeta.persistentDataContainer.get(ID_KEY, PersistentDataType.STRING)
     }
 

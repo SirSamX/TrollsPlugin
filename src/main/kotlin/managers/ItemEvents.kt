@@ -1,13 +1,16 @@
-package me.sirsam.trolls.item
+package me.sirsam.trolls.managers
 
+import me.sirsam.trolls.Trolls
 import me.sirsam.trolls.core.helper.Cooldown
 import me.sirsam.trolls.core.helper.Utils
-import me.sirsam.trolls.Trolls
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.*
 import org.bukkit.block.Block
-import org.bukkit.entity.*
+import org.bukkit.entity.Chicken
+import org.bukkit.entity.EntityType
+import org.bukkit.entity.LargeFireball
+import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockBreakEvent
@@ -129,8 +132,9 @@ class ItemEvents : Listener {
     @EventHandler
     fun explosiveBowShoot(event: EntityShootBowEvent) {
         if (event.entity !is Player) return
-        val player = event.entity as Player
-        if (player.inventory.itemInMainHand.itemMeta.persistentDataContainer.get(Utils.ID_KEY, PersistentDataType.STRING) != "explosive_bow") return
+        event.entity as Player
+        if (event.bow == null || event.bow?.itemMeta == null) return
+        if (event.bow!!.itemMeta.persistentDataContainer.get(Utils.ID_KEY, PersistentDataType.STRING) != "explosive_bow") return
         event.projectile.customName(Component.text("Explosive Arrow"))
     }
 
@@ -158,37 +162,6 @@ class ItemEvents : Listener {
             Utils.destroy(item, 1)
         }
         player.launchProjectile(LargeFireball::class.java, player.eyeLocation.direction.normalize().multiply(strength))
-    }
-
-    @EventHandler
-    fun terminatorShoot(event: PlayerInteractEvent) {
-        val player = event.player
-        val item = player.inventory.itemInMainHand
-
-        if (item.itemMeta == null) return
-        val data = item.itemMeta.persistentDataContainer
-        if (data.get(Utils.ID_KEY, PersistentDataType.STRING) != "terminator") return
-
-        val arrow = player.launchProjectile(Arrow::class.java)
-        event.isCancelled = true
-        shootSpreadArrows(player, arrow, 3, 5f, 8.0)
-    }
-
-    private fun shootSpreadArrows(player: Player, arrow: Arrow, amount: Int, angle: Float, damage: Double) {
-        for (i in 0 until amount) {
-            val rotation = Math.toRadians(angle * (i - (amount - 1) / 2.0))
-            val direction = arrow.velocity.clone().rotateAroundY(rotation)
-            val newArrow = player.launchProjectile(Arrow::class.java)
-            newArrow.damage = damage
-            newArrow.pickupStatus = AbstractArrow.PickupStatus.CREATIVE_ONLY
-            newArrow.velocity = direction
-            object : BukkitRunnable() {
-                override fun run() {
-                    newArrow.remove()
-                }
-            }.runTaskLater(plugin, 60L)
-        }
-        arrow.remove()
     }
 
     @EventHandler

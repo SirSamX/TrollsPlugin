@@ -15,13 +15,13 @@ class AbilityEvents : Listener {
     // TODO: add missing events
     private fun runEvent(function: AbilityItem.() -> Unit, item: ItemStack?) {
         for (it in items) {
-            if (item == null || it.id != Utils.getTrollItem(item)) return
+            if (item == null || it.id != Utils.getTrollItemId(item)) continue
             it.function()
         }
     }
 
     @EventHandler
-    fun onRightClick(event: PlayerInteractEvent) {
+    fun onInteract(event: PlayerInteractEvent) {
         when (event.action) {
             PHYSICAL -> {
                 runEvent({ interactPhysically(event) }, event.item)
@@ -43,6 +43,8 @@ class AbilityEvents : Listener {
                 runEvent ({ rightClickAir(event) }, event.item)
             }
         }
+
+        runEvent({ interact(event) }, event.item)
 
         if (event.action.isLeftClick) {
             runEvent ({ leftClick(event) }, event.item)
