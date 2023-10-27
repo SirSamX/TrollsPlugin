@@ -38,7 +38,7 @@ class ItemsGUI : InventoryHolder, Listener {
         maxPage = ceil(registeredItems.size / itemsPerPage.toDouble()).toInt()
         val inv = Bukkit.createInventory(this, 54, Component.text("Items & Ingredients ($page/$maxPage)"))
 
-        registeredItems.sortedBy { it.name() }.subList(startIdx, endIdx).forEachIndexed { index, item ->
+        registeredItems.sortedBy { it.name }.subList(startIdx, endIdx).forEachIndexed { index, item ->
             inv.setItem(index, item.item())
         }
 

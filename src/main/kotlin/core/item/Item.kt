@@ -15,21 +15,22 @@ import java.util.*
  * Only use if you know how to use this!
  * Use [AbilityItem] or [MaterialItem] instead.
  */
+@Suppress("MemberVisibilityCanBePrivate")
 open class Item(properties: ItemProperties) {
-    private val id = properties.id
-    private val material = properties.material
-    private val name = properties.name
-    private val description = properties.description
-    private val note = properties.note
-    private val rarity = properties.rarity
-    private val raritySuffix = properties.raritySuffix
-    private val stackable = properties.stackable
-    private val enchantments = properties.enchantments
-    private val abilities = properties.abilities
-    private val unbreakable = properties.unbreakable
-    private val customModelData = properties.customModelData
-    private val headTexture = properties.headTexture
-    private val color = properties.color
+    val id = properties.id
+    val material = properties.material
+    val name = properties.name
+    val description = properties.description
+    val note = properties.note
+    val rarity = properties.rarity
+    val raritySuffix = properties.raritySuffix
+    val stackable = properties.stackable
+    val enchantments = properties.enchantments
+    val abilities = properties.abilities
+    val unbreakable = properties.unbreakable
+    val customModelData = properties.customModelData
+    val headTexture = properties.headTexture
+    val color = properties.color
 
     fun item(): ItemStack {
         val item = ItemStack(material)
@@ -54,10 +55,6 @@ open class Item(properties: ItemProperties) {
         item.setItemMeta(meta)
         return item
     }
-
-    fun id(): String { return id }
-
-    fun name(): String { return name }
 
     fun nameComponent(colored: Boolean = true): Component {
         return if (colored) {

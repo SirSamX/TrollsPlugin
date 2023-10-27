@@ -29,6 +29,10 @@ object Utils {
         return item.itemMeta.persistentDataContainer.get(ID_KEY, PersistentDataType.STRING) != null
     }
 
+    fun getTrollItem(item: ItemStack): String? {
+        return item.itemMeta.persistentDataContainer.get(ID_KEY, PersistentDataType.STRING)
+    }
+
     fun receiveItemMessage(player: Player, amount: Int, item: Component) {
         player.sendMessage(Component.text("You received $amount ").append(item).append(Component.text("!")))
     }

@@ -34,7 +34,7 @@ class Troll : CommandExecutor, TabCompleter {
 
                 lateinit var givenItem: ItemStack
                 for (item in Registry.items) {
-                    if (item.id() == args[1]) {
+                    if (item.id == args[1]) {
                         givenItem = item.item()
                         var i = 0
                         while (i < amount) {
