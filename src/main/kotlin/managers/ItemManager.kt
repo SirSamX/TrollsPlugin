@@ -75,7 +75,6 @@ enum class ItemManager(val item: Item) {
                 raritySuffix = "SWORD",
                 enchantments = mutableMapOf(Enchantment.FIRE_ASPECT to 5, Enchantment.DURABILITY to 3),
                 abilities = listOf(Ability("Throw Sword!", AbilityType.RIGHT_CLICK)),
-                unbreakable = true
             )
         )
     ),
