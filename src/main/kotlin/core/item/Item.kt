@@ -6,6 +6,7 @@ import me.sirsam.trolls.core.item.abilities.AbilityType
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextDecoration
+import org.bukkit.enchantments.Enchantment
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
@@ -27,7 +28,7 @@ open class Item(properties: ItemProperties) {
     val stackable = properties.stackable
     val enchantments = properties.enchantments
     val abilities = properties.abilities
-    val unbreakable = properties.unbreakable
+    val glint = properties.glint
     val customModelData = properties.customModelData
     val headTexture = properties.headTexture
     val color = properties.color
@@ -43,10 +44,11 @@ open class Item(properties: ItemProperties) {
         if (!stackable) { data.set(Utils.UNSTACKABLE_KEY, PersistentDataType.STRING, UUID.randomUUID().toString()) }
         meta.displayName(nameComponent())
         meta.lore(addLore())
-        meta.isUnbreakable = unbreakable
-        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE)
+        meta.isUnbreakable = true
+        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ARMOR_TRIM, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_DYE, ItemFlag.HIDE_ITEM_SPECIFICS, ItemFlag.HIDE_DESTROYS, ItemFlag.HIDE_PLACED_ON)
 
         if (enchantments != null) { item.addUnsafeEnchantments(enchantments) }
+        if (glint) { item.addEnchantment(Enchantment.DURABILITY, 1)}
         if (customModelData != null) { item.itemMeta.setCustomModelData(customModelData) }
         if (headTexture != null) {
             Head.valueOf(headTexture.name).setTexture(meta)

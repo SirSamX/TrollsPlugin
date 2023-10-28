@@ -17,6 +17,7 @@ class AbilityEvents : Listener {
         for (it in items) {
             if (item == null || it.id != Utils.getTrollItemId(item)) continue
             it.function()
+            break
         }
     }
 

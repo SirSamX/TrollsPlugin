@@ -16,7 +16,7 @@ data class ItemProperties(
     var stackable: Boolean = false,
     var enchantments: MutableMap<Enchantment, Int>? = null,
     var abilities: List<Ability>? = null,
-    var unbreakable: Boolean = true,
+    var glint: Boolean = false,
     var customModelData: Int? = null,
     var headTexture: Head? = null,
     var color: NamedTextColor? = null
