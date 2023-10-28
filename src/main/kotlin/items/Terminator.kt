@@ -24,7 +24,6 @@ class Terminator : AbilityItem(ItemProperties(
     raritySuffix = "BOW"
 )) {
     override fun leftClick(event: PlayerInteractEvent): AbilityResult {
-        Main.logger.warning("")
         val player = event.player
 
         val arrow = player.launchProjectile(Arrow::class.java)

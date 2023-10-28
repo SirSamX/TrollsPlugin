@@ -6,6 +6,7 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
+import org.bukkit.Particle
 import org.bukkit.Sound
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
@@ -102,6 +103,16 @@ object Utils {
             POP -> player.playSound(player.location, Sound.ENTITY_CHICKEN_EGG, 1.0f, 1.0f)
             BREAK -> player.playSound(player.location, Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f)
             ERROR -> player.playSound(player.location, Sound.ENTITY_ENDERMAN_TELEPORT, 1.0f, 0.5f)
+        }
+    }
+
+    fun throwItem(player: Player, item: ItemStack, strength: Float, particle: Particle, keepItem: Boolean = false) {
+        val thrownItem = player.world.dropItem(player.eyeLocation, item.clone().apply { amount = 1 })
+        val loc = player.eyeLocation
+        thrownItem.velocity = player.eyeLocation.direction.multiply(strength)
+        player.world.spawnParticle(particle, loc, 25)
+        if (!keepItem) {
+            destroy(item, 1)
         }
     }
 }

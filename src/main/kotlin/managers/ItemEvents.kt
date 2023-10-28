@@ -20,7 +20,6 @@ import org.bukkit.event.inventory.InventoryCloseEvent
 import org.bukkit.event.inventory.InventoryType
 import org.bukkit.event.player.PlayerFishEvent
 import org.bukkit.event.player.PlayerInteractEvent
-import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.scheduler.BukkitRunnable
 import org.bukkit.util.Vector
@@ -72,29 +71,10 @@ class ItemEvents : Listener {
         if (item.itemMeta == null) return
         if (item.itemMeta.persistentDataContainer.get(Utils.ID_KEY, PersistentDataType.STRING) != "pogeroni_sword" || !event.action.isRightClick) return
 
-        throwItem(player, item, 1.2f, Particle.FLAME)
+        Utils.throwItem(player, item, 1.2f, Particle.FLAME)
     }
 
-    @EventHandler
-    fun throwShuriken(event: PlayerInteractEvent) {
-        val player = event.player
-        val item = player.inventory.itemInMainHand
 
-        if (item.itemMeta == null) return
-        if (item.itemMeta.persistentDataContainer.get(Utils.ID_KEY, PersistentDataType.STRING) != "shuriken" || !event.action.isRightClick) return
-
-        throwItem(player, item, 1.7f, Particle.FIREWORKS_SPARK)
-    }
-
-    private fun throwItem(player: Player, item: ItemStack, strength: Float, particle: Particle, keepItem: Boolean = false) {
-        val thrownItem = player.world.dropItem(player.eyeLocation, item)
-        val loc = player.eyeLocation
-        thrownItem.velocity = player.eyeLocation.direction.multiply(strength)
-        player.world.spawnParticle(particle, loc, 50)
-        if (player.gameMode != GameMode.CREATIVE || !keepItem) {
-            Utils.destroy(item, 1)
-        }
-    }
 
     @EventHandler
     fun shootyBox(event: PlayerInteractEvent) {
