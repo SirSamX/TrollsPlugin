@@ -14,7 +14,7 @@ import java.util.*
 
 /**
  * Only use if you know how to use this!
- * Use [AbilityItem] or [MaterialItem] instead.
+ * Use [AbilityItem] or [Ingredient] instead.
  */
 @Suppress("MemberVisibilityCanBePrivate")
 open class Item(properties: ItemProperties) {

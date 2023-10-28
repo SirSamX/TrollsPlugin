@@ -6,6 +6,9 @@ import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
 
 data class ItemProperties(
+    /**
+     * Items with the same ID cause problems!
+     */
     var id: String,
     var material: Material,
     var name: String,

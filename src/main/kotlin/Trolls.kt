@@ -3,11 +3,12 @@ package me.sirsam.trolls
 import me.sirsam.trolls.commands.*
 import me.sirsam.trolls.core.Main
 import me.sirsam.trolls.core.registry.Registry
-import me.sirsam.trolls.items.VacuumCleaner
-import me.sirsam.trolls.items.Terminator
+import me.sirsam.trolls.items.*
+import me.sirsam.trolls.items.axe.JungleAxe
+import me.sirsam.trolls.items.axe.Treecapitator
 import me.sirsam.trolls.listeners.*
+import me.sirsam.trolls.managers.IngredientManager
 import me.sirsam.trolls.managers.ItemEvents
-import me.sirsam.trolls.managers.ItemManager
 import me.sirsam.trolls.managers.RecipeManager
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandExecutor
@@ -29,11 +30,24 @@ class Trolls : JavaPlugin() {
         Trolls.config = config
         Trolls.logger = logger
 
-        for (item in ItemManager.values()) {
-            Registry.register(item.item)
+        with(Registry) {
+            register(VacuumCleaner())
+            register(Terminator())
+            register(ExplosiveBow())
+            register(ThrowableFireball())
+            register(ThrowableTNT())
+            register(GrapplingHook())
+            register(Shuriken())
+            register(MagicalWand())
+            register(Chickzooka())
+            register(Treecapitator())
+            register(JungleAxe())
+            register(Jukebox())
+            register(PogeroniSword())
+
+            register(IngredientManager.CompressedJungleWood())
+            register(IngredientManager.CompressedNetherStar())
         }
-        Registry.register(VacuumCleaner())
-        Registry.register(Terminator())
 
         for (recipe in RecipeManager().getRecipes()) {
             Registry.register(recipe)
