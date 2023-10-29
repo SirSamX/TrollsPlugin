@@ -8,7 +8,6 @@ import me.sirsam.trolls.core.item.abilities.AbilityItem
 import me.sirsam.trolls.core.item.abilities.AbilityResult
 import me.sirsam.trolls.core.item.abilities.AbilityType
 import org.bukkit.Material
-import org.bukkit.Particle
 import org.bukkit.event.player.PlayerInteractEvent
 
 class Shuriken : AbilityItem(ItemProperties(
@@ -22,7 +21,7 @@ class Shuriken : AbilityItem(ItemProperties(
     stackable = true
 )) {
     override fun rightClick(event: PlayerInteractEvent): AbilityResult {
-        Utils.throwItem(event.player, event.item!!, 1.7f, Particle.FIREWORKS_SPARK)
+        Utils.throwItem(event.player, event.item!!, 1.7f, 7.5)
 
         return AbilityResult.SUCCESS
     }

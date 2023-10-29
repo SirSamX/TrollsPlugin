@@ -6,13 +6,13 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
-import org.bukkit.Particle
 import org.bukkit.Sound
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
+import org.bukkit.scheduler.BukkitRunnable
 import kotlin.random.Random
 
 object Utils {
@@ -106,13 +106,27 @@ object Utils {
         }
     }
 
-    fun throwItem(player: Player, item: ItemStack, strength: Float, particle: Particle, keepItem: Boolean = false) {
-        val thrownItem = player.world.dropItem(player.eyeLocation, item.clone().apply { amount = 1 })
+    fun throwItem(player: Player, item: ItemStack, strength: Float, damage: Double) {
         val loc = player.eyeLocation
-        thrownItem.velocity = player.eyeLocation.direction.multiply(strength)
-        player.world.spawnParticle(particle, loc, 25)
-        if (!keepItem) {
-            destroy(item, 1)
-        }
+        val thrownItem = player.world.dropItem(loc, item.clone().apply { amount = 1 })
+        thrownItem.velocity = loc.direction.multiply(strength)
+        destroy(item, 1)
+
+        val damageRadius = 0.4
+        object : BukkitRunnable() {
+            override fun run() {
+                val belowBlock = thrownItem.location.subtract(0.0, 0.5, 0.0).block
+
+                if (!belowBlock.isPassable) {
+                    cancel()
+                    return
+                }
+
+                val nearbyEntities = thrownItem.location.getNearbyLivingEntities(damageRadius).filter { it != player }
+                for (entity in nearbyEntities) {
+                    entity.damage(damage, player)
+                }
+            }
+        }.runTaskTimer(plugin, 0L, 1L)
     }
 }

@@ -6,6 +6,7 @@ import me.sirsam.trolls.core.registry.Registry
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action.*
+import org.bukkit.event.player.PlayerFishEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
 
@@ -15,7 +16,8 @@ class AbilityEvents : Listener {
     // TODO: add missing events
     private fun runEvent(function: AbilityItem.() -> Unit, item: ItemStack?) {
         for (it in items) {
-            if (item == null || it.id != Utils.getTrollItemId(item)) continue
+            if (item == null) break
+            if (it.id != Utils.getTrollItemId(item)) continue
             it.function()
             break
         }
@@ -47,12 +49,17 @@ class AbilityEvents : Listener {
 
         runEvent({ interact(event) }, event.item)
 
-        if (event.action.isLeftClick) {
-            runEvent ({ leftClick(event) }, event.item)
+        if (event.action.isLeftClick) {(
+            runEvent ({ leftClick(event) }, event.item))
         }
 
         if (event.action.isRightClick) {
             runEvent ({ rightClick(event) }, event.item)
         }
+    }
+
+    @EventHandler
+    fun onFish(event: PlayerFishEvent) {
+        runEvent({ fish(event) }, event.player.inventory.itemInMainHand)
     }
 }
