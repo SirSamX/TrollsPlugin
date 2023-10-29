@@ -9,6 +9,7 @@ import net.kyori.adventure.text.format.TextDecoration
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.Recipe
 import org.bukkit.persistence.PersistentDataType
 import java.util.*
 
@@ -32,6 +33,8 @@ open class Item(properties: ItemProperties) {
     val customModelData = properties.customModelData
     val headTexture = properties.headTexture
     val color = properties.color
+    
+    var recipe: Recipe? = null
 
     fun item(): ItemStack {
         val item = ItemStack(material)
@@ -48,7 +51,7 @@ open class Item(properties: ItemProperties) {
         meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ARMOR_TRIM, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_DYE, ItemFlag.HIDE_ITEM_SPECIFICS, ItemFlag.HIDE_DESTROYS, ItemFlag.HIDE_PLACED_ON)
 
         if (enchantments != null) { item.addUnsafeEnchantments(enchantments) }
-        if (glint) { item.addEnchantment(Enchantment.DURABILITY, 1)}
+        if (glint) { item.addUnsafeEnchantment(Enchantment.DURABILITY, 1)}
         if (customModelData != null) { item.itemMeta.setCustomModelData(customModelData) }
         if (headTexture != null) {
             Head.valueOf(headTexture.name).setTexture(meta)

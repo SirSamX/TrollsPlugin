@@ -9,7 +9,6 @@ import me.sirsam.trolls.items.axe.Treecapitator
 import me.sirsam.trolls.listeners.*
 import me.sirsam.trolls.managers.IngredientManager
 import me.sirsam.trolls.managers.ItemEvents
-import me.sirsam.trolls.managers.RecipeManager
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandExecutor
 import org.bukkit.configuration.file.FileConfiguration
@@ -29,6 +28,7 @@ class Trolls : JavaPlugin() {
         instance = this
         Trolls.config = config
         Trolls.logger = logger
+        Main.plugin = this
 
         with(Registry) {
             register(VacuumCleaner())
@@ -49,11 +49,7 @@ class Trolls : JavaPlugin() {
             register(IngredientManager.CompressedNetherStar())
         }
 
-        for (recipe in RecipeManager().getRecipes()) {
-            Registry.register(recipe)
-        }
-
-        Main.init(this)
+        Main.init()
 
         registerCommands()
         registerEvents()

@@ -3,8 +3,8 @@ package me.sirsam.trolls.core
 import me.sirsam.trolls.core.command.Troll
 import me.sirsam.trolls.core.gui.ItemsGUI
 import me.sirsam.trolls.core.item.Head
-import me.sirsam.trolls.core.listener.ability.AbilityEvents
 import me.sirsam.trolls.core.listener.MiscEvents
+import me.sirsam.trolls.core.listener.ability.AbilityEvents
 import me.sirsam.trolls.core.registry.Registry
 import org.bukkit.Bukkit
 import org.bukkit.Server
@@ -16,6 +16,7 @@ import java.util.logging.Logger
 
 
 /**
+ * Set plugin to your plugin BEFORE registereing everything!
  * Initialize this at [JavaPlugin.onEnable] AFTER registering everything!
  */
 object Main {
@@ -23,16 +24,17 @@ object Main {
     lateinit var logger: Logger
     lateinit var server: Server
 
-    fun init(plugin: JavaPlugin) {
-        this.plugin = plugin
+    fun init() {
         logger = plugin.logger
         server = plugin.server
-        registerCommands()
-        registerEvents()
-        registerRecipes()
+
         for (head in Head.values()) {
             Registry.register(head.skin)
         }
+
+        registerCommands()
+        registerEvents()
+        registerRecipes()
 
         logger.info("TrollsCore initialized!")
     }

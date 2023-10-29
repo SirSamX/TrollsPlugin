@@ -42,5 +42,6 @@ object Registry {
 
     private fun registerItem(item: Item) {
         items.add(item)
+        item.recipe?.let { recipes.add(it) }
     }
 }

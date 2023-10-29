@@ -20,7 +20,6 @@ object Utils {
 
     private val COMPACT_INVENTORY_KEY = NamespacedKey(plugin, "compact_inventory")
     val ID_KEY = NamespacedKey(plugin, "id")
-    val RECIPE_KEY = NamespacedKey(plugin, "recipe")
     val STACKABLE_KEY = NamespacedKey(plugin, "stackable")
     val UNSTACKABLE_KEY = NamespacedKey(plugin, "unstackable")
     val MOB_KEY = NamespacedKey(plugin, "troll_mob")

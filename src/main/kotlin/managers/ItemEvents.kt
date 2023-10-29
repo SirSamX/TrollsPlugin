@@ -191,6 +191,7 @@ class ItemEvents : Listener {
 
     private fun summonDefender(player: Player) {
         val ironGolem = player.world.spawnEntity(player.location, EntityType.IRON_GOLEM) as IronGolem
+        ironGolem.clearLootTable()
 
         object : BukkitRunnable() {
             override fun run() {
