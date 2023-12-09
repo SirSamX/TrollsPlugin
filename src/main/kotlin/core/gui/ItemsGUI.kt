@@ -21,9 +21,21 @@ import org.bukkit.scheduler.BukkitRunnable
 import kotlin.math.ceil
 
 class ItemsGUI : InventoryHolder, Listener {
+    enum class Type {
+        ITEMS,
+        ALL,
+        INGREDIENTS
+    }
+
+    private var type = Type.ITEMS
     private val itemsPerPage = 45
-    private var page = 1 // TODO: make page argument in command
+    private var page = 1
     private var maxPage = 1
+
+    private val previousPage = 45
+    private val close = 49
+    private val sort = 50
+    private val nextPage = 53
 
 
     override fun getInventory(): Inventory {
@@ -31,25 +43,39 @@ class ItemsGUI : InventoryHolder, Listener {
             throw IllegalArgumentException("Page cannot be negative")
         }
 
-        val registeredItems: List<Item> = Registry.items.toList()
+        val items: List<Item> = when (type) {
+            Type.ALL -> Registry.items.toList().sortedBy { it.name }
+            Type.ITEMS -> Registry.abilityItems.toList().sortedBy { it.name }
+            Type.INGREDIENTS -> Registry.ingredients.toList().sortedBy { it.name }
+        }
+
 
         val startIdx = (page - 1) * itemsPerPage
-        val endIdx = minOf(startIdx + itemsPerPage, registeredItems.size)
-        maxPage = ceil(registeredItems.size / itemsPerPage.toDouble()).toInt()
-        val inv = Bukkit.createInventory(this, 54, Component.text("Items & Ingredients ($page/$maxPage)"))
+        val endIdx = minOf(startIdx + itemsPerPage, items.size)
+        maxPage = ceil(items.size / itemsPerPage.toDouble()).toInt()
+        val inv = Bukkit.createInventory(this, 54, Component.text(when (type) {
+            Type.ITEMS -> "Items ($page/$maxPage)"
+            Type.ALL -> "Items & Ingredients ($page/$maxPage)"
+            Type.INGREDIENTS -> "Ingredients ($page/$maxPage)"
+        }))
 
-        registeredItems.sortedBy { it.name }.subList(startIdx, endIdx).forEachIndexed { index, item ->
+        items.subList(startIdx, endIdx).forEachIndexed { index, item ->
             inv.setItem(index, item.item())
         }
 
         if (page != 1) {
-            inv.setItem(45, Utils.guiItem(Material.ARROW, Component.text("← Previous Page", NamedTextColor.GREEN).decoration(TextDecoration.ITALIC, false)))
+            inv.setItem(previousPage, Utils.guiItem(Material.ARROW, Component.text("← Previous Page", NamedTextColor.GREEN).decoration(TextDecoration.ITALIC, false)))
         }
 
-        inv.setItem(49, Utils.guiItem(Material.BARRIER, Component.text("Close ❌", NamedTextColor.RED).decoration(TextDecoration.ITALIC, false)))
+        inv.setItem(close, Utils.guiItem(Material.BARRIER, Component.text("Close ❌", NamedTextColor.RED).decoration(TextDecoration.ITALIC, false)))
+        inv.setItem(sort, Utils.guiItem(Material.HOPPER, Component.text("Sort", NamedTextColor.DARK_AQUA).decoration(TextDecoration.ITALIC, false), mutableListOf(
+            Component.text("Items", NamedTextColor.BLUE).decoration(TextDecoration.BOLD, type == Type.ITEMS).decoration(TextDecoration.ITALIC, false),
+            Component.text("All", NamedTextColor.BLUE).decoration(TextDecoration.BOLD, type == Type.ALL).decoration(TextDecoration.ITALIC, false),
+            Component.text("Ingredients", NamedTextColor.BLUE).decoration(TextDecoration.BOLD, type == Type.INGREDIENTS).decoration(TextDecoration.ITALIC, false),
+        )))
 
-        if (endIdx < registeredItems.size) {
-            inv.setItem(53, Utils.guiItem(Material.ARROW, Component.text("Next Page →", NamedTextColor.GREEN).decoration(TextDecoration.ITALIC, false)))
+        if (endIdx < items.size) {
+            inv.setItem(nextPage, Utils.guiItem(Material.ARROW, Component.text("Next Page →", NamedTextColor.GREEN).decoration(TextDecoration.ITALIC, false)))
         }
 
         return inv
@@ -69,7 +95,7 @@ class ItemsGUI : InventoryHolder, Listener {
         val itemsGUI = e.inventory.holder as ItemsGUI
 
         when (e.slot) {
-            45 -> {
+            previousPage -> {
                 e.isCancelled = true
                 if (itemsGUI.page <= 1) return
                 if (e.isShiftClick) {
@@ -78,8 +104,7 @@ class ItemsGUI : InventoryHolder, Listener {
                 p.openInventory(itemsGUI.inventory)
             }
 
-            49 -> {
-                e.isCancelled = true
+            close -> {
                 object : BukkitRunnable() {
                     override fun run() {
                         p.closeInventory()
@@ -87,7 +112,25 @@ class ItemsGUI : InventoryHolder, Listener {
                 }.runTaskLater(Trolls.instance, 1L)
             }
 
-            53 -> {
+            sort -> {
+                e.isCancelled = true
+                if (e.isLeftClick) {
+                    when (itemsGUI.type) {
+                        Type.ITEMS -> itemsGUI.type = Type.ALL
+                        Type.ALL -> itemsGUI.type = Type.INGREDIENTS
+                        Type.INGREDIENTS -> itemsGUI.type = Type.ITEMS
+                    }
+                } else if (e.isRightClick) {
+                    when (itemsGUI.type) {
+                        Type.ITEMS -> itemsGUI.type = Type.INGREDIENTS
+                        Type.ALL -> itemsGUI.type = Type.ITEMS
+                        Type.INGREDIENTS -> itemsGUI.type = Type.ALL
+                    }
+                }
+                p.openInventory(itemsGUI.inventory)
+            }
+
+            nextPage -> {
                 e.isCancelled = true
                 if (itemsGUI.page >= itemsGUI.maxPage) return
                 if (e.isShiftClick) {
