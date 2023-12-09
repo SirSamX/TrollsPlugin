@@ -99,8 +99,8 @@ sealed class IngredientManager {
 
     class DoubleCompressedCobweb : Ingredient(ItemProperties(
         id = "double_compressed_cobweb",
-        material = Material.COBWEB,
-        name = "Compressed Cobweb",
+        material = Material.WHITE_WOOL,
+        name = "Double Compressed Cobweb",
         rarity = Rarity.RARE,
         stackable = true
     )) {

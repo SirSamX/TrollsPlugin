@@ -1,8 +1,8 @@
 package me.sirsam.trolls.core.command
 
-import me.sirsam.trolls.core.helper.Utils
 import me.sirsam.trolls.Trolls
 import me.sirsam.trolls.core.gui.ItemsGUI
+import me.sirsam.trolls.core.helper.Utils
 import me.sirsam.trolls.core.registry.Registry
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
@@ -60,7 +60,7 @@ class Troll : CommandExecutor, TabCompleter {
 
             "item" -> {
                 if (!sender.hasPermission("trolls.troll.items")) { utils.noPermissionMessage(sender); return true }
-                sender.openInventory(ItemsGUI().inventory) // TODO: ADD SORTING FOR RECIPE ITEMS & ABILITY ITEMS AND RARITIES
+                sender.openInventory(ItemsGUI().inventory)
             }
 
             "heads" -> {

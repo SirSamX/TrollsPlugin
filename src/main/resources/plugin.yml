@@ -13,7 +13,7 @@ commands:
     usage: /<command> amount command
   tjump:
     description: Launches you high in the air!
-    permission: trolls.utils.god
+    permission: trolls.utils.jump
     permission-message: You do not have permission to use this Command!
     usage: /<command> player
   tfly:
@@ -105,4 +105,4 @@ permissions:
     description: /sudo
   trolls.utils.freeze:
     default: op
-    description:  /freeze
+    description: /freeze

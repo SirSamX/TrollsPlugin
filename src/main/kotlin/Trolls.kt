@@ -2,6 +2,8 @@ package me.sirsam.trolls
 
 import me.sirsam.trolls.commands.*
 import me.sirsam.trolls.core.Main
+import me.sirsam.trolls.core.item.Item
+import me.sirsam.trolls.core.item.ItemProperties
 import me.sirsam.trolls.core.registry.Registry
 import me.sirsam.trolls.item.*
 import me.sirsam.trolls.item.axe.JungleAxe
@@ -10,6 +12,7 @@ import me.sirsam.trolls.listener.*
 import me.sirsam.trolls.manager.IngredientManager
 import me.sirsam.trolls.manager.ItemEvents
 import org.bukkit.Bukkit
+import org.bukkit.Material
 import org.bukkit.command.CommandExecutor
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.event.Listener
@@ -55,6 +58,10 @@ class Trolls : JavaPlugin() {
             register(IngredientManager.DoubleCompressedStone())
             register(IngredientManager.TripleCompressedStone())
             register(IngredientManager.ReinforcedStick())
+        }
+
+        for (i in 0..100) {
+            Registry.register(Item(ItemProperties(i.toString(), Material.REDSTONE, i.toString())))
         }
 
         Main.init()

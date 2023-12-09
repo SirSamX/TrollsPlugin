@@ -77,8 +77,8 @@ open class Item(properties: ItemProperties) {
         val lore = mutableListOf<Component>()
 
         if (rarity === Rarity.UNFINISHED) {
-            lore.add(Component.text("§cThis item is UNFINISHED"))
-            lore.add(Component.text("§cIt may not perform as expected"))
+            lore.add(Component.text("This item is UNFINISHED", NamedTextColor.RED))
+            lore.add(Component.text("It may not perform as expected", NamedTextColor.RED))
             lore.add(Component.text(""))
         }
 
