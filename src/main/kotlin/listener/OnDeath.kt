@@ -1,4 +1,4 @@
-package me.sirsam.trolls.listeners
+package me.sirsam.trolls.listener
 
 import org.bukkit.Location
 import org.bukkit.Material

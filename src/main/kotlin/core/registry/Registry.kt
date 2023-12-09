@@ -3,6 +3,7 @@ package me.sirsam.trolls.core.registry
 import me.sirsam.trolls.core.item.Ingredient
 import me.sirsam.trolls.core.item.Item
 import me.sirsam.trolls.core.item.abilities.AbilityItem
+import org.bukkit.NamespacedKey
 import org.bukkit.inventory.Recipe
 import java.net.URL
 
@@ -17,6 +18,7 @@ object Registry {
     val ingredients = mutableListOf<Ingredient>()
     val abilityItems = mutableListOf<AbilityItem>()
     val recipes = mutableListOf<Recipe>()
+    val recipeKeys = mutableListOf<NamespacedKey>()
     val heads = mutableListOf<URL>()
 
     fun register(item: Item) {
@@ -32,8 +34,9 @@ object Registry {
         abilityItems.add(item)
         registerItem(item)
     }
-    fun register(recipe: Recipe) {
+    fun register(recipe: Recipe, key: NamespacedKey) {
         recipes.add(recipe)
+        recipeKeys.add(key)
     }
 
     fun register(skin: URL?) {
@@ -42,6 +45,6 @@ object Registry {
 
     private fun registerItem(item: Item) {
         items.add(item)
-        item.recipe?.let { recipes.add(it) }
+        item.recipe?.let { register(it, item.recipeKey ?: throw NullPointerException("Item with recipe must also have recipeKey!")) }
     }
 }

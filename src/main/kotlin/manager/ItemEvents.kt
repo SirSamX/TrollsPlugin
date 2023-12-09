@@ -1,4 +1,4 @@
-package me.sirsam.trolls.managers
+package me.sirsam.trolls.manager
 
 import me.sirsam.trolls.Trolls
 import me.sirsam.trolls.core.helper.Cooldown

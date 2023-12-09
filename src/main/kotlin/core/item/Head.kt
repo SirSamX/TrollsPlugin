@@ -22,7 +22,8 @@ enum class Head(val id: String) {
     SNIFFER("fe5a8341c478a134302981e6a7758ea4ecfd8d62a0df4067897e75502f9b25de"),
     TRICK_OR_TREAT_BASKET("a7edc909808940f6564e96086c9b98cdaa859f627eed556ec375d6ed2704c506"),
     EVIL_STEVE("62a744b85e49b74dcb3d0f079c664d6c0036bf5cc3b7ad272efdd8f0b7ac6b24"),
-    SKELETON_GHOST("d45dc55daba4e2d32a284448bb9e38335d843f93c4a776885fd35653fdfc758");
+    SKELETON_GHOST("d45dc55daba4e2d32a284448bb9e38335d843f93c4a776885fd35653fdfc758"),
+    EXPLOSIVE_ENGINE("918a00b1c5ef0ba6d83e54fcbabb6272764f165d57ce8a26a916d4192a54c966");
 
     companion object {
         fun getItem(id: String): ItemStack {

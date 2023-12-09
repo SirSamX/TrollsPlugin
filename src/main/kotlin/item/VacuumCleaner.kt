@@ -1,4 +1,4 @@
-package me.sirsam.trolls.items
+package me.sirsam.trolls.item
 
 import me.sirsam.trolls.core.Main
 import me.sirsam.trolls.core.item.ItemProperties

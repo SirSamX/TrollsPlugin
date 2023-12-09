@@ -2,16 +2,17 @@ package me.sirsam.trolls.core.listener
 
 import me.sirsam.trolls.core.helper.ActionSound
 import me.sirsam.trolls.core.helper.Utils
+import me.sirsam.trolls.core.registry.Registry
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.event.enchantment.EnchantItemEvent
 import org.bukkit.event.entity.EntityResurrectEvent
-import org.bukkit.event.inventory.CraftItemEvent
 import org.bukkit.event.inventory.FurnaceSmeltEvent
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryType
+import org.bukkit.event.player.PlayerJoinEvent
 
 class MiscEvents : Listener {
     @EventHandler
@@ -35,14 +36,14 @@ class MiscEvents : Listener {
         Utils.playSound(ActionSound.ERROR, event.enchanter)
     }
 
-    @EventHandler // TODO: fix
+    /*@EventHandler // TODO: fix
     fun onCraft(event: CraftItemEvent) {
         for (item in event.inventory.matrix) {
             if (!Utils.isTrollItem(item)) return
         }
         event.isCancelled = true
         Utils.playSound(ActionSound.ERROR, event.whoClicked as Player)
-    }
+    }*/
 
     @EventHandler
     fun renameItem(event: InventoryClickEvent) {
@@ -59,5 +60,12 @@ class MiscEvents : Listener {
     fun blockPlace(event: BlockPlaceEvent) {
         if (!Utils.isTrollItem(event.itemInHand)) return
         event.isCancelled = true
+    }
+
+    @EventHandler
+    fun join(event: PlayerJoinEvent) {
+        for (key in Registry.recipeKeys) {
+            event.player.discoverRecipe(key)
+        }
     }
 }

@@ -3,12 +3,12 @@ package me.sirsam.trolls
 import me.sirsam.trolls.commands.*
 import me.sirsam.trolls.core.Main
 import me.sirsam.trolls.core.registry.Registry
-import me.sirsam.trolls.items.*
-import me.sirsam.trolls.items.axe.JungleAxe
-import me.sirsam.trolls.items.axe.Treecapitator
-import me.sirsam.trolls.listeners.*
-import me.sirsam.trolls.managers.IngredientManager
-import me.sirsam.trolls.managers.ItemEvents
+import me.sirsam.trolls.item.*
+import me.sirsam.trolls.item.axe.JungleAxe
+import me.sirsam.trolls.item.axe.Treecapitator
+import me.sirsam.trolls.listener.*
+import me.sirsam.trolls.manager.IngredientManager
+import me.sirsam.trolls.manager.ItemEvents
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandExecutor
 import org.bukkit.configuration.file.FileConfiguration
@@ -47,6 +47,14 @@ class Trolls : JavaPlugin() {
 
             register(IngredientManager.CompressedJungleWood())
             register(IngredientManager.CompressedNetherStar())
+            register(IngredientManager.Filter())
+            register(IngredientManager.CompressedCobweb())
+            register(IngredientManager.DoubleCompressedCobweb())
+            register(IngredientManager.CompressedObsidian())
+            register(IngredientManager.CompressedStone())
+            register(IngredientManager.DoubleCompressedStone())
+            register(IngredientManager.TripleCompressedStone())
+            register(IngredientManager.ReinforcedStick())
         }
 
         Main.init()

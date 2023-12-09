@@ -1,4 +1,4 @@
-package me.sirsam.trolls.listeners
+package me.sirsam.trolls.listener
 
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
@@ -11,20 +11,20 @@ import org.bukkit.event.player.PlayerJoinEvent
 class OnJoin : Listener {
     @EventHandler
     fun onJoin(event: PlayerJoinEvent) {
-        val p = event.player
+        val player = event.player
         val playerCount = Bukkit.getOnlinePlayers().size
-        p.sendMessage(Component.text("Welcome back ${p.name}!\nThere are currently ${playerCount - 1} other players online.", NamedTextColor.BLUE))
-        p.sendMessage(Component.text("Herzlich Willkommen auf dem Server ${p.name}!"))
+        player.sendMessage(Component.text("Welcome back ${player.name}!\nThere are currently ${playerCount - 1} other players online.", NamedTextColor.BLUE))
+        player.sendMessage(Component.text("Herzlich Willkommen auf dem Server ${player.name}!"))
 
-        val loc = p.location
+        val loc = player.location
         loc.y++
-        p.world.spawnParticle(Particle.REVERSE_PORTAL, loc, 50)
+        player.world.spawnParticle(Particle.REVERSE_PORTAL, loc, 50)
 
-        when (p.name) {
+        when (player.name) {
             "niceleumas" -> {
                 event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text("ඞ", NamedTextColor.DARK_RED)))
             }
-            else ->  event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text(p.name, NamedTextColor.GOLD)))
+            else ->  event.joinMessage(Component.text("+ ", NamedTextColor.GREEN).append(Component.text(player.name, NamedTextColor.GOLD)))
         }
     }
 }

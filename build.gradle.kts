@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm") version "1.8.21"
     id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("xyz.jpenilla.run-paper") version "2.2.2"
 }
 
 group = "me.sirsam.trolls"
@@ -33,5 +34,9 @@ tasks {
 
     test {
         useJUnitPlatform()
+    }
+
+    runServer {
+        minecraftVersion("1.20.2")
     }
 }

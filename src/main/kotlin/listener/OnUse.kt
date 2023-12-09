@@ -1,7 +1,7 @@
-package me.sirsam.trolls.listeners
+package me.sirsam.trolls.listener
 
-import me.sirsam.trolls.core.helper.Utils
 import me.sirsam.trolls.Trolls
+import me.sirsam.trolls.core.helper.Utils
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.entity.Player
@@ -14,7 +14,6 @@ import org.bukkit.persistence.PersistentDataType
 import org.bukkit.scheduler.BukkitRunnable
 
 class OnUse : Listener {
-
     @EventHandler
     fun onUse(event: PlayerInteractEvent) {
         val p = event.player
@@ -68,6 +67,7 @@ class OnUse : Listener {
             else p.openAnvil(null, true)
         }
     }
+
     @EventHandler
     fun onPlayerInteract(event: PlayerInteractEvent) {
         val item = event.player.inventory.itemInMainHand

@@ -1,4 +1,4 @@
-package me.sirsam.trolls.listeners
+package me.sirsam.trolls.listener
 
 import io.papermc.paper.event.player.AsyncChatEvent
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
