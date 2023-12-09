@@ -10,7 +10,7 @@ class JungleAxe : AbilityItem(ItemProperties(
     material = Material.WOODEN_AXE,
     name = "Jungle Axe",
     description = "Break wood to cut down a whole tree.",
-    note = "Blocks: 25, Delay: 3 Tick",
+    note = "Blocks: 25, Delay: 3 Ticks",
     rarity = Rarity.UNCOMMON,
     raritySuffix = "AXE"
 )) {

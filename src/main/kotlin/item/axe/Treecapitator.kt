@@ -10,7 +10,7 @@ class Treecapitator : AbilityItem(ItemProperties(
     material = Material.GOLDEN_AXE,
     name = "Treecapitator",
     description = "Break wood to cut down a whole tree.",
-    note = "Blocks: 50, Delay: 1 Ticks",
+    note = "Blocks: 50, Delay: 1 Tick",
     rarity = Rarity.EPIC,
     raritySuffix = "AXE"
 )) {

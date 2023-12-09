@@ -76,7 +76,7 @@ class ItemEvents : Listener {
                 veinMine(block, logMaterials, 50, 1L); event.isCancelled = true
             }
             "jungle_axe" -> {
-                veinMine(block, logMaterials, 50, 1L); event.isCancelled = true
+                veinMine(block, logMaterials, 25, 1L); event.isCancelled = true
             }
         }
     }
