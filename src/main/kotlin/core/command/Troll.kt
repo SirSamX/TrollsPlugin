@@ -63,10 +63,6 @@ class Troll : CommandExecutor, TabCompleter {
                 sender.openInventory(ItemsGUI().inventory)
             }
 
-            "heads" -> {
-                // TODO: ADD GUI
-            }
-
             "head" -> {
                 if (!sender.hasPermission("trolls.troll.head")) { utils.noPermissionMessage(sender); return true }
                 val head = ItemStack(Material.PLAYER_HEAD)

@@ -142,7 +142,7 @@ class ItemEvents : Listener {
                     var y = 2 * exp(-0.1 * t) * sin(t) + 1.5
                     var z = t * sin(theta)
                     loc.add(x, y, z)
-                    loc.world.spawnParticle(Particle.FIREWORKS_SPARK, loc, 1, 0.0, 0.0, 0.0)
+                    loc.world.spawnParticle(Particle.FLAME, loc, 1, 0.0, 0.0, 0.0)
                     loc.subtract(x, y, z)
                     theta += Math.PI / 64
                     x = t * cos(theta)

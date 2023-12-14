@@ -158,7 +158,9 @@ class ItemsGUI : InventoryHolder, Listener {
                         p.setItemOnCursor(item)
                     }
                 }
-            } else p.sendMessage(Component.text("Recipe GUI is not implemented yet!", NamedTextColor.RED).decorate(TextDecoration.BOLD))
+            } else {
+                p.sendMessage(Component.text("Recipe GUI is not implemented yet!", NamedTextColor.RED).decorate(TextDecoration.BOLD))
+            }
         }
         e.isCancelled = true
     }
