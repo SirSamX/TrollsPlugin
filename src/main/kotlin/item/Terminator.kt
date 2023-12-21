@@ -9,7 +9,6 @@ import me.sirsam.trolls.core.item.abilities.AbilityResult
 import me.sirsam.trolls.core.item.abilities.AbilityType
 import org.bukkit.Material
 import org.bukkit.entity.AbstractArrow
-import org.bukkit.entity.Arrow
 import org.bukkit.entity.Player
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.scheduler.BukkitRunnable
@@ -26,18 +25,18 @@ class Terminator : AbilityItem(ItemProperties(
     override fun leftClick(event: PlayerInteractEvent): AbilityResult {
         val player = event.player
 
-        val arrow = player.launchProjectile(Arrow::class.java)
+        val arrow = player.launchProjectile(AbstractArrow::class.java)
         event.isCancelled = true
         shootSpreadArrows(player, arrow, 3, 5f, 8.0)
 
         return AbilityResult.SUCCESS
     }
 
-    private fun shootSpreadArrows(player: Player, arrow: Arrow, amount: Int, angle: Float, damage: Double) {
+    private fun shootSpreadArrows(player: Player, arrow: AbstractArrow, amount: Int, angle: Float, damage: Double) {
         for (i in 0 until amount) {
             val rotation = Math.toRadians(angle * (i - (amount - 1) / 2.0))
             val direction = arrow.velocity.clone().rotateAroundY(rotation)
-            val newArrow = player.launchProjectile(Arrow::class.java)
+            val newArrow = player.launchProjectile(AbstractArrow::class.java)
             newArrow.damage = damage
             newArrow.pickupStatus = AbstractArrow.PickupStatus.CREATIVE_ONLY
             newArrow.velocity = direction

@@ -6,6 +6,8 @@ import me.sirsam.trolls.core.registry.Registry
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action.*
+import org.bukkit.event.block.BlockBreakEvent
+import org.bukkit.event.entity.EntityShootBowEvent
 import org.bukkit.event.player.PlayerFishEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
@@ -61,5 +63,15 @@ class AbilityEvents : Listener {
     @EventHandler
     fun onFish(event: PlayerFishEvent) {
         runEvent({ fish(event) }, event.player.inventory.itemInMainHand)
+    }
+
+    @EventHandler
+    fun onBreak(event: BlockBreakEvent) {
+        runEvent({ blockBreak(event) }, event.player.inventory.itemInMainHand)
+    }
+
+    @EventHandler
+    fun onShoot(event: EntityShootBowEvent) {
+        runEvent({ shoot(event) }, event.bow)
     }
 }

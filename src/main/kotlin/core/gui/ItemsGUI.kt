@@ -127,6 +127,7 @@ class ItemsGUI : InventoryHolder, Listener {
                         Type.INGREDIENTS -> itemsGUI.type = Type.ALL
                     }
                 }
+                itemsGUI.page = 1
                 p.openInventory(itemsGUI.inventory)
             }
 
@@ -141,8 +142,8 @@ class ItemsGUI : InventoryHolder, Listener {
         }
 
         if (e.slot <= 44) {
+            val item = e.currentItem?.clone()
             if (p.gameMode == GameMode.CREATIVE) {
-                val item = e.currentItem?.clone()
                 if (item != null) {
                     if (e.isShiftClick) {
                         if (e.isLeftClick && item.itemMeta.persistentDataContainer.get(Utils.STACKABLE_KEY, PersistentDataType.BOOLEAN) == true) {
@@ -160,6 +161,8 @@ class ItemsGUI : InventoryHolder, Listener {
                 }
             } else {
                 p.sendMessage(Component.text("Recipe GUI is not implemented yet!", NamedTextColor.RED).decorate(TextDecoration.BOLD))
+                //val workbench = p.openWorkbench(null, true)?.topInventory as CraftingInventory
+                //workbench.result = item
             }
         }
         e.isCancelled = true

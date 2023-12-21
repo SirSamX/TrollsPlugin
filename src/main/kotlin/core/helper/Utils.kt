@@ -1,22 +1,25 @@
 package me.sirsam.trolls.core.helper
 
-import me.sirsam.trolls.Trolls
+import me.sirsam.trolls.core.Main
 import me.sirsam.trolls.core.helper.ActionSound.*
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
+import org.bukkit.Particle
 import org.bukkit.Sound
+import org.bukkit.block.Block
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.scheduler.BukkitRunnable
+import kotlin.math.pow
 import kotlin.random.Random
 
 object Utils {
-    private val plugin = Trolls.instance // FIXME: Use Main 
+    private val plugin = Main.plugin // FIXME: Use Main
 
     private val COMPACT_INVENTORY_KEY = NamespacedKey(plugin, "compact_inventory")
     val ID_KEY = NamespacedKey(plugin, "id")
@@ -114,7 +117,7 @@ object Utils {
         val damageRadius = 0.4
         object : BukkitRunnable() {
             override fun run() {
-                val belowBlock = thrownItem.location.subtract(0.0, 0.5, 0.0).block
+                val belowBlock = thrownItem.location.subtract(0.0, 0.2, 0.0).block
 
                 if (!belowBlock.isPassable) {
                     cancel()
@@ -127,5 +130,61 @@ object Utils {
                 }
             }
         }.runTaskTimer(plugin, 0L, 1L)
+    }
+
+    /**
+     * @param decimals Amount of decimals left.
+     */
+    fun Double.round(decimals: Int): Double {
+        val multiplier = 10.0.pow(decimals)
+        return (this * multiplier) / multiplier
+    }
+
+    val logMaterials = setOf(
+        Material.ACACIA_LOG,
+        Material.BIRCH_LOG,
+        Material.DARK_OAK_LOG,
+        Material.JUNGLE_LOG,
+        Material.OAK_LOG,
+        Material.SPRUCE_LOG,
+        Material.CHERRY_LOG,
+        Material.MANGROVE_LOG,
+        Material.MANGROVE_ROOTS,
+        Material.MUDDY_MANGROVE_ROOTS,
+        Material.MUSHROOM_STEM,
+        Material.CRIMSON_STEM,
+        Material.WARPED_STEM
+    )
+
+    fun veinMine(centerBlock: Block, materials: Set<Material>, maxBlocks: Int, delay: Long) {
+        val treeBlocks: MutableList<Block> = mutableListOf(centerBlock)
+        val processedBlocks: MutableSet<Block> = mutableSetOf(centerBlock)
+
+        var currentIndex = 0
+
+        while (currentIndex < treeBlocks.size && currentIndex < maxBlocks) {
+            val currentBlock = treeBlocks[currentIndex]
+            for (x in -1..1) {
+                for (y in -1..1) {
+                    for (z in -1..1) {
+                        val relativeBlock: Block = currentBlock.getRelative(x, y, z)
+                        if (relativeBlock.type in materials) {
+                            if (relativeBlock !in processedBlocks) {
+                                treeBlocks.add(relativeBlock)
+                                processedBlocks.add(relativeBlock)
+                            }
+                        }
+                    }
+                }
+            }
+            currentIndex++
+        }
+
+        for ((index, block) in treeBlocks.withIndex()) {
+            Main.plugin.server.scheduler.runTaskLater(Main.plugin, Runnable {
+                block.breakNaturally()
+                block.world.spawnParticle(Particle.COMPOSTER, block.location.toCenterLocation(), 1)
+            }, delay * index)
+        }
     }
 }

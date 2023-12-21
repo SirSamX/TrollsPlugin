@@ -5,7 +5,8 @@ plugins {
 }
 
 group = "me.sirsam.trolls"
-version = "0.22.1"
+version = "0.23.0"
+val minecraftVersion = "1.20.4"
 
 repositories {
     mavenCentral()
@@ -13,7 +14,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.20-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:${minecraftVersion}-R0.1-SNAPSHOT")
 }
 
 kotlin {
@@ -26,7 +27,7 @@ tasks {
     }
 
     shadowJar {
-        archiveFileName.set("Trolls-${version}.jar")
+        archiveFileName.set("Trolls-${version}-${minecraftVersion}.jar")
         dependencyFilter.apply {
             exclude(dependency("org.jetbrains:annotations"))
         }
@@ -37,6 +38,6 @@ tasks {
     }
 
     runServer {
-        minecraftVersion("1.20.2")
+        minecraftVersion(minecraftVersion)
     }
 }
